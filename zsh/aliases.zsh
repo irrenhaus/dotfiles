@@ -27,5 +27,8 @@ alias alert='notify-send --urgency=low -i "$([ $? = 0 ] && echo terminal || echo
 # Provide sort-by-size for du
 alias du-sort='du -sh * | sort -h'
 
-alias vim='gvim -v'
+# We only want to use gvim if we're not on a remote server!
+if [ -n "$SSH_CONNECTION" ]; then
+    alias vim='gvim -v'
+fi
 
