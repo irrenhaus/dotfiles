@@ -1,0 +1,284 @@
+set nocompatible              " be iMproved, required
+filetype off                  " required
+
+" set the runtime path to include Vundle and initialize
+set rtp+=~/.vim/bundle/Vundle.vim
+call vundle#begin()
+" alternatively, pass a path where Vundle should install plugins
+"call vundle#begin('~/some/path/here')
+
+" let Vundle manage Vundle, required
+Plugin 'gmarik/Vundle.vim'
+
+" Color themes
+Plugin 'tomasr/molokai'
+Plugin 'nanotech/jellybeans.vim'
+
+Plugin 'Valloric/YouCompleteMe'
+Plugin 'kien/rainbow_parentheses.vim'
+" Plugin 'scrooloose/nerdtree'
+Plugin 'scrooloose/syntastic'
+Plugin 'majutsushi/tagbar'
+" Better status line
+" Plugin 'bling/vim-airline'
+Plugin 'Lokaltog/powerline'
+" GIT integration
+Plugin 'tpope/vim-fugitive'
+Plugin 'christoomey/vim-tmux-navigator'
+Plugin 'Chiel92/vim-autoformat'
+
+" Needed by unite
+Plugin 'Shougo/vimproc.vim'
+Plugin 'Shougo/unite.vim'
+
+" Most recently used files
+Plugin 'Shougo/neomru.vim'
+
+" All of your Plugins must be added before the following line
+call vundle#end()            " required
+filetype plugin indent on    " required
+
+" GVim settings
+set guifont=Envy\ Code\ R\ for\ Powerline\ 10
+" Autoselect: Automatically yank visual selection into "* register
+set guioptions+=a
+" Use console dialogs instead of popup dialogs
+set guioptions+=c
+" Disable toolbar
+set guioptions-=T
+" Disable menu
+" set guioptions-=m
+
+" RainbowParantheses Config Start
+let g:rbpt_colorpairs = [
+    \ ['brown',       'RoyalBlue3'],
+    \ ['Darkblue',    'SeaGreen3'],
+    \ ['darkgray',    'DarkOrchid3'],
+    \ ['darkgreen',   'firebrick3'],
+    \ ['darkcyan',    'RoyalBlue3'],
+    \ ['darkred',     'SeaGreen3'],
+    \ ['darkmagenta', 'DarkOrchid3'],
+    \ ['brown',       'firebrick3'],
+    \ ['gray',        'RoyalBlue3'],
+    \ ['black',       'SeaGreen3'],
+    \ ['darkmagenta', 'DarkOrchid3'],
+    \ ['Darkblue',    'firebrick3'],
+    \ ['darkgreen',   'RoyalBlue3'],
+    \ ['darkcyan',    'SeaGreen3'],
+    \ ['darkred',     'DarkOrchid3'],
+    \ ['red',         'firebrick3'],
+    \ ]
+let g:rbpt_max = 16
+let g:rbpt_loadcmd_toggle = 0
+" RainbowParantheses Config End
+
+syntax on
+filetype plugin indent on
+colorscheme jellybeans
+
+" Set utf8 as standard encoding
+set encoding=utf8
+
+" Use Unix as the standard file type
+set ffs=unix,dos,mac
+
+" Turn backup off, since most stuff is in SVN, git et.c anyway...
+set nobackup
+set nowb
+set noswapfile
+
+set term=xterm-256color
+
+" By default: Use spaces, tabwidth = 4
+setlocal expandtab
+setlocal shiftwidth=4
+setlocal softtabstop=4
+
+" Load the RainbowParentheses and activate them upon VIM startup
+au VimEnter * RainbowParenthesesToggle
+au Syntax * RainbowParenthesesLoadRound
+au Syntax * RainbowParenthesesLoadSquare
+au Syntax * RainbowParenthesesLoadBraces
+
+" Sets how many lines of history VIM has to remember
+set history=700
+
+" Set to auto read when a file is changed from the outside
+set autoread
+
+" Enable the wildmenu (better auto completion for files in command line)
+set wildmenu
+set wildmode=longest:full,full
+
+" Always have 7 lines from screen edge to the cursor
+set so=7
+
+" Ignore compiled files
+set wildignore=*.o,*~,*.pyc
+
+" Ignore case when searching
+set ignorecase
+
+" When searching try to be smart about cases 
+set smartcase
+
+" Highlight search results
+set hlsearch
+
+" Makes search act like search in modern browsers
+set incsearch
+
+" Don't redraw while executing macros (good performance config)
+set lazyredraw
+
+" For regular expressions turn magic on
+set magic
+
+" No annoying sound on errors
+set noerrorbells
+set novisualbell
+set t_vb=
+set tm=500
+
+" Change the VIM working directory upon root change of the NERDTree
+let NERDTreeChDirMode=2
+
+" Close Vim if the last window left is NERD-Tree 
+autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
+
+" Activate line numbers
+set number
+" Set line number style for console
+:highlight LineNr ctermfg=grey
+" and GUI
+:highlight LineNr guifg=#868686
+
+" Automatically detect *.md files as Markdown files
+autocmd BufNewFile,BufReadPost *.md set filetype=markdown
+
+" Open new split panes to right and bottom
+set splitbelow
+set splitright
+
+" YCM configuration
+let g:ycm_autoclose_preview_window_after_completion=1
+
+let g:ycm_register_as_syntastic_checker = 1 "default 1
+let g:Show_diagnostics_ui = 1 "default 1
+
+let g:ycm_enable_diagnostic_signs = 1
+let g:ycm_enable_diagnostic_highlighting = 1
+let g:ycm_always_populate_location_list = 1 "default 0
+let g:ycm_open_loclist_on_ycm_diags = 1 "default 1
+
+let g:ycm_complete_in_strings = 1 "default 1
+let g:ycm_collect_identifiers_from_tags_files = 1 "default 0
+let g:ycm_path_to_python_interpreter = '' "default ''
+
+let g:ycm_server_use_vim_stdout = 0 "default 0 (logging to console)
+let g:ycm_server_log_level = 'info' "default info
+
+let g:ycm_global_ycm_extra_conf = '~/.ycm_extra_conf.py'  "where to search for .ycm_extra_conf.py if not found
+let g:ycm_confirm_extra_conf = 1
+
+let g:ycm_goto_buffer_command = 'same-buffer' "[ 'same-buffer', 'horizontal-split', 'vertical-split', 'new-tab' ]
+let g:ycm_filetype_whitelist = { '*': 1 }
+let g:ycm_key_invoke_completion = '<C-Space>'
+
+" Syntastic
+let g:syntastic_enable_signs = 1
+let g:syntastic_enable_balloons = 1
+let g:syntastic_always_populate_loc_list = 1
+" Default = 2 (auto close but not open)
+let g:syntastic_auto_loc_list = 2
+
+" Powerline
+set rtp+=~/.vim/bundle/powerline/powerline/bindings/vim
+set laststatus=2 " Always display the statusline in all windows
+set noshowmode " Hide the default mode text (e.g. -- INSERT -- below the statusline)
+
+" Unite
+" Use fuzzy search and sort results by rank
+call unite#filters#matcher_default#use(['matcher_fuzzy'])
+call unite#filters#sorter_default#use(['sorter_rank'])
+
+let g:unite_source_history_yank_enable = 1
+" Use ag command instead of the find/grep command for file_rec/async
+let g:unite_source_rec_async_command= 'ag --nocolor --nogroup --hidden -g ""'
+
+" tmux-Navigator with key mappings
+let g:tmux_navigator_no_mappings = 1
+
+nnoremap <silent> <S-Left> :TmuxNavigateLeft<cr>
+nnoremap <silent> <S-Down> :TmuxNavigateDown<cr>
+nnoremap <silent> <S-Up> :TmuxNavigateUp<cr>
+nnoremap <silent> <S-Right> :TmuxNavigateRight<cr>
+nnoremap <silent> <S-\> :TmuxNavigatePrevious<cr>
+
+" KEYMAPPINGS
+
+" Unite
+" -no-split?
+nnoremap <C-p> :Unite -start-insert buffer file_rec/async file_mru -auto-preview -no-split<CR>
+nnoremap <Leader>l :Unite -start-insert line -auto-preview -vertical -no-split<CR>
+nnoremap <Leader>m :Unite -start-insert mapping -auto-preview -no-split<CR>
+nnoremap <space>/ :Unite grep:.<CR>
+nnoremap <space>y :Unite history/yank<CR>
+" OMG UNITE!
+
+
+" Map Ctrl+Up and Ctrl+Down to scroll window
+map <C-Down> <C-E>
+map <C-Up> <C-Y>
+
+" I want word movements on Ctrl + Arrows instread of WORD movements
+map <C-Right> w
+map <C-Left> b
+
+" Map Shift + Arrows to switch between windows
+nmap <S-Up>    <C-W><Up>
+nmap <S-Down>  <C-W><Down>
+nmap <S-Left>  <C-W><Left>
+nmap <S-Right> <C-W><Right>
+
+noremap <F3> :Autoformat<CR><CR>
+nnoremap <F5> :YcmCompleter GoToDefinitionElseDeclaration<CR>
+" Nicer buffer switchting on F6
+nnoremap <F6> :buffers<CR>:buffer<Space>
+nmap <F8> :TagbarToggle<CR>
+nnoremap <F11> :YcmForceCompileAndDiagnostics <CR>
+
+" See http://vim.wikia.com/wiki/Accessing_the_system_clipboard
+" Visual mode: F7 to copy current selection to clipboard
+vmap <F7> "+ygv"+y`>
+" Visual Mode Ctrl-F7: Overwrite selection with clipboard cursor
+vmap <C-F7> "+p`]
+" F7: Paste clipboard after cursor
+nmap <F7> "+gp
+" Shift-F7: Paste clipboard before cursor
+nmap <S-F7> "+gP
+
+""""" Helper function from http://amix.dk/vim/vimrc.html
+" Visual mode: search & highlight current selection (* -> forward, # -> backward)
+vnoremap <silent> * :call VisualSelection('f')<CR>
+vnoremap <silent> # :call VisualSelection('b')<CR>
+function! VisualSelection(direction) range
+    let l:saved_reg = @"
+    execute "normal! vgvy"
+
+    let l:pattern = escape(@", '\\/.*$^~[]')
+    let l:pattern = substitute(l:pattern, "\n$", "", "")
+
+    if a:direction == 'b'
+        execute "normal ?" . l:pattern . "^M"
+    elseif a:direction == 'gv'
+        call CmdLine("vimgrep " . '/'. l:pattern . '/' . ' **/*.')
+    elseif a:direction == 'replace'
+        call CmdLine("%s" . '/'. l:pattern . '/')
+    elseif a:direction == 'f'
+        execute "normal /" . l:pattern . "^M"
+    endif
+
+    let @/ = l:pattern
+    let @" = l:saved_reg
+endfunction
