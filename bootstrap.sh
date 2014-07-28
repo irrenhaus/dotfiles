@@ -113,6 +113,13 @@ install_dotfiles () {
   done
 }
 
+update_submodules () {
+    (cd $DOTFILES_ROOT && git submodule init && git submodule update)
+}
+
+set -e
+
+update_submodules
 install_dotfiles
 
 # If we're on a Mac, let's install and setup homebrew.
@@ -127,7 +134,6 @@ then
   fi
 fi
 
-set -e
 echo '  Running installers...'
 find "$DOTFILES_ROOT" -maxdepth 2 -name "install.sh" | while read installer; do sh -c "${installer}"; done
 
