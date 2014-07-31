@@ -226,6 +226,8 @@ nnoremap <space>/ :Unite grep:.<CR>
 nnoremap <space>y :Unite history/yank<CR>
 " OMG UNITE!
 
+" F12:  Toggle line numbers
+map <F12> :set nonumber!<CR>
 
 " Map Ctrl+Up and Ctrl+Down to scroll window
 map <C-Down> <C-E>
