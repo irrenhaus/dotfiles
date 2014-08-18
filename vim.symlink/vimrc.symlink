@@ -118,6 +118,9 @@ set so=7
 " Ignore compiled files
 set wildignore=*.o,*~,*.pyc
 
+" Let the netrw file explorer ignore specific filetypes (comma separated)
+let g:netrw_list_hide= '.*\.swp$,.*\.pyc$,.*\.o$,.*~$'
+
 " Ignore case when searching
 set ignorecase
 
