@@ -229,6 +229,7 @@ nnoremap <Leader>l :Unite -start-insert line -auto-preview -vertical -no-split<C
 nnoremap <Leader>m :Unite -start-insert mapping -auto-preview -no-split<CR>
 nnoremap <space>/ :Unite grep:.<CR>
 nnoremap <space>y :Unite history/yank<CR>
+nnoremap <space>/ :Unite grep:.<CR>
 " OMG UNITE!
 
 " F12:  Toggle line numbers
