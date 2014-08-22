@@ -36,6 +36,8 @@ Plugin 'Shougo/neomru.vim'
 
 Plugin 'thinca/vim-localrc'
 
+Plugin 'sirtaj/vim-openscad'
+
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
 filetype plugin indent on    " required
@@ -230,6 +232,7 @@ nnoremap <Leader>m :Unite -start-insert mapping -auto-preview -no-split<CR>
 nnoremap <space>/ :Unite grep:.<CR>
 nnoremap <space>y :Unite history/yank<CR>
 nnoremap <space>/ :Unite grep:.<CR>
+vnoremap <space>( :call VisualSelection('ug')<CR>
 " OMG UNITE!
 
 " F12:  Toggle line numbers
@@ -270,6 +273,7 @@ nmap <S-F7> "+gP
 " Visual mode: search & highlight current selection (* -> forward, # -> backward)
 vnoremap <silent> * :call VisualSelection('f')<CR>
 vnoremap <silent> # :call VisualSelection('b')<CR>
+
 function! VisualSelection(direction) range
     let l:saved_reg = @"
     execute "normal! vgvy"
@@ -285,6 +289,8 @@ function! VisualSelection(direction) range
         call CmdLine("%s" . '/'. l:pattern . '/')
     elseif a:direction == 'f'
         execute "normal /" . l:pattern . "^M"
+    elseif a:direction == 'ug'
+        execute "Unite grep:.::" . l:pattern
     endif
 
     let @/ = l:pattern
