@@ -3,3 +3,5 @@
 	name = Nils Hesse
 [push]
 	default = simple
+[merge]
+	tool = vimdiff
