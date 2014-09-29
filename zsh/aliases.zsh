@@ -32,3 +32,5 @@ if [ -n "$SSH_CONNECTION" ]; then
     alias vim='gvim -v'
 fi
 
+# I don't want rm to ask me for every single file
+unalias rm
