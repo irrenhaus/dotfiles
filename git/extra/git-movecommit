@@ -1,0 +1,106 @@
+#!/usr/bin/env python
+
+import sys
+import subprocess
+
+DESTINATIONS = ["new", "existing"]
+
+def print_help():
+    print "Usage: git movecommit <num_commits> <destination> <destination_name>"
+    print ""
+    print "       <num_commits>      The count of commits to move to another branch"
+    print "       <destination>      'new' for moving the commits to a new branch"
+    print "                          'existing' for moving the commits to an existing"
+    print "                          branch"
+    print "       <destination_name> The name of the destination branch"
+
+def print_error(msg):
+    print "ERROR:", msg
+    print_help()
+    sys.exit(1)
+
+def print_warning(msg):
+    print "WARNING:", msg
+
+def print_info(msg):
+    print msg 
+
+def run_git(cmd):
+    argv = cmd.split(' ')
+    p = subprocess.Popen(argv, stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
+    (out, nothing) = p.communicate()
+    out = out.decode('utf-8', 'replace')
+    return (p.returncode, out.strip())
+
+def run_git_or_fail(cmd, error_msg, additional_error_out=""):
+    print_info("Running %s" % cmd)
+    (ret, out) = run_git(cmd)
+    if ret != 0:
+        print_error("\n".join([error_msg, additional_error_out, out]))
+    return out
+
+def move_to_new_branch(noc, branch):
+    all_out = run_git_or_fail("git branch %s" % branch, "Error creating new branch %s:" % (branch))
+    all_out += run_git_or_fail("git reset --hard HEAD~%d" % (noc), "WTF we had an error resetting to HEAD~%d:" % (noc))
+    all_out += run_git_or_fail("git checkout %s" % branch, "We could not checkout the new branch %s. This is bad, you're still on the old branch and we resetted HEAD... Here's the complete output:" % (branch), additional_error_out=all_out)
+
+    print_info("All went well, you're now on branch %s containing your last %d commits." % (branch, noc))
+    sys.exit(0)
+
+def move_to_existing_branch(noc, current_branch, new_branch):
+    all_out = run_git_or_fail("git checkout %s" % new_branch, "Error checking out branch %s:" % new_branch)
+    all_out += run_git_or_fail("git merge %s" % current_branch, "Error merging commits from %s into %s:" % (current_branch, new_branch))
+    all_out += run_git_or_fail("git checkout %s" % current_branch, "Error checking out branch %s:" % current_branch)
+    all_out += run_git_or_fail("git reset --hard HEAD~%d" % noc, "Error resetting branch %s to HEAD~%d:" % (current_branch, noc))
+    all_out += run_git_or_fail("git checkout %s" % new_branch, "Error checking out branch %s:" % new_branch)
+
+    print_info("All went well, you're now on branch %s containing your last %d commits." % (new_branch, noc))
+    sys.exit(0)
+
+if __name__ == '__main__':
+    if '--help' in sys.argv or '-help' in sys.argv or '-h' in sys.argv:
+        print_help()
+        sys.exit(1)
+    
+    try:
+        number_of_commits = int(sys.argv[1])
+    except ValueError:
+        print_error('<num_commits> needs to be a number')
+    except IndexError:
+        print_error('You have to specify a number of commits to move!')
+
+    try:
+        destination = sys.argv[2]
+    except IndexError:
+        print_error('You have to specify a destination!')
+
+    if destination.lower() not in DESTINATIONS:
+        print_error("<destination> needs to be one of: %s" % ', '.join(DESTINATIONS))
+
+    try:
+        destination_name = sys.argv[3]
+    except IndexError:
+        print_error('You have to specify a destination name!')
+
+    (ret, out) = run_git("git rev-parse --abbrev-ref HEAD")
+    if ret != 0:
+        print_error("Could not get the current branch name: %s" % out)
+
+    current_branch = out
+
+    last_commits_summary = run_git_or_fail("git log --oneline -n %s" % number_of_commits, "Could not fetch the last %d commits." % number_of_commits)
+
+    # UGLY formatting, but, who cares?
+    print_warning("This will delete the last %d commits from branch %s and move them to the (%s) branch %s. You can find a list of the affected commits below." % (number_of_commits, current_branch, destination.lower(), destination_name))
+    print_info(last_commits_summary)
+
+    print 'Please type YES to continue: '
+    check = sys.stdin.readline()
+    if check.strip() != 'YES':
+        print_error("Cancelling...")
+
+    if destination.lower() == 'new':
+        move_to_new_branch(number_of_commits, destination_name)
+    else:
+        move_to_existing_branch(number_of_commits, current_branch, destination_name)
+
