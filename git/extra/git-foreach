@@ -1,0 +1,23 @@
+#!/bin/sh
+
+if [ $# -lt 1 ]; then
+    echo "Usage: git foreach <command>"
+    exit 1
+fi
+
+CMD=""
+CURDIR="`pwd`"
+
+for p in $@; do
+    CMD="${CMD}$p "
+done
+
+for DIR in `find -type d -iname "*.git"`; do
+    DIR="$(dirname $DIR)"
+    if [ -e "${DIR}/.git" ]; then
+        echo "Running ${CMD}in ${DIR}..."
+        bash -c "cd ${CURDIR}/${DIR}; ${CMD}; cd ${CURDIR}"
+    fi
+done
+
+exit 0
