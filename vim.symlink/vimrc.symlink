@@ -78,6 +78,9 @@ syntax on
 filetype plugin indent on
 colorscheme jellybeans
 
+" Damn you Arduino!
+au BufNewFile,BufRead *.ino set filetype=cpp
+
 " Set utf8 as standard encoding
 set encoding=utf8
 
