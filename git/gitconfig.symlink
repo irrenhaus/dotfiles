@@ -3,3 +3,9 @@
 	name = Nils Hesse
 [push]
 	default = simple
+[merge]
+	tool = vimdiff
+
+[alias]
+        lg = log --graph --all
+        llg = log --pretty=oneline --graph --all
