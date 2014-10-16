@@ -34,9 +34,12 @@ Plugin 'Shougo/unite.vim'
 " Most recently used files
 Plugin 'Shougo/neomru.vim'
 
-Plugin 'thinca/vim-localrc'
+" Plugin 'thinca/vim-localrc'
 
 Plugin 'sirtaj/vim-openscad'
+
+Plugin 'editorconfig/editorconfig-vim'
+Plugin 'PreserveNoEOL'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
