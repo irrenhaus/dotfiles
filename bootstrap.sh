@@ -122,20 +122,22 @@ set -e
 update_submodules
 install_dotfiles
 
-# If we're on a Mac, let's install and setup homebrew.
-if [ "$(uname -s)" == "Darwin" ]
-then
-  info "installing dependencies"
-  if source bin/dot > /tmp/dotfiles-dot 2>&1
-  then
-    success "dependencies installed"
-  else
-    fail "error installing dependencies"
-  fi
-fi
+if [ "x$NOINSTALL" != "xYes" ]; then
+    # If we're on a Mac, let's install and setup homebrew.
+    if [ "$(uname -s)" == "Darwin" ]
+    then
+      info "installing dependencies"
+      if source bin/dot > /tmp/dotfiles-dot 2>&1
+      then
+        success "dependencies installed"
+      else
+        fail "error installing dependencies"
+      fi
+    fi
 
-echo '  Running installers...'
-find "$DOTFILES_ROOT" -maxdepth 2 -name "install.sh" | while read installer; do sh -c "${installer}"; done
+    echo '  Running installers...'
+    find "$DOTFILES_ROOT" -maxdepth 2 -name "install.sh" | while read installer; do sh -c "${installer}"; done
+fi
 
 echo ''
 echo '  All installed!'
