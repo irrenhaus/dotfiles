@@ -1,6 +1,6 @@
 #!/bin/zsh
 
-NAMES=()
+ROMIDS=()
 SECTIONS=()
 
 usage() {
@@ -13,32 +13,39 @@ if [ -e "$1" ]; then
     # First param was a file. Read the rom names from the file
     while read line; do
         data=("${(s/:/)line}")
-        NAMES+=( $data[1] )
+        ROMIDS+=( $data[1] )
         SECTIONS+=( $data[2] )
     done < "$1"
 else
-    NAMES=("$1")
+    ROMIDS=("$1")
     SECTIONS=("$2")
 fi
 
+date > log.txt
 C=1
-for NAME in $NAMES; do
+for ROMID in $ROMIDS; do
     SECTION=$SECTIONS[$C]
-    echo "Downloading $NAME in section $SECTION"
+    echo "Downloading $ROMID in section $SECTION"
     let C++
 
-    if [[ -z "$NAME" ]] || [[ -z "$SECTION" ]]; then
+    if [[ -z "$ROMID" ]] || [[ -z "$SECTION" ]]; then
         usage
     fi
 
-    SAFE_NAME=$(echo "$NAME" | tr "[() ]" "_")
+    rm -f cookies.txt
+    rm -f rom.zip
+    curl -c cookies.txt "http://www.n-roms.de/$SECTION/index.php?action=details&id=$ROMID" > /dev/null
+    DL_URL=$(curl -b cookies.txt "http://www.n-roms.de/$SECTION/index.php?action=load&id=$ROMID" | grep -o -E -e "URL=[^\"]*" | sed 's/URL=//g' | python -c "import urllib; import sys; print urllib.quote(sys.stdin.read().strip()).replace('%3A//', '://')")
 
-    if [ -e "$SECTION/$SAFE_NAME" ]; then
-        echo "$NAME in $SECTION already exists. Skipping this one..."
+    echo "$DL_URL" | grep "index.php" >/dev/null 2>&1
+    if [ "$?" -eq "0" ]; then
+        echo "ERROR: This was a redirect to the frontpage..."
         continue
     fi
 
-    mkdir -p "$SECTION/$SAFE_NAME"
+    echo "Dowloading $DL_URL..."
 
-    (cd "$SECTION/$SAFE_NAME" && date > log.txt && wget "http://www.n-roms.de/roms/$SECTION/$NAME.zip" -O rom.zip >> log.txt && unzip rom.zip >> log.txt && rm rom.zip)
+    mkdir -p "$SECTION"
+
+    curl "$DL_URL" -o rom.zip >> log.txt && unzip -d $SECTION -n rom.zip >> log.txt && rm rom.zip
 done
