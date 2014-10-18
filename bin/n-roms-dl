@@ -1,16 +1,39 @@
-#!/bin/bash
+#!/bin/zsh
 
-NAME="$1"
-SECTION="$2"
+NAMES=()
+SECTIONS=()
 
-if [[ -z "$NAME" ]] || [[ -z "$SECTION" ]]; then
+usage() {
     echo "Usage:   n-roms-dl <ROM name> <section id>"
     echo "Example: n-roms-dl \"Zelda 4 (D)\" snes"
     exit 1
+}
+
+if [ -e "$1" ]; then
+    # First param was a file. Read the rom names from the file
+    while read line; do
+        data=("${(s/:/)line}")
+        NAMES+=( $data[1] )
+        SECTIONS+=( $data[2] )
+    done < "$1"
+else
+    NAMES=("$1")
+    SECTIONS=("$2")
 fi
 
-SAFE_NAME=$(echo "$1" | tr "[() ]" "_")
+C=1
+for NAME in $NAMES; do
+    SECTION=$SECTIONS[$C]
+    echo "Downloading $NAME in section $SECTION"
+    let C++
 
-mkdir -p "$SECTION/$SAFE_NAME"
+    if [[ -z "$NAME" ]] || [[ -z "$SECTION" ]]; then
+        usage
+    fi
 
-(cd "$SECTION/$SAFE_NAME" && wget "http://www.n-roms.de/roms/$SECTION/$NAME.zip" -O rom.zip && unzip rom.zip && rm rom.zip)
+    SAFE_NAME=$(echo "$NAME" | tr "[() ]" "_")
+
+    mkdir -p "$SECTION/$SAFE_NAME"
+
+    (cd "$SECTION/$SAFE_NAME" && date > log.txt && wget "http://www.n-roms.de/roms/$SECTION/$NAME.zip" -O rom.zip >> log.txt && unzip rom.zip >> log.txt && rm rom.zip)
+done
