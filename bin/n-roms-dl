@@ -1,8 +1,16 @@
 #!/bin/bash
 
 NAME="$1"
+SECTION="$2"
+
+if [[ -z "$NAME" ]] || [[ -z "$SECTION" ]]; then
+    echo "Usage:   n-roms-dl <ROM name> <section id>"
+    echo "Example: n-roms-dl \"Zelda 4 (D)\" snes"
+    exit 1
+fi
+
 SAFE_NAME=$(echo "$1" | sed 's/\(/_/g' | sed 's/\)/_/g' | sed 's/ /_/g')
 
-mkdir "$SAFE_NAME"
+mkdir -p "$SECTION/$SAFE_NAME"
 
-(cd "$SAFE_NAME" && wget "http://www.n-roms.de/roms/gb/$NAME.zip" -O rom.zip && unzip rom.zip && rm rom.zip)
+(cd "$SECTION/$SAFE_NAME" && wget "http://www.n-roms.de/roms/$SECTION/$NAME.zip" -O rom.zip && unzip rom.zip && rm rom.zip)
