@@ -33,6 +33,11 @@ for NAME in $NAMES; do
 
     SAFE_NAME=$(echo "$NAME" | tr "[() ]" "_")
 
+    if [ -e "$SECTION/$SAFE_NAME" ]; then
+        echo "$NAME in $SECTION already exists. Skipping this one..."
+        continue
+    fi
+
     mkdir -p "$SECTION/$SAFE_NAME"
 
     (cd "$SECTION/$SAFE_NAME" && date > log.txt && wget "http://www.n-roms.de/roms/$SECTION/$NAME.zip" -O rom.zip >> log.txt && unzip rom.zip >> log.txt && rm rom.zip)
