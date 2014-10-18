@@ -16,33 +16,37 @@ indent_size = 4
 # Tab indentation (no size specified)
 [*.js]
 indent_style = space
-intent_size = 2
+indent_size = 2
 
 [*.json]
 indent_style = space
-intent_size = 2
+indent_size = 2
 
 [*.rb]
 indent_style = space
-intent_size = 2
+indent_size = 2
 
 [*.c]
 indent_style = space
-intent_size = 4
+indent_size = 4
 
 [*.cpp]
 indent_style = space
-intent_size = 4
+indent_size = 4
 
 [*.cxx]
 indent_style = space
-intent_size = 4
+indent_size = 4
+
+[*.ino]
+indent_style = space
+indent_size = 4
 
 [*.h]
 indent_style = space
-intent_size = 4
+indent_size = 4
 
 [*.hpp]
 indent_style = space
-intent_size = 4
+indent_size = 4
 
