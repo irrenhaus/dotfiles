@@ -20,14 +20,16 @@ config_files=("${(@f)$(find $DOTFILES -maxdepth 2 -name "*.zsh")}")
 
 # load the path files
 for file in ${(M)config_files:#*/path.zsh}; do
-    echo $file | grep "symlink" 1>/dev/null 2>/dev/null || continue
-    source $file
+    if [ -z "$(echo $file | grep -o ".symlink")" ]; then
+        source $file
+    fi
 done
 
 # load everything but the path and completion files
 for file in ${${config_files:#*/path.zsh}:#*/completion.zsh}; do
-    echo $file | grep "symlink" 1>/dev/null 2>/dev/null || continue
-    source $file
+    if [ -z "$(echo $file | grep -o ".symlink")" ]; then
+        source $file
+    fi
 done
 
 #####################
@@ -39,8 +41,9 @@ source $ZSH/oh-my-zsh.sh
 
 # load every completion after autocomplete loads
 for file in ${(M)config_files:#*/completion.zsh}; do
-    echo $file | grep "symlink" 1>/dev/null 2>/dev/null || continue
-    source $file
+    if [ -z "$(echo $file | grep -o ".symlink")" ]; then
+        source $file
+    fi
 done
 
 type rm | grep "alias" >/dev/null 2>/dev/null && unalias rm

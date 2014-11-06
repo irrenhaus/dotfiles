@@ -1,5 +1,7 @@
 VENV_DETECTION_RESTRICT_TO="/home/irrenhaus" # Only detect if within this directory root
 
+autoload -U add-zsh-hook
+
 autodetect_virtualenv() {
     if [ -n "$VIRTUAL_ENV" ]; then
         local basedir=$(bash -c "cd ${VIRTUAL_ENV}/.. && pwd")

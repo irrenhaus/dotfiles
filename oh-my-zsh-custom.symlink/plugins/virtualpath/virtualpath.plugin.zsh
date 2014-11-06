@@ -1,3 +1,5 @@
+autoload -U add-zsh-hook
+
 virtualpath_chpwd() {
     if [ -n "$OLD_VIRTUAL_PATH" ]; then
         echo "Resetting PATH variable"
