@@ -44,3 +44,6 @@ unalias rm
 
 unset config_files
 
+# Small workaround for virtualenvs not being found upon opening a new window
+cd .
+

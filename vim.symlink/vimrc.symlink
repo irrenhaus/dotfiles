@@ -217,22 +217,19 @@ let g:unite_source_history_yank_enable = 1
 " Use ag command instead of the find/grep command for file_rec/async
 let g:unite_source_rec_async_command= 'ag --nocolor --nogroup --hidden -g ""'
 
-" tmux-Navigator with key mappings
-let g:tmux_navigator_no_mappings = 1
-
-nnoremap <silent> <S-Left> :TmuxNavigateLeft<cr>
-nnoremap <silent> <S-Down> :TmuxNavigateDown<cr>
-nnoremap <silent> <S-Up> :TmuxNavigateUp<cr>
-nnoremap <silent> <S-Right> :TmuxNavigateRight<cr>
-nnoremap <silent> <S-\> :TmuxNavigatePrevious<cr>
-
 " KEYMAPPINGS
+
+" Tab changes
+:nmap \t2 :set expandtab tabstop=2 shiftwidth=2 softtabstop=2<CR>
+:nmap \t4 :set expandtab tabstop=4 shiftwidth=4 softtabstop=4<CR>
+:nmap \t8 :set expandtab tabstop=8 shiftwidth=8 softtabstop=4<CR>
+:nmap \T :set noexpandtab tabstop=8 softtabstop=4 shiftwidth=4<CR>
 
 " Unite
 " -no-split?
-nnoremap <C-p> :Unite -start-insert buffer file_rec/async file_mru -auto-preview -no-split<CR>
-nnoremap <Leader>l :Unite -start-insert line -auto-preview -vertical -no-split<CR>
-nnoremap <Leader>m :Unite -start-insert mapping -auto-preview -no-split<CR>
+nnoremap <C-p> :Unite -start-insert buffer file_rec/async file_mru -auto-preview<CR>
+nnoremap <Leader>l :Unite -start-insert line -auto-preview<CR>
+nnoremap <Leader>m :Unite -start-insert mapping -auto-preview<CR>
 nnoremap <space>/ :Unite grep:.<CR>
 nnoremap <space>y :Unite history/yank<CR>
 nnoremap <space>/ :Unite grep:.<CR>
@@ -242,6 +239,11 @@ vnoremap <space>( :call VisualSelection('ug')<CR>
 " F12:  Toggle line numbers
 map <F12> :set nonumber!<CR>
 
+" Map Up and Down keys to move one row instead of one line (wrapped lines
+" stuff)
+map <Down> gj
+map <Up> gk
+
 " Map Ctrl+Up and Ctrl+Down to scroll window
 map <C-Down> <C-E>
 map <C-Up> <C-Y>
@@ -249,6 +251,8 @@ map <C-Up> <C-Y>
 " I want word movements on Ctrl + Arrows instread of WORD movements
 map <C-Right> w
 map <C-Left> b
+
+nmap \q :nohlsearch<CR>
 
 " Map Shift + Arrows to switch between windows
 nmap <S-Up>    <C-W><Up>

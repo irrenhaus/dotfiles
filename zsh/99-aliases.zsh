@@ -32,3 +32,5 @@ if [[ "x$SSH_CONNECTION" == "x" ]] && [[ "x$SSH_CLIENT" == "x" ]]; then
     alias vim='gvim -v'
 fi
 
+alias md5='md5sum'
+
