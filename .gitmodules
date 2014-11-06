@@ -4,3 +4,6 @@
 [submodule "vim.symlink/bundle/Vundle.vim"]
 	path = vim.symlink/bundle/Vundle.vim
 	url = https://github.com/gmarik/Vundle.vim.git
+[submodule "zsh-syntax-highlighting.symlink"]
+	path = zsh-syntax-highlighting.symlink
+	url = git://github.com/zsh-users/zsh-syntax-highlighting.git
