@@ -43,6 +43,8 @@ Plugin 'editorconfig/editorconfig-vim'
 Plugin 'godlygeek/tabular'
 Plugin 'plasticboy/vim-markdown'
 
+Plugin 'suan/vim-instant-markdown'
+
 Plugin 'PreserveNoEOL'
 
 " All of your Plugins must be added before the following line
