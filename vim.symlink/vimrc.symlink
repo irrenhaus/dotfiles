@@ -21,7 +21,7 @@ Plugin 'scrooloose/syntastic'
 Plugin 'majutsushi/tagbar'
 " Better status line
 " Plugin 'bling/vim-airline'
-Plugin 'Lokaltog/powerline'
+Bundle 'Lokaltog/powerline', {'rtp': 'powerline/bindings/vim/'}
 " GIT integration
 Plugin 'tpope/vim-fugitive'
 Plugin 'christoomey/vim-tmux-navigator'
@@ -39,6 +39,10 @@ Plugin 'Shougo/neomru.vim'
 Plugin 'sirtaj/vim-openscad'
 
 Plugin 'editorconfig/editorconfig-vim'
+
+Plugin 'godlygeek/tabular'
+Plugin 'plasticboy/vim-markdown'
+
 Plugin 'PreserveNoEOL'
 
 " All of your Plugins must be added before the following line
@@ -114,6 +118,11 @@ set history=700
 " Set to auto read when a file is changed from the outside
 set autoread
 
+" Word wrapping after 80 characters
+set tw=80
+set fo+=t
+set wrap
+
 " Enable the wildmenu (better auto completion for files in command line)
 set wildmenu
 set wildmode=longest:full,full
@@ -130,7 +139,7 @@ let g:netrw_list_hide= '.*\.swp$,.*\.pyc$,.*\.o$,.*~$'
 " Ignore case when searching
 set ignorecase
 
-" When searching try to be smart about cases 
+" When searching try to be smart about cases
 set smartcase
 
 " Highlight search results
@@ -154,7 +163,7 @@ set tm=500
 " Change the VIM working directory upon root change of the NERDTree
 let NERDTreeChDirMode=2
 
-" Close Vim if the last window left is NERD-Tree 
+" Close Vim if the last window left is NERD-Tree
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
 
 " Activate line numbers
@@ -201,10 +210,10 @@ let g:syntastic_enable_signs = 1
 let g:syntastic_enable_balloons = 1
 let g:syntastic_always_populate_loc_list = 1
 " Default = 2 (auto close but not open)
-let g:syntastic_auto_loc_list = 2
+let g:syntastic_auto_loc_list = 1
+let g:syntastic_markdown_checkers = ['mdl']
 
 " Powerline
-set rtp+=~/.vim/bundle/powerline/powerline/bindings/vim
 set laststatus=2 " Always display the statusline in all windows
 set noshowmode " Hide the default mode text (e.g. -- INSERT -- below the statusline)
 
@@ -218,6 +227,10 @@ let g:unite_source_history_yank_enable = 1
 let g:unite_source_rec_async_command= 'ag --nocolor --nogroup --hidden -g ""'
 
 " KEYMAPPINGS
+
+" Open/Close foldings in normal mode with space
+nnoremap <silent> <Space> @=(foldlevel('.')?'za':"\<Space>")<CR>
+vnoremap <Space> zf
 
 " Tab changes
 :nmap \t2 :set expandtab tabstop=2 shiftwidth=2 softtabstop=2<CR>
@@ -238,6 +251,9 @@ vnoremap <space>( :call VisualSelection('ug')<CR>
 
 " F12:  Toggle line numbers
 map <F12> :set nonumber!<CR>
+
+" F9 : Toggle auto line wrapping
+map <F9> :set nowrap!<CR>
 
 " Map Up and Down keys to move one row instead of one line (wrapped lines
 " stuff)

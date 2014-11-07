@@ -1,5 +1,6 @@
 {
-	"common": {
+	"common":{
+		"watcher":"stat",
 		"term_truecolor": false,
 		"dividers": {
 			"left": {
