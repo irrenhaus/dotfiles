@@ -228,6 +228,9 @@ let g:unite_source_history_yank_enable = 1
 " Use ag command instead of the find/grep command for file_rec/async
 let g:unite_source_rec_async_command= 'ag --nocolor --nogroup --hidden -g ""'
 
+" MARKDOWN
+let g:VMEPextensions = ['extra', 'codehilite', 'headerid', 'meta', 'nl2br', 'sane_lists', 'toc']
+
 " KEYMAPPINGS
 
 " Open/Close foldings in normal mode with space
@@ -294,6 +297,10 @@ vmap <C-F7> "+p`]
 nmap <F7> "+gp
 " Shift-F7: Paste clipboard before cursor
 nmap <S-F7> "+gP
+
+" Markdown preview
+nmap \P :Me<CR>
+nmap \p :Mer<CR>
 
 """"" Helper function from http://amix.dk/vim/vimrc.html
 " Visual mode: search & highlight current selection (* -> forward, # -> backward)
