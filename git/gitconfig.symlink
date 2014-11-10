@@ -4,7 +4,7 @@
 [push]
 	default = simple
 [merge]
-	tool = vimdiff
+	tool = kdiff3
 
 [alias]
         lg = log --graph --all
