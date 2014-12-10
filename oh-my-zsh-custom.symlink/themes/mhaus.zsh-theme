@@ -11,6 +11,13 @@
 # if superuser make the username red
 if [ $UID -eq 0 ]; then NCOLOR="red"; else NCOLOR="white"; fi
 
+# if this is a SSH connection show the hostname
+if [[ -n "$SSH_CLIENT" ]] || [[ -n "$SSH_CONNECTION" ]] || [[ -n "$SSH_TTY" ]]; then
+    HOSTINFO="%{$fg[cyan]%}@%B$(hostname)%b%{$reset_color%}"
+else
+    HOSTINFO=""
+fi
+
 # git theming
 ZSH_THEME_GIT_PROMPT_PREFIX="%{$fg_bold[gray]%}(%{$fg_no_bold[blue]%}%B"
 ZSH_THEME_GIT_PROMPT_SUFFIX="%b%{$fg_bold[gray]%})%{$reset_color%} "
@@ -148,5 +155,5 @@ export LS_COLORS='no=00:fi=00:di=01;34:ln=00;36:pi=40;33:so=01;35:do=01;35:bd=40
 autoload -U current_virtual_env
 
 # prompt
-PROMPT='[%{$fg[$NCOLOR]%}%B%n%b%{$reset_color%}:%{$fg[red]%}%30<...<%~%<<%{$reset_color%}]%(!.#.$) '
+PROMPT='[%{$fg[$NCOLOR]%}%B%n%b%{$reset_color%}$HOSTINFO:%{$fg[red]%}%30<...<%~%<<%{$reset_color%}]%(!.#.$) '
 RPROMPT='$(git_super_status)$(current_virtual_env)'
