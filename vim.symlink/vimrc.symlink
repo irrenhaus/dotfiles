@@ -43,7 +43,9 @@ Plugin 'editorconfig/editorconfig-vim'
 Plugin 'godlygeek/tabular'
 Plugin 'plasticboy/vim-markdown'
 
-Plugin 'suan/vim-instant-markdown'
+" This somehow has a bug and keeps creating a folder named "~" in the working
+" dir
+" Plugin 'suan/vim-instant-markdown'
 
 Plugin 'PreserveNoEOL'
 
