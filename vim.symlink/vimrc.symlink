@@ -43,6 +43,8 @@ Plugin 'editorconfig/editorconfig-vim'
 Plugin 'godlygeek/tabular'
 Plugin 'plasticboy/vim-markdown'
 
+Plugin 'wting/rust.vim'
+
 " This somehow has a bug and keeps creating a folder named "~" in the working
 " dir
 " Plugin 'suan/vim-instant-markdown'
@@ -92,6 +94,9 @@ colorscheme jellybeans
 " Damn you Arduino!
 au BufNewFile,BufRead *.ino set filetype=cpp
 
+" Rust
+au BufNewFile,BufRead *.rs set filetype=rust
+
 " Set utf8 as standard encoding
 set encoding=utf8
 
@@ -124,8 +129,8 @@ set autoread
 
 " Word wrapping after 80 characters
 set tw=80
-set fo+=t
-set wrap
+"set fo+=t
+"set wrap
 
 " Enable the wildmenu (better auto completion for files in command line)
 set wildmenu
@@ -260,7 +265,8 @@ vnoremap <space>( :call VisualSelection('ug')<CR>
 map <F12> :set nonumber!<CR>
 
 " F9 : Toggle auto line wrapping
-map <F9> :set nowrap!<CR>
+"map <F9> :set fo-=t
+map<F9> :call ToggleHighlightLongLines()<CR>
 
 " Map Up and Down keys to move one row instead of one line (wrapped lines
 " stuff)
@@ -330,4 +336,24 @@ function! VisualSelection(direction) range
 
     let @/ = l:pattern
     let @" = l:saved_reg
+endfunction
+
+" Thanks to http://wtf.hijacked.us/wiki/index.php/Vim
+" Global tracker var
+let g:HighlightLongLines = 0 "set to 0 so we can run it to enable
+" Function to toggle highlighting of lines longer than 80 character
+" It also toggles textwidth to 80 so newlines are forced when typing
+fu! ToggleHighlightLongLines()
+   if(g:HighlightLongLines == 1)
+           " Disable highlighting and textwidth
+           highlight clear rightMargin
+           set textwidth=0
+           let g:HighlightLongLines = 0
+   else
+           " Enable highlighting and textwidth
+           set textwidth=80
+           highlight rightMargin ctermbg=LightRed guibg=LightRed
+           match rightMargin /\%>81v/
+           let g:HighlightLongLines = 1
+   endif
 endfunction
