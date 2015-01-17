@@ -9,7 +9,6 @@ sudo npm -g install instant-markdown-d js-beautify
 (cd ~/.vim && git submodule init && git submodule update) && \
 vim -c ":BundleInstall" -c ":qa" && \
 (cd ~/.vim/bundle/YouCompleteMe && ./install.sh --clang-completer) && \
-(cd ~/.vim/bundle/vimproc.vim && make) && \
-ln -s ~/.vim/powerline ~/.config/powerline && \
+(cd ~/.vim/bundle/vimproc.vim && make)
 ```
 

@@ -20,8 +20,8 @@ Plugin 'kien/rainbow_parentheses.vim'
 Plugin 'scrooloose/syntastic'
 Plugin 'majutsushi/tagbar'
 " Better status line
-" Plugin 'bling/vim-airline'
-Bundle 'Lokaltog/powerline', {'rtp': 'powerline/bindings/vim/'}
+Plugin 'bling/vim-airline'
+" Bundle 'Lokaltog/powerline', {'rtp': 'powerline/bindings/vim/'}
 " GIT integration
 Plugin 'tpope/vim-fugitive'
 Plugin 'christoomey/vim-tmux-navigator'
@@ -223,8 +223,12 @@ let g:syntastic_auto_loc_list = 1
 let g:syntastic_markdown_checkers = ['mdl']
 
 " Powerline
+" set laststatus=2 " Always display the statusline in all windows
+" set noshowmode " Hide the default mode text (e.g. -- INSERT -- below the statusline)
+
+" Airline
 set laststatus=2 " Always display the statusline in all windows
-set noshowmode " Hide the default mode text (e.g. -- INSERT -- below the statusline)
+let g:airline_powerline_fonts = 1
 
 " Unite
 " Use fuzzy search and sort results by rank
