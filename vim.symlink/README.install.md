@@ -5,7 +5,7 @@ sudo apt-get remove libgit2-dev && \
 sudo pip install cffi && \
 sudo pip install mercurial psutil pygit2 && \
 gem install pygments.rb redcarpet && \
-sudo npm -g install instant-markdown-d js-beautify
+sudo npm -g install instant-markdown-d js-beautify && \
 (cd ~/.vim && git submodule init && git submodule update) && \
 vim -c ":BundleInstall" -c ":qa" && \
 (cd ~/.vim/bundle/YouCompleteMe && ./install.sh --clang-completer) && \
