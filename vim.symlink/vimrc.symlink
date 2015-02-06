@@ -129,7 +129,7 @@ set autoread
 
 " Word wrapping after 80 characters
 set tw=80
-"set fo+=t
+set fo-=t
 "set wrap
 
 " Enable the wildmenu (better auto completion for files in command line)
@@ -188,6 +188,9 @@ autocmd BufNewFile,BufReadPost *.md set filetype=markdown
 " Open new split panes to right and bottom
 set splitbelow
 set splitright
+
+" Search the tree for ctags, not just the current directory
+set tags=./tags;/
 
 " YCM configuration
 let g:ycm_autoclose_preview_window_after_completion=1
@@ -265,13 +268,6 @@ nnoremap <space>/ :Unite grep:.<CR>
 vnoremap <space>( :call VisualSelection('ug')<CR>
 " OMG UNITE!
 
-" F12:  Toggle line numbers
-map <F12> :set nonumber!<CR>
-
-" F9 : Toggle auto line wrapping
-"map <F9> :set fo-=t
-map<F9> :call ToggleHighlightLongLines()<CR>
-
 " Map Up and Down keys to move one row instead of one line (wrapped lines
 " stuff)
 map <Down> gj
@@ -298,6 +294,13 @@ nnoremap <F5> :YcmCompleter GoToDefinitionElseDeclaration<CR>
 " Nicer buffer switchting on F6
 nnoremap <F6> :buffers<CR>:buffer<Space>
 nmap <F8> :TagbarToggle<CR>
+" F9 : Toggle auto line wrapping
+map <F9> :call ToggleTextWrap()<CR>
+" F10: Highlight too long lines
+map<F10> :call ToggleHighlightLongLines()<CR>
+" F12:  Toggle line numbers
+map <F12> :set nonumber!<CR>
+
 nnoremap <F11> :YcmForceCompileAndDiagnostics <CR>
 
 " See http://vim.wikia.com/wiki/Accessing_the_system_clipboard
@@ -360,4 +363,12 @@ fu! ToggleHighlightLongLines()
            match rightMargin /\%>81v/
            let g:HighlightLongLines = 1
    endif
+endfunction
+
+function! ToggleTextWrap()
+    if &fo =~ 't'
+        set fo-=t
+    else
+        set fo+=t
+    endif
 endfunction

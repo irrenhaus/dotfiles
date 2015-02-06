@@ -1,0 +1,16 @@
+#!/bin/bash
+
+function usage() {
+    echo "Usage: ctags-ycm [--help|<source directories>]"
+    echo ""
+    echo "       Generates a YCM compatible tags file in the current directory"
+    echo "       Uses '--fields+=l' and '--recurse=yes' options for"
+    echo "       ctags-exuberant."
+}
+
+if [[ "$#" -lt 1 ]] || [[ "$1" == "--help" ]]; then
+    usage
+    exit 1
+fi
+
+ctags-exuberant -f tags --fields=+l --recurse=yes $@
