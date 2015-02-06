@@ -10,6 +10,6 @@ sudo npm -g install instant-markdown-d js-beautify && \
 vim -c ":BundleInstall" -c ":qa" && \
 (cd ~/.vim/bundle/YouCompleteMe && ./install.sh --clang-completer) && \
 (cd ~/.vim/bundle/vimproc.vim && make) && \
-grep -q -F "fields+=l" ~/.ctags || echo "--fields+=l" >> ~/.ctags
+grep -q -F "fields=+l" ~/.ctags || echo "--fields=+l" >> ~/.ctags
 ```
 
