@@ -25,8 +25,8 @@ for file in ${(M)config_files:#*/path.zsh}; do
     fi
 done
 
-# load everything but the path and completion files
-for file in ${${config_files:#*/path.zsh}:#*/completion.zsh}; do
+# load everything but the path, alias and completion files
+for file in ${${config_files:#*/path.zsh}:#*/completion.zsh:#*/aliases.zsh}; do
     if [ -z "$(echo $file | grep -o ".symlink")" ]; then
         source $file
     fi
@@ -41,6 +41,13 @@ source $ZSH/oh-my-zsh.sh
 
 # load every completion after autocomplete loads
 for file in ${(M)config_files:#*/completion.zsh}; do
+    if [ -z "$(echo $file | grep -o ".symlink")" ]; then
+        source $file
+    fi
+done
+
+# load all aliases
+for file in ${(M)config_files:#*/aliases.zsh}; do
     if [ -z "$(echo $file | grep -o ".symlink")" ]; then
         source $file
     fi
