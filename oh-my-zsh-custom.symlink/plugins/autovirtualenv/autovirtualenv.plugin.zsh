@@ -25,14 +25,14 @@ autodetect_virtualenv() {
                 break
             fi
 
-            activatescripts="$(ls $current_path/*env*/bin/activate $current_path/*env*/bin/activate.csh 2>/dev/null)"
+            activatescripts="$(/bin/ls $current_path/*env*/bin/activate $current_path/*env*/bin/activate.csh 2>/dev/null)"
             activatescripts=($activatescripts)
             if [ "${#activatescripts[@]}" -eq "2" ]; then
                 echo "Found virtualenv. Activating..."
                 export VIRTUAL_ENV_DISABLE_PROMPT="yes"
                 source $activatescripts[1]
             fi
-            
+
             current_path=`dirname $current_path`;
         done
 
