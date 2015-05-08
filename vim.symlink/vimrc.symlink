@@ -10,13 +10,18 @@ call vundle#begin()
 " let Vundle manage Vundle, required
 Plugin 'gmarik/Vundle.vim'
 
+Plugin 'ervandew/supertab'
+
 " Color themes
 Plugin 'tomasr/molokai'
 Plugin 'nanotech/jellybeans.vim'
 
 Plugin 'Valloric/YouCompleteMe'
 Plugin 'kien/rainbow_parentheses.vim'
-" Plugin 'scrooloose/nerdtree'
+
+Plugin 'scrooloose/nerdtree'
+Plugin 'Xuyuanp/nerdtree-git-plugin'
+
 Plugin 'scrooloose/syntastic'
 Plugin 'majutsushi/tagbar'
 " Better status line
@@ -24,7 +29,7 @@ Plugin 'bling/vim-airline'
 " Bundle 'Lokaltog/powerline', {'rtp': 'powerline/bindings/vim/'}
 " GIT integration
 Plugin 'tpope/vim-fugitive'
-Plugin 'christoomey/vim-tmux-navigator'
+"Plugin 'christoomey/vim-tmux-navigator'
 Plugin 'Chiel92/vim-autoformat'
 
 " Needed by unite
@@ -34,14 +39,13 @@ Plugin 'Shougo/unite.vim'
 " Most recently used files
 Plugin 'Shougo/neomru.vim'
 
-" Plugin 'thinca/vim-localrc'
+Plugin 'thinca/vim-localrc'
 
 Plugin 'sirtaj/vim-openscad'
 
 Plugin 'editorconfig/editorconfig-vim'
 
 Plugin 'godlygeek/tabular'
-Plugin 'plasticboy/vim-markdown'
 
 Plugin 'wting/rust.vim'
 
@@ -49,15 +53,36 @@ Plugin 'Yggdroot/indentLine'
 
 Plugin 'StanAngeloff/php.vim'
 
-" This somehow has a bug and keeps creating a folder named "~" in the working
+" One of these somehow has a bug and keeps creating a folder named "~" in the working
 " dir
+" Plugin 'plasticboy/vim-markdown'
+" It's most propably this one:
 " Plugin 'suan/vim-instant-markdown'
 
 Plugin 'PreserveNoEOL'
 
+" JavaScript & Angular
+Plugin 'burnettk/vim-angular'
+Plugin 'pangloss/vim-javascript'
+Plugin 'othree/javascript-libraries-syntax.vim'
+Plugin 'claco/jasmine.vim'
+
+" Track the engine.
+Plugin 'SirVer/ultisnips'
+" Snippets are separated from the engine. Add this if you want them:
+Plugin 'honza/vim-snippets'
+
+Plugin 'matthewsimo/angular-vim-snippets'
+
+Plugin 'fholgado/minibufexpl.vim'
+
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
 filetype plugin indent on    " required
+
+set hidden
+
+autocmd VimEnter * MBEOpen
 
 " GVim settings
 set guifont=Envy\ Code\ R\ for\ Powerline\ 10
@@ -69,6 +94,15 @@ set guioptions+=c
 set guioptions-=T
 " Disable menu
 " set guioptions-=m
+
+" OMNI SyntaxComplete
+
+"if has("autocmd") && exists("+omnifunc")
+"    autocmd Filetype *
+"        \ if &omnifunc == "" |
+"        \ setlocal omnifunc=syntaxcomplete#Complete |
+"        \ endif
+"endif
 
 " RainbowParantheses Config Start
 let g:rbpt_colorpairs = [
@@ -173,6 +207,10 @@ set novisualbell
 set t_vb=
 set tm=500
 
+" Open NERDTree upon startup (if no files were specified)
+autocmd StdinReadPre * let s:std_in=1
+autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
+
 " Change the VIM working directory upon root change of the NERDTree
 let NERDTreeChDirMode=2
 
@@ -195,6 +233,11 @@ set splitright
 
 " Search the tree for ctags, not just the current directory
 set tags=./tags;/
+
+
+let g:miniBufExplBRSplit = 0   " Put new window above
+                               " current or on the
+                               " left for vertical split
 
 " YCM configuration
 let g:ycm_autoclose_preview_window_after_completion=1
@@ -221,13 +264,38 @@ let g:ycm_goto_buffer_command = 'same-buffer' "[ 'same-buffer', 'horizontal-spli
 let g:ycm_filetype_whitelist = { '*': 1 }
 let g:ycm_key_invoke_completion = '<C-Space>'
 
+let g:ycm_filetype_specific_completion_to_disable = {
+      \ 'gitcommit': 1,
+      \ 'html': 1
+      \}
+
 " Syntastic
 let g:syntastic_enable_signs = 1
 let g:syntastic_enable_balloons = 1
 let g:syntastic_always_populate_loc_list = 1
+let g:syntastic_check_on_open = 1
+let g:syntastic_aggregate_errors = 1
 " Default = 2 (auto close but not open)
-let g:syntastic_auto_loc_list = 1
+let g:syntastic_auto_loc_list = 2
 let g:syntastic_markdown_checkers = ['mdl']
+let g:syntastic_javascript_checkers = ['eslint']
+
+" javascript-libraries-syntax
+"    jQuery: jquery
+"    underscore.js: underscore
+"    Lo-Dash: underscore
+"    Backbone.js: backbone
+"    prelude.ls: prelude
+"    AngularJS: angularjs
+"    AngularUI: angularui
+"    React: react
+"    Flux: flux
+"    RequireJS: requirejs
+"    Sugar.js: sugar
+"    Jasmine: jasmine
+"    Chai: chai
+"    Handlebars: handlebars
+let g:used_javascript_libs = 'jquery,angularjs,jasmine'
 
 " Powerline
 " set laststatus=2 " Always display the statusline in all windows
@@ -252,7 +320,29 @@ let g:VMEPextensions = ['extra', 'codehilite', 'headerid', 'meta', 'nl2br', 'san
 " Indent Line
 let g:indentLine_color_term = 239
 let g:indentLine_color_gui = '#09AA08'
-let g:indentLine_char = '│'
+let g:indentLine_char = '|'
+
+" Ultisnips
+" Trigger configuration. Do not use <tab> if you use https://github.com/Valloric/YouCompleteMe.
+"let g:UltiSnipsExpandTrigger="<C-s>"
+"let g:UltiSnipsJumpForwardTrigger="<C-d>"
+"let g:UltiSnipsJumpBackwardTrigger="<C-f>"
+
+" If you want :UltiSnipsEdit to split your window.
+let g:UltiSnipsEditSplit="vertical"
+
+let g:UltiSnipsSnippetDirectories=["UltiSnips"]
+
+" Ultisnips / YCM compatibility
+" make YCM compatible with UltiSnips (using supertab)
+let g:ycm_key_list_select_completion = ['<C-n>', '<Down>']
+let g:ycm_key_list_previous_completion = ['<C-p>', '<Up>']
+let g:SuperTabDefaultCompletionType = '<C-n>'
+
+" better key bindings for UltiSnipsExpandTrigger
+let g:UltiSnipsExpandTrigger = "<tab>"
+let g:UltiSnipsJumpForwardTrigger = "<tab>"
+let g:UltiSnipsJumpBackwardTrigger = "<s-tab>"
 
 " KEYMAPPINGS
 
@@ -298,6 +388,7 @@ nmap <S-Down>  <C-W><Down>
 nmap <S-Left>  <C-W><Left>
 nmap <S-Right> <C-W><Right>
 
+map <F2> :NERDTreeToggle<CR>
 noremap <F3> :Autoformat<CR><CR>
 nnoremap <F5> :YcmCompleter GoToDefinitionElseDeclaration<CR>
 " Nicer buffer switchting on F6
@@ -308,7 +399,7 @@ map <F9> :call ToggleTextWrap()<CR>
 " F10: Highlight too long lines
 map<F10> :call ToggleHighlightLongLines()<CR>
 " F12:  Toggle line numbers
-map <F12> :set nonumber!<CR>
+map <F12> :set nonumber!<CR>:IndentLinesToggle<CR>
 
 nnoremap <F11> :YcmForceCompileAndDiagnostics <CR>
 
