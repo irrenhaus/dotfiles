@@ -8,7 +8,7 @@ gem install pygments.rb redcarpet && \
 sudo npm -g install instant-markdown-d js-beautify && \
 (cd ~/.vim && git submodule init && git submodule update) && \
 vim -c ":BundleInstall" -c ":qa" && \
-(cd ~/.vim/bundle/YouCompleteMe && ./install.sh --clang-completer) && \
+(cd ~/.vim/bundle/YouCompleteMe && ./install.sh --clang-completer --omnisharp-completer) && \
 (cd ~/.vim/bundle/vimproc.vim && make) && \
 grep -q -F "fields=+l" ~/.ctags || echo "--fields=+l" >> ~/.ctags
 ```
