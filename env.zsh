@@ -4,3 +4,4 @@ export GOPATH=/home/irrenhaus/.gocode
 export PATH="$PATH:$GOPATH/bin"
 
 export MYVIMRC=~/.vimrc
+export VIMRC=$MYVIMRC

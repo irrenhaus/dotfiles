@@ -2,63 +2,66 @@ set nocompatible              " be iMproved, required
 filetype off                  " required
 
 " set the runtime path to include Vundle and initialize
-set rtp+=~/.vim/bundle/Vundle.vim
+set rtp+=$HOME/.vim/bundle/Vundle.vim
 call vundle#begin()
-" alternatively, pass a path where Vundle should install plugins
-"call vundle#begin('~/some/path/here')
 
 " let Vundle manage Vundle, required
 Plugin 'gmarik/Vundle.vim'
 
-Plugin 'ervandew/supertab'
+"Plugin 'ervandew/supertab'
 
 " Color themes
 Plugin 'tomasr/molokai'
 Plugin 'nanotech/jellybeans.vim'
 
+" YouCompleteMe autocompletion engine
 Plugin 'Valloric/YouCompleteMe'
+
+" Color coding for parantheses
 Plugin 'kien/rainbow_parentheses.vim'
 
+" NERDTree file exploration sidebar
 Plugin 'scrooloose/nerdtree'
+
+" Show GIT informations in nerdtree
 Plugin 'Xuyuanp/nerdtree-git-plugin'
 
+" Syntastic syntax highlighting
 Plugin 'scrooloose/syntastic'
+
+" Automated tag generation and syntax highlighting in Vim
+" Plugin 'xolox/vim-easytags'
+
+" A sidebar showing tags for the current file
 Plugin 'majutsushi/tagbar'
+
 " Better status line
 Plugin 'bling/vim-airline'
-" Bundle 'Lokaltog/powerline', {'rtp': 'powerline/bindings/vim/'}
-" GIT integration
-Plugin 'tpope/vim-fugitive'
-"Plugin 'christoomey/vim-tmux-navigator'
-Plugin 'Chiel92/vim-autoformat'
+
+" Support auto-formatting of code via external autoformatters
+" Plugin 'Chiel92/vim-autoformat'
 
 " Needed by unite
 Plugin 'Shougo/vimproc.vim'
+" Unite.vim
 Plugin 'Shougo/unite.vim'
 
-" Most recently used files
-Plugin 'Shougo/neomru.vim'
+" Support most recently used files in unite.vim
+" Plugin 'Shougo/neomru.vim'
 
-Plugin 'thinca/vim-localrc'
+" Support .local.vimrc files in each directory
+" Plugin 'thinca/vim-localrc'
 
-Plugin 'sirtaj/vim-openscad'
+" Support editorconfig files
+" Plugin 'editorconfig/editorconfig-vim'
 
-Plugin 'editorconfig/editorconfig-vim'
-
+" Tabular makes it easy to line up text
 Plugin 'godlygeek/tabular'
 
-Plugin 'wting/rust.vim'
+" Displayline indentation marks
+" Plugin 'Yggdroot/indentLine'
 
-Plugin 'Yggdroot/indentLine'
-
-Plugin 'StanAngeloff/php.vim'
-
-" One of these somehow has a bug and keeps creating a folder named "~" in the working
-" dir
-" Plugin 'plasticboy/vim-markdown'
-" It's most propably this one:
-" Plugin 'suan/vim-instant-markdown'
-
+" Deletes a trailing EOL from files on save (if it is there)
 Plugin 'PreserveNoEOL'
 
 " JavaScript & Angular
@@ -67,14 +70,33 @@ Plugin 'pangloss/vim-javascript'
 Plugin 'othree/javascript-libraries-syntax.vim'
 Plugin 'claco/jasmine.vim'
 
-" Track the engine.
+" Ultisnippets
 Plugin 'SirVer/ultisnips'
 " Snippets are separated from the engine. Add this if you want them:
 Plugin 'honza/vim-snippets'
 
+" Snippets for AngularJS
 Plugin 'matthewsimo/angular-vim-snippets'
 
-Plugin 'fholgado/minibufexpl.vim'
+" Maps Groovy syntax to gradle files
+Plugin 'tfnico/vim-gradle'
+
+" TernJS - Intelligent autocompletion & code parsing for JS
+Plugin 'marijnh/tern_for_vim'
+
+" Generates .sh files for a airline-like prompt
+Plugin 'edkolev/promptline.vim'
+
+" Only GIT: Show changed/added/deleted lines in the signs-column
+Plugin 'airblade/vim-gitgutter'
+
+" Preview of %s changes
+Plugin 'osyo-manga/vim-over'
+
+" Narrow region editing: Edit a specific region of a buffer
+Plugin 'chrisbra/NrrwRgn'
+
+Plugin 'mbbill/undotree'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -82,7 +104,7 @@ filetype plugin indent on    " required
 
 set hidden
 
-autocmd VimEnter * MBEOpen
+set background=dark
 
 " GVim settings
 set guifont=Envy\ Code\ R\ for\ Powerline\ 10
@@ -257,7 +279,7 @@ let g:ycm_path_to_python_interpreter = '' "default ''
 let g:ycm_server_use_vim_stdout = 0 "default 0 (logging to console)
 let g:ycm_server_log_level = 'info' "default info
 
-let g:ycm_global_ycm_extra_conf = '~/.ycm_extra_conf.py'  "where to search for .ycm_extra_conf.py if not found
+let g:ycm_global_ycm_extra_conf = '$HOME/.ycm_extra_conf.py'  "where to search for .ycm_extra_conf.py if not found
 let g:ycm_confirm_extra_conf = 1
 
 let g:ycm_goto_buffer_command = 'same-buffer' "[ 'same-buffer', 'horizontal-split', 'vertical-split', 'new-tab' ]
@@ -304,6 +326,9 @@ let g:used_javascript_libs = 'jquery,angularjs,jasmine'
 " Airline
 set laststatus=2 " Always display the statusline in all windows
 let g:airline_powerline_fonts = 1
+let g:airline#extensions#tabline#enabled = 1
+let g:airline#extensions#whitespace#enabled = 1
+let g:airline_theme='wombat'
 
 " Unite
 " Use fuzzy search and sort results by rank
@@ -318,9 +343,9 @@ let g:unite_source_rec_async_command= 'ag --nocolor --nogroup --hidden -g ""'
 let g:VMEPextensions = ['extra', 'codehilite', 'headerid', 'meta', 'nl2br', 'sane_lists', 'toc']
 
 " Indent Line
-let g:indentLine_color_term = 239
-let g:indentLine_color_gui = '#09AA08'
-let g:indentLine_char = '|'
+" let g:indentLine_color_term = 239
+" let g:indentLine_color_gui = '#09AA08'
+" let g:indentLine_char = '|'
 
 " Ultisnips
 " Trigger configuration. Do not use <tab> if you use https://github.com/Valloric/YouCompleteMe.
@@ -390,6 +415,7 @@ nmap <S-Right> <C-W><Right>
 
 map <F2> :NERDTreeToggle<CR>
 noremap <F3> :Autoformat<CR><CR>
+nnoremap <F4> :UndotreeToggle<cr>
 nnoremap <F5> :YcmCompleter GoToDefinitionElseDeclaration<CR>
 " Nicer buffer switchting on F6
 nnoremap <F6> :buffers<CR>:buffer<Space>

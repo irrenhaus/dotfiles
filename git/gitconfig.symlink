@@ -9,3 +9,5 @@
 [alias]
         lg = log --graph --all
         llg = log --pretty=oneline --graph --all
+[http]
+	proxy = 
