@@ -47,7 +47,7 @@ Plugin 'Shougo/vimproc.vim'
 Plugin 'Shougo/unite.vim'
 
 " Support most recently used files in unite.vim
-" Plugin 'Shougo/neomru.vim'
+Plugin 'Shougo/neomru.vim'
 
 " Support .local.vimrc files in each directory
 " Plugin 'thinca/vim-localrc'
@@ -105,6 +105,8 @@ filetype plugin indent on    " required
 set hidden
 
 set background=dark
+
+let mapleader=','
 
 " GVim settings
 set guifont=Envy\ Code\ R\ for\ Powerline\ 10
@@ -439,9 +441,12 @@ nmap <F7> "+gp
 " Shift-F7: Paste clipboard before cursor
 nmap <S-F7> "+gP
 
-" Markdown preview
-nmap \P :Me<CR>
-nmap \p :Mer<CR>
+if exists(":Tabularize")
+    nmap <Leader>a= :Tabularize /=<CR>
+    vmap <Leader>a= :Tabularize /=<CR>
+    nmap <Leader>a: :Tabularize /:\zs<CR>
+    vmap <Leader>a: :Tabularize /:\zs<CR>
+endif
 
 """"" Helper function from http://amix.dk/vim/vimrc.html
 " Visual mode: search & highlight current selection (* -> forward, # -> backward)
