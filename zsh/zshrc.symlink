@@ -9,9 +9,9 @@ DOTFILES=$HOME/.dotfiles
 
 # use .localrc for SUPER SECRET CRAP that you don't
 # want in your public, versioned repo.
-if [[ -a ~/.localrc ]]
+if [[ -a $HOME/.localrc ]]
 then
-    source ~/.localrc
+    source $HOME/.localrc
 fi
 
 # Load dotfiles ZSH configs
