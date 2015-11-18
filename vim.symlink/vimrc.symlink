@@ -69,6 +69,7 @@ Plugin 'burnettk/vim-angular'
 Plugin 'pangloss/vim-javascript'
 Plugin 'othree/javascript-libraries-syntax.vim'
 Plugin 'claco/jasmine.vim'
+Plugin 'Shutnik/jshint2.vim'
 
 " Ultisnippets
 Plugin 'SirVer/ultisnips'
@@ -170,7 +171,9 @@ set nobackup
 set nowb
 set noswapfile
 
-set term=xterm-256color
+if !has('nvim')
+    set term=xterm-256color
+endif
 
 " By default: Use spaces, tabwidth = 4
 setlocal expandtab

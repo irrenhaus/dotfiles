@@ -1,4 +1,4 @@
-VENV_DETECTION_RESTRICT_TO="/home/irrenhaus" # Only detect if within this directory root
+VENV_DETECTION_RESTRICT_TO="$HOME" # Only detect if within this directory root
 
 autoload -U add-zsh-hook
 
