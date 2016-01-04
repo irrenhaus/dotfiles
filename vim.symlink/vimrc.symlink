@@ -99,6 +99,9 @@ Plugin 'chrisbra/NrrwRgn'
 
 Plugin 'mbbill/undotree'
 
+" Auto-close parentheses
+Plugin 'Townk/vim-autoclose'
+
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
 filetype plugin indent on    " required

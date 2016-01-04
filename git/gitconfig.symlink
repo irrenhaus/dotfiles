@@ -11,3 +11,5 @@
         llg = log --pretty=oneline --graph --all
 [http]
 	proxy = 
+[rerere]
+	enabled = true
