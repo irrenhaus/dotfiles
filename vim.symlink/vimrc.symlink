@@ -53,11 +53,8 @@ Plugin 'Yggdroot/indentLine'
 
 Plugin 'StanAngeloff/php.vim'
 
-" One of these somehow has a bug and keeps creating a folder named "~" in the working
-" dir
 " Plugin 'plasticboy/vim-markdown'
-" It's most propably this one:
-" Plugin 'suan/vim-instant-markdown'
+Plugin 'suan/vim-instant-markdown'
 
 Plugin 'PreserveNoEOL'
 
