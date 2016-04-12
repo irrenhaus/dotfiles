@@ -36,7 +36,8 @@ Plugin 'scrooloose/syntastic'
 Plugin 'majutsushi/tagbar'
 
 " Better status line
-Plugin 'bling/vim-airline'
+Plugin 'vim-airline/vim-airline'
+Plugin 'vim-airline/vim-airline-themes'
 
 " Support auto-formatting of code via external autoformatters
 " Plugin 'Chiel92/vim-autoformat'
