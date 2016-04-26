@@ -36,7 +36,8 @@ Plugin 'scrooloose/syntastic'
 Plugin 'majutsushi/tagbar'
 
 " Better status line
-Plugin 'bling/vim-airline'
+Plugin 'vim-airline/vim-airline'
+Plugin 'vim-airline/vim-airline-themes'
 
 " Support auto-formatting of code via external autoformatters
 " Plugin 'Chiel92/vim-autoformat'
@@ -58,8 +59,15 @@ Plugin 'Shougo/neomru.vim'
 " Tabular makes it easy to line up text
 Plugin 'godlygeek/tabular'
 
+Plugin 'wting/rust.vim'
+
+Plugin 'StanAngeloff/php.vim'
+
+" Plugin 'plasticboy/vim-markdown'
+Plugin 'suan/vim-instant-markdown'
+
 " Displayline indentation marks
-" Plugin 'Yggdroot/indentLine'
+Plugin 'Yggdroot/indentLine'
 
 " Deletes a trailing EOL from files on save (if it is there)
 Plugin 'PreserveNoEOL'

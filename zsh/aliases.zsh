@@ -40,4 +40,4 @@ alias md5='md5sum'
 # alias ll='exa -lg'
 # alias lt='exa -lgTR'
 
-alias vim='nvim'
+#alias vim='nvim'
