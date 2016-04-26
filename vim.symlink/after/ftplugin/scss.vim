@@ -1,4 +1,4 @@
-" For JS file indentation: Use spaces, tabwidth = 4
+" For SASS file indentation: Use spaces, tabwidth = 2
 setlocal expandtab
 setlocal shiftwidth=2
 setlocal softtabstop=2

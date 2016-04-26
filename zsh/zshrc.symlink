@@ -62,8 +62,3 @@ source $HOME/.zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 # Small workaround for virtualenvs not being found upon opening a new window
 cd .
 
-
-export PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting
-
-export NVM_DIR="/home/nhe/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
