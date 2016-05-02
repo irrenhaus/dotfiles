@@ -11,20 +11,20 @@ Plugin 'gmarik/Vundle.vim'
 "Plugin 'ervandew/supertab'
 
 " Color themes
-Plugin 'tomasr/molokai'
+" Plugin 'tomasr/molokai'
 Plugin 'nanotech/jellybeans.vim'
 
 " YouCompleteMe autocompletion engine
-Plugin 'Valloric/YouCompleteMe'
+" Plugin 'Valloric/YouCompleteMe'
 
 " Color coding for parantheses
 Plugin 'kien/rainbow_parentheses.vim'
 
 " NERDTree file exploration sidebar
-Plugin 'scrooloose/nerdtree'
+" Plugin 'scrooloose/nerdtree'
 
 " Show GIT informations in nerdtree
-Plugin 'Xuyuanp/nerdtree-git-plugin'
+" Plugin 'Xuyuanp/nerdtree-git-plugin'
 
 " Syntastic syntax highlighting
 Plugin 'scrooloose/syntastic'
@@ -33,7 +33,7 @@ Plugin 'scrooloose/syntastic'
 " Plugin 'xolox/vim-easytags'
 
 " A sidebar showing tags for the current file
-Plugin 'majutsushi/tagbar'
+" Plugin 'majutsushi/tagbar'
 
 " Better status line
 Plugin 'vim-airline/vim-airline'
@@ -57,14 +57,14 @@ Plugin 'Shougo/neomru.vim'
 " Plugin 'editorconfig/editorconfig-vim'
 
 " Tabular makes it easy to line up text
-Plugin 'godlygeek/tabular'
+" Plugin 'godlygeek/tabular'
 
-Plugin 'wting/rust.vim'
+" Plugin 'wting/rust.vim'
 
-Plugin 'StanAngeloff/php.vim'
+" Plugin 'StanAngeloff/php.vim'
 
 " Plugin 'plasticboy/vim-markdown'
-Plugin 'suan/vim-instant-markdown'
+" Plugin 'suan/vim-instant-markdown'
 
 " Displayline indentation marks
 Plugin 'Yggdroot/indentLine'
@@ -80,18 +80,18 @@ Plugin 'claco/jasmine.vim'
 Plugin 'Shutnik/jshint2.vim'
 
 " Ultisnippets
-Plugin 'SirVer/ultisnips'
+" Plugin 'SirVer/ultisnips'
 " Snippets are separated from the engine. Add this if you want them:
-Plugin 'honza/vim-snippets'
+" Plugin 'honza/vim-snippets'
 
 " Snippets for AngularJS
-Plugin 'matthewsimo/angular-vim-snippets'
+" Plugin 'matthewsimo/angular-vim-snippets'
 
 " Maps Groovy syntax to gradle files
 Plugin 'tfnico/vim-gradle'
 
 " TernJS - Intelligent autocompletion & code parsing for JS
-Plugin 'marijnh/tern_for_vim'
+" Plugin 'marijnh/tern_for_vim'
 
 " Generates .sh files for a airline-like prompt
 Plugin 'edkolev/promptline.vim'
@@ -103,15 +103,18 @@ Plugin 'airblade/vim-gitgutter'
 Plugin 'osyo-manga/vim-over'
 
 " Narrow region editing: Edit a specific region of a buffer
-Plugin 'chrisbra/NrrwRgn'
+" Plugin 'chrisbra/NrrwRgn'
 
 Plugin 'mbbill/undotree'
 
 " Auto-close parentheses
-" Plugin 'Townk/vim-autoclose'
+Plugin 'Townk/vim-autoclose'
 
 " Sublime Text style multiple cursors
-Plugin 'vim-multiple-cursors'
+" Plugin 'vim-multiple-cursors'
+
+" golang support
+Plugin 'fatih/vim-go'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
