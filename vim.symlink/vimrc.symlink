@@ -193,7 +193,7 @@ set nobackup
 set nowb
 set noswapfile
 
-set shiftwidth=0
+set shiftwidth=4
 set tabstop=4
 set softtabstop=4
 set expandtab
@@ -409,8 +409,7 @@ vnoremap <Space> zf
 " Tab changes
 :nmap \t2 :set expandtab tabstop=2 shiftwidth=2 softtabstop=2<CR>
 :nmap \t4 :set expandtab tabstop=4 shiftwidth=4 softtabstop=4<CR>
-:nmap \t8 :set expandtab tabstop=8 shiftwidth=8 softtabstop=4<CR>
-:nmap \T :set noexpandtab tabstop=8 softtabstop=4 shiftwidth=4<CR>
+:nmap \t8 :set expandtab tabstop=8 shiftwidth=8 softtabstop=8<CR>
 
 " Unite
 " -no-split?
