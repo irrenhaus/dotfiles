@@ -197,11 +197,6 @@ if !has('nvim')
     set term=xterm-256color
 endif
 
-" By default: Use spaces, tabwidth = 4
-setlocal expandtab
-setlocal shiftwidth=4
-setlocal softtabstop=4
-
 " Load the RainbowParentheses and activate them upon VIM startup
 au VimEnter * RainbowParenthesesToggle
 au Syntax * RainbowParenthesesLoadRound
