@@ -20,20 +20,8 @@ Plugin 'nanotech/jellybeans.vim'
 " Color coding for parantheses
 Plugin 'kien/rainbow_parentheses.vim'
 
-" NERDTree file exploration sidebar
-" Plugin 'scrooloose/nerdtree'
-
-" Show GIT informations in nerdtree
-" Plugin 'Xuyuanp/nerdtree-git-plugin'
-
 " Syntastic syntax highlighting
 Plugin 'scrooloose/syntastic'
-
-" Automated tag generation and syntax highlighting in Vim
-" Plugin 'xolox/vim-easytags'
-
-" A sidebar showing tags for the current file
-" Plugin 'majutsushi/tagbar'
 
 " Better status line
 Plugin 'vim-airline/vim-airline'
@@ -51,52 +39,18 @@ Plugin 'Shougo/unite.vim'
 Plugin 'Shougo/neomru.vim'
 
 " neocomplete auto-completion
-Plugin 'Shougo/neocomplete.vim'
-Plugin 'Shougo/context_filetype.vim'
-Plugin 'Shougo/neoinclude.vim'
+" Plugin 'Shougo/neocomplete.vim'
+" Plugin 'Shougo/context_filetype.vim'
+" Plugin 'Shougo/neoinclude.vim'
 
-" Support .local.vimrc files in each directory
-" Plugin 'thinca/vim-localrc'
-
-" Support editorconfig files
-" Plugin 'editorconfig/editorconfig-vim'
-
-" Tabular makes it easy to line up text
-" Plugin 'godlygeek/tabular'
-
-" Plugin 'wting/rust.vim'
-
-" Plugin 'StanAngeloff/php.vim'
-
-" Plugin 'plasticboy/vim-markdown'
-" Plugin 'suan/vim-instant-markdown'
-
-" Displayline indentation marks
+" Display line indentation marks
 Plugin 'Yggdroot/indentLine'
 
 " Deletes a trailing EOL from files on save (if it is there)
 Plugin 'PreserveNoEOL'
 
-" JavaScript & Angular
-Plugin 'burnettk/vim-angular'
-Plugin 'pangloss/vim-javascript'
-Plugin 'othree/javascript-libraries-syntax.vim'
-Plugin 'claco/jasmine.vim'
-Plugin 'Shutnik/jshint2.vim'
-
-" Ultisnippets
-" Plugin 'SirVer/ultisnips'
-" Snippets are separated from the engine. Add this if you want them:
-" Plugin 'honza/vim-snippets'
-
-" Snippets for AngularJS
-" Plugin 'matthewsimo/angular-vim-snippets'
-
 " Maps Groovy syntax to gradle files
 Plugin 'tfnico/vim-gradle'
-
-" TernJS - Intelligent autocompletion & code parsing for JS
-" Plugin 'marijnh/tern_for_vim'
 
 " Generates .sh files for a airline-like prompt
 Plugin 'edkolev/promptline.vim'
@@ -106,9 +60,6 @@ Plugin 'airblade/vim-gitgutter'
 
 " Preview of %s changes
 Plugin 'osyo-manga/vim-over'
-
-" Narrow region editing: Edit a specific region of a buffer
-" Plugin 'chrisbra/NrrwRgn'
 
 Plugin 'mbbill/undotree'
 
@@ -141,15 +92,6 @@ set guioptions+=c
 set guioptions-=T
 " Disable menu
 " set guioptions-=m
-
-" OMNI SyntaxComplete
-
-"if has("autocmd") && exists("+omnifunc")
-"    autocmd Filetype *
-"        \ if &omnifunc == "" |
-"        \ setlocal omnifunc=syntaxcomplete#Complete |
-"        \ endif
-"endif
 
 " RainbowParantheses Config Start
 let g:rbpt_colorpairs = [
@@ -188,7 +130,7 @@ set encoding=utf8
 " Use Unix as the standard file type
 set ffs=unix,dos,mac
 
-" Turn backup off, since most stuff is in SVN, git et.c anyway...
+" Turn backup off, since most stuff is in SVN, git, etc anyway...
 set nobackup
 set nowb
 set noswapfile
@@ -209,7 +151,7 @@ au Syntax * RainbowParenthesesLoadSquare
 au Syntax * RainbowParenthesesLoadBraces
 
 " Sets how many lines of history VIM has to remember
-set history=700
+set history=1024
 
 " Set to auto read when a file is changed from the outside
 set autoread
@@ -224,7 +166,7 @@ set wildmenu
 set wildmode=longest:full,full
 
 " Always have 7 lines from screen edge to the cursor
-set so=7
+set so=5
 
 " Ignore compiled files
 set wildignore=*.o,*~,*.pyc
@@ -256,16 +198,6 @@ set novisualbell
 set t_vb=
 set tm=500
 
-" Open NERDTree upon startup (if no files were specified)
-autocmd StdinReadPre * let s:std_in=1
-autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
-
-" Change the VIM working directory upon root change of the NERDTree
-let NERDTreeChDirMode=2
-
-" Close Vim if the last window left is NERD-Tree
-autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
-
 " Activate line numbers
 set number
 " Set line number style for console
@@ -280,47 +212,13 @@ autocmd BufNewFile,BufReadPost *.md set filetype=markdown
 set splitbelow
 set splitright
 
-" Search the tree for ctags, not just the current directory
-set tags=./tags;/
-
-
 let g:miniBufExplBRSplit = 0   " Put new window above
                                " current or on the
                                " left for vertical split
 
-" YCM configuration
-"let g:ycm_autoclose_preview_window_after_completion=1
-" 
-" let g:ycm_register_as_syntastic_checker = 1 "default 1
-" let g:Show_diagnostics_ui = 1 "default 1
-" 
-" let g:ycm_enable_diagnostic_signs = 1
-" let g:ycm_enable_diagnostic_highlighting = 1
-" let g:ycm_always_populate_location_list = 1 "default 0
-" let g:ycm_open_loclist_on_ycm_diags = 1 "default 1
-" 
-" let g:ycm_complete_in_strings = 1 "default 1
-" let g:ycm_collect_identifiers_from_tags_files = 1 " default 0
-" let g:ycm_path_to_python_interpreter = '' "default ''
-" 
-" let g:ycm_server_use_vim_stdout = 0 "default 0 (logging to console)
-" let g:ycm_server_log_level = 'info' "default info
-" 
-" let g:ycm_global_ycm_extra_conf = '$HOME/.ycm_extra_conf.py'  "where to search for .ycm_extra_conf.py if not found
-" let g:ycm_confirm_extra_conf = 1
-" 
-" let g:ycm_goto_buffer_command = 'same-buffer' "[ 'same-buffer', 'horizontal-split', 'vertical-split', 'new-tab' ]
-" let g:ycm_filetype_whitelist = { '*': 1 }
-" let g:ycm_key_invoke_completion = '<C-Space>'
-" 
-" let g:ycm_filetype_specific_completion_to_disable = {
-"       \ 'gitcommit': 1,
-"       \ 'html': 1
-"       \}
-
-let g:neocomplete#enable_at_startup = 0 "default 0
-let g:neocomplete#enable_smart_case = 1
-let g:neocomplete#enable_cursor_hold_i = 1
+" let g:neocomplete#enable_at_startup = 0 "default 0
+" let g:neocomplete#enable_smart_case = 1
+" let g:neocomplete#enable_cursor_hold_i = 1
 
 " Syntastic
 let g:syntastic_enable_signs = 1
@@ -332,27 +230,6 @@ let g:syntastic_aggregate_errors = 1
 let g:syntastic_auto_loc_list = 2
 let g:syntastic_markdown_checkers = ['mdl']
 let g:syntastic_javascript_checkers = ['eslint']
-
-" javascript-libraries-syntax
-"    jQuery: jquery
-"    underscore.js: underscore
-"    Lo-Dash: underscore
-"    Backbone.js: backbone
-"    prelude.ls: prelude
-"    AngularJS: angularjs
-"    AngularUI: angularui
-"    React: react
-"    Flux: flux
-"    RequireJS: requirejs
-"    Sugar.js: sugar
-"    Jasmine: jasmine
-"    Chai: chai
-"    Handlebars: handlebars
-let g:used_javascript_libs = 'jquery,angularjs,jasmine'
-
-" Powerline
-" set laststatus=2 " Always display the statusline in all windows
-" set noshowmode " Hide the default mode text (e.g. -- INSERT -- below the statusline)
 
 " Airline
 set laststatus=2 " Always display the statusline in all windows
@@ -388,36 +265,6 @@ call unite#filters#sorter_default#use(['sorter_rank'])
 let g:unite_source_history_yank_enable = 1
 " Use ag command instead of the find/grep command for file_rec/async
 let g:unite_source_rec_async_command= 'ag --nocolor --nogroup --hidden -g ""'
-
-" MARKDOWN
-let g:VMEPextensions = ['extra', 'codehilite', 'headerid', 'meta', 'nl2br', 'sane_lists', 'toc']
-
-" Indent Line
-" let g:indentLine_color_term = 239
-" let g:indentLine_color_gui = '#09AA08'
-" let g:indentLine_char = '|'
-
-" Ultisnips
-" Trigger configuration. Do not use <tab> if you use https://github.com/Valloric/YouCompleteMe.
-"let g:UltiSnipsExpandTrigger="<C-s>"
-"let g:UltiSnipsJumpForwardTrigger="<C-d>"
-"let g:UltiSnipsJumpBackwardTrigger="<C-f>"
-
-" If you want :UltiSnipsEdit to split your window.
-let g:UltiSnipsEditSplit="vertical"
-
-let g:UltiSnipsSnippetDirectories=["UltiSnips"]
-
-" Ultisnips / YCM compatibility
-" make YCM compatible with UltiSnips (using supertab)
-let g:ycm_key_list_select_completion = ['<C-n>', '<Down>']
-let g:ycm_key_list_previous_completion = ['<C-p>', '<Up>']
-let g:SuperTabDefaultCompletionType = '<C-n>'
-
-" better key bindings for UltiSnipsExpandTrigger
-let g:UltiSnipsExpandTrigger = "<tab>"
-let g:UltiSnipsJumpForwardTrigger = "<tab>"
-let g:UltiSnipsJumpBackwardTrigger = "<s-tab>"
 
 " KEYMAPPINGS
 
@@ -462,21 +309,15 @@ nmap <S-Down>  <C-W><Down>
 nmap <S-Left>  <C-W><Left>
 nmap <S-Right> <C-W><Right>
 
-map <F2> :NERDTreeToggle<CR>
-noremap <F3> :Autoformat<CR><CR>
 nnoremap <F4> :UndotreeToggle<cr>
-nnoremap <F5> :YcmCompleter GoToDefinitionElseDeclaration<CR>
 " Nicer buffer switchting on F6
 nnoremap <F6> :buffers<CR>:buffer<Space>
-nmap <F8> :TagbarToggle<CR>
 " F9 : Toggle auto line wrapping
 map <F9> :call ToggleTextWrap()<CR>
 " F10: Highlight too long lines
 map<F10> :call ToggleHighlightLongLines()<CR>
 " F12:  Toggle line numbers
 map <F12> :set nonumber!<CR>:IndentLinesToggle<CR>
-
-nnoremap <F11> :YcmForceCompileAndDiagnostics <CR>
 
 " See http://vim.wikia.com/wiki/Accessing_the_system_clipboard
 " Visual mode: F7 to copy current selection to clipboard
@@ -497,13 +338,6 @@ au FileType go nmap <Leader>gd <Plug>(go-doc)
 au FileType go nmap <Leader>gs <Plug>(go-implements)
 au FileType go nmap <Leader>gi <Plug>(go-info)
 au FileType go nmap <Leader>gre <Plug>(go-rename)
-
-if exists(":Tabularize")
-    nmap <Leader>a= :Tabularize /=<CR>
-    vmap <Leader>a= :Tabularize /=<CR>
-    nmap <Leader>a: :Tabularize /:\zs<CR>
-    vmap <Leader>a: :Tabularize /:\zs<CR>
-endif
 
 """"" Helper function from http://amix.dk/vim/vimrc.html
 " Visual mode: search & highlight current selection (* -> forward, # -> backward)
