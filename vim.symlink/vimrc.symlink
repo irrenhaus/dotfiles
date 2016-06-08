@@ -23,6 +23,8 @@ Plugin 'kien/rainbow_parentheses.vim'
 " Syntastic syntax highlighting
 Plugin 'scrooloose/syntastic'
 
+Plugin 'majutsushi/tagbar'
+
 " Better status line
 Plugin 'vim-airline/vim-airline'
 Plugin 'vim-airline/vim-airline-themes'
@@ -39,9 +41,9 @@ Plugin 'Shougo/unite.vim'
 Plugin 'Shougo/neomru.vim'
 
 " neocomplete auto-completion
-" Plugin 'Shougo/neocomplete.vim'
-" Plugin 'Shougo/context_filetype.vim'
-" Plugin 'Shougo/neoinclude.vim'
+ Plugin 'Shougo/neocomplete.vim'
+ Plugin 'Shougo/context_filetype.vim'
+ Plugin 'Shougo/neoinclude.vim'
 
 " Display line indentation marks
 Plugin 'Yggdroot/indentLine'
@@ -216,9 +218,9 @@ let g:miniBufExplBRSplit = 0   " Put new window above
                                " current or on the
                                " left for vertical split
 
-" let g:neocomplete#enable_at_startup = 0 "default 0
-" let g:neocomplete#enable_smart_case = 1
-" let g:neocomplete#enable_cursor_hold_i = 1
+let g:neocomplete#enable_at_startup = 1 "default 0
+let g:neocomplete#enable_smart_case = 1
+let g:neocomplete#enable_cursor_hold_i = 1
 
 " Syntastic
 let g:syntastic_enable_signs = 1
@@ -237,6 +239,9 @@ let g:airline_powerline_fonts = 1
 let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#whitespace#enabled = 1
 let g:airline_theme='wombat'
+
+" tagbar
+let g:tagbar_left = 1
 
 " vim-go
 let g:go_fmt_command = "goimports"
@@ -326,17 +331,28 @@ vmap <F7> "+ygv"+y`>
 vmap <C-F7> "+p`]
 " F7: Paste clipboard after cursor
 nmap <F7> "+gp
+" F8: Tagbar toggle
+nmap <F8> :TagbarToggle<CR>
 " Shift-F7: Paste clipboard before cursor
 nmap <S-F7> "+gP
+
+" neocomplete
+" <TAB>: completion.
+inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
 
 " vim-go
 au FileType go nmap <leader>gr <Plug>(go-run)
 au FileType go nmap <leader>gb <Plug>(go-build)
 au FileType go nmap <leader>gt <Plug>(go-test)
+au FileType go nmap <leader>gv <Plug>(go-vet)
 au FileType go nmap <leader>gc <Plug>(go-coverage)
+au FileType go nmap <leader>gcc <Plug>(go-coverage-clear)
+au FileType go nmap <leader>gct <Plug>(go-coverage-toggle)
 au FileType go nmap <Leader>gd <Plug>(go-doc)
-au FileType go nmap <Leader>gs <Plug>(go-implements)
-au FileType go nmap <Leader>gi <Plug>(go-info)
+au FileType go nmap <Leader>gi <Plug>(go-implements)
+au FileType go nmap <Leader>gce <Plug>(go-callees)
+au FileType go nmap <Leader>gcr <Plug>(go-callers)
+au FileType go nmap <Leader>gcs <Plug>(go-callstack)
 au FileType go nmap <Leader>gre <Plug>(go-rename)
 
 """"" Helper function from http://amix.dk/vim/vimrc.html
