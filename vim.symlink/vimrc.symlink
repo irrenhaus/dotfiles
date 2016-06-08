@@ -361,6 +361,9 @@ let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#whitespace#enabled = 1
 let g:airline_theme='wombat'
 
+" vim-go
+let g:go_fmt_command = "goimports"
+
 " Unite
 " Use fuzzy search and sort results by rank
 call unite#filters#matcher_default#use(['matcher_fuzzy'])
