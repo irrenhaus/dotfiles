@@ -4,87 +4,85 @@ endif
 
 filetype off                  " required
 
-" set the runtime path to include Vundle and initialize
-set rtp+=$HOME/.vim/bundle/Vundle.vim
-call vundle#begin()
+call plug#begin('~/.vim/plugged')
 
 " let Vundle manage Vundle, required
-Plugin 'gmarik/Vundle.vim'
+Plug 'gmarik/Vundle.vim'
 
-"Plugin 'ervandew/supertab'
+"Plug 'ervandew/supertab'
 
 " Color themes
-" Plugin 'tomasr/molokai'
-Plugin 'nanotech/jellybeans.vim'
+" Plug 'tomasr/molokai'
+Plug 'nanotech/jellybeans.vim'
 
 " YouCompleteMe autocompletion engine
-" Plugin 'Valloric/YouCompleteMe'
+" Plug 'Valloric/YouCompleteMe'
 
 " Color coding for parantheses
-Plugin 'kien/rainbow_parentheses.vim'
+Plug 'kien/rainbow_parentheses.vim'
 
 " Syntastic syntax highlighting
-Plugin 'scrooloose/syntastic'
+Plug 'scrooloose/syntastic'
 
-Plugin 'majutsushi/tagbar'
+Plug 'majutsushi/tagbar'
 
 " Better status line
-Plugin 'vim-airline/vim-airline'
-Plugin 'vim-airline/vim-airline-themes'
+Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
 
 " Support auto-formatting of code via external autoformatters
-" Plugin 'Chiel92/vim-autoformat'
+" Plug 'Chiel92/vim-autoformat'
 
 " Needed by unite and neocomplete
-Plugin 'Shougo/vimproc.vim'
+Plug 'Shougo/vimproc.vim'
 " Unite.vim
-Plugin 'Shougo/unite.vim'
+Plug 'Shougo/unite.vim'
 
 " Support most recently used files in unite.vim
-Plugin 'Shougo/neomru.vim'
+Plug 'Shougo/neomru.vim'
 
 " neocomplete auto-completion
 if !has('nvim')
-    Plugin 'Shougo/neocomplete.vim'
-    Plugin 'Shougo/context_filetype.vim'
-    Plugin 'Shougo/neoinclude.vim'
-endif
-
-if has('nvim')
-    Plugin 'Shougo/deoplete.nvim'
+    Plug 'Shougo/neocomplete.vim'
+    Plug 'Shougo/context_filetype.vim'
+    Plug 'Shougo/neoinclude.vim'
+else
+    Plug 'Shougo/deoplete.nvim'
+    Plug 'zchee/deoplete-go', { 'do': 'make' }
 endif
 
 " Display line indentation marks
-Plugin 'Yggdroot/indentLine'
+Plug 'Yggdroot/indentLine'
 
 " Deletes a trailing EOL from files on save (if it is there)
-Plugin 'PreserveNoEOL'
+Plug 'PreserveNoEOL'
 
 " Maps Groovy syntax to gradle files
-Plugin 'tfnico/vim-gradle'
+Plug 'tfnico/vim-gradle'
 
 " Generates .sh files for a airline-like prompt
-Plugin 'edkolev/promptline.vim'
+Plug 'edkolev/promptline.vim'
 
 " Only GIT: Show changed/added/deleted lines in the signs-column
-Plugin 'airblade/vim-gitgutter'
+Plug 'airblade/vim-gitgutter'
 
 " Preview of %s changes
-Plugin 'osyo-manga/vim-over'
+Plug 'osyo-manga/vim-over'
 
-Plugin 'mbbill/undotree'
+Plug 'mbbill/undotree'
 
 " Auto-close parentheses
-Plugin 'Townk/vim-autoclose'
+Plug 'Townk/vim-autoclose'
 
 " Sublime Text style multiple cursors
-" Plugin 'vim-multiple-cursors'
+" Plug 'vim-multiple-cursors'
 
 " golang support
-Plugin 'fatih/vim-go'
+Plug 'fatih/vim-go'
 
 " All of your Plugins must be added before the following line
-call vundle#end()            " required
+call plug#end()
+
 filetype plugin indent on    " required
 
 set hidden
@@ -232,6 +230,8 @@ if !has('nvim')
     let g:neocomplete#enable_cursor_hold_i = 1
 else
     let g:deoplete#enable_at_startup = 1
+    let g:deoplete#enable_smart_case = 1
+    let g:deoplete#auto_complete_delay = 200
 endif
 
 " Syntastic
@@ -349,8 +349,12 @@ nmap <F8> :TagbarToggle<CR>
 nmap <S-F7> "+gP
 
 " neocomplete
+if !has('nvim')
 " <TAB>: completion.
-inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
+    inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
+else
+    inoremap <expr><BS> deoplete#mappings#smart_close_popup()."\<C-h>"
+endif
 
 " vim-go
 au FileType go nmap <leader>gr <Plug>(go-run)
