@@ -1,1 +1,1 @@
-/home/nhe/.vimrc
+/home/irrenhaus/.dotfiles/vim.symlink/vimrc.symlink

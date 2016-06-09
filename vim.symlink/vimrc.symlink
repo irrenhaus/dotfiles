@@ -1,4 +1,7 @@
-set nocompatible              " be iMproved, required
+if !has('nvim')
+	set nocompatible              " be iMproved, required
+endif
+
 filetype off                  " required
 
 " set the runtime path to include Vundle and initialize
@@ -41,9 +44,15 @@ Plugin 'Shougo/unite.vim'
 Plugin 'Shougo/neomru.vim'
 
 " neocomplete auto-completion
- Plugin 'Shougo/neocomplete.vim'
- Plugin 'Shougo/context_filetype.vim'
- Plugin 'Shougo/neoinclude.vim'
+if !has('nvim')
+    Plugin 'Shougo/neocomplete.vim'
+    Plugin 'Shougo/context_filetype.vim'
+    Plugin 'Shougo/neoinclude.vim'
+endif
+
+if has('nvim')
+    Plugin 'Shougo/deoplete.nvim'
+endif
 
 " Display line indentation marks
 Plugin 'Yggdroot/indentLine'
@@ -126,9 +135,6 @@ au BufNewFile,BufRead *.ino set filetype=cpp
 " Rust
 au BufNewFile,BufRead *.rs set filetype=rust
 
-" Set utf8 as standard encoding
-set encoding=utf8
-
 " Use Unix as the standard file type
 set ffs=unix,dos,mac
 
@@ -144,6 +150,8 @@ set expandtab
 
 if !has('nvim')
     set term=xterm-256color
+    " Set utf8 as standard encoding
+    set encoding=utf8
 endif
 
 " Load the RainbowParentheses and activate them upon VIM startup
@@ -218,9 +226,13 @@ let g:miniBufExplBRSplit = 0   " Put new window above
                                " current or on the
                                " left for vertical split
 
-let g:neocomplete#enable_at_startup = 1 "default 0
-let g:neocomplete#enable_smart_case = 1
-let g:neocomplete#enable_cursor_hold_i = 1
+if !has('nvim')
+    let g:neocomplete#enable_at_startup = 1 "default 0
+    let g:neocomplete#enable_smart_case = 1
+    let g:neocomplete#enable_cursor_hold_i = 1
+else
+    let g:deoplete#enable_at_startup = 1
+endif
 
 " Syntastic
 let g:syntastic_enable_signs = 1
