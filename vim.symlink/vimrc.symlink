@@ -34,7 +34,7 @@ Plug 'vim-airline/vim-airline-themes'
 " Plug 'Chiel92/vim-autoformat'
 
 " Needed by unite and neocomplete
-Plug 'Shougo/vimproc.vim'
+Plug 'Shougo/vimproc.vim', {'do': 'make'}
 " Unite.vim
 Plug 'Shougo/unite.vim'
 
@@ -257,6 +257,9 @@ let g:tagbar_left = 1
 
 " vim-go
 let g:go_fmt_command = "goimports"
+let g:go_fmt_autosave = 1
+
+let g:go_get_update = 0
 
 let g:go_auto_type_info = 1
 
@@ -270,9 +273,9 @@ let g:go_highlight_structs = 1
 let g:go_highlight_interfaces = 1
 
 " Sometimes when using both vim-go and syntastic Vim will start lagging while saving and opening files. The following fixes this:
-let g:syntastic_go_checkers = ['golint', 'govet', 'errcheck']
-let g:syntastic_mode_map = { 'mode': 'active', 'passive_filetypes': ['go'] }
-let g:go_list_type = "quickfix"
+" let g:syntastic_go_checkers = ['golint', 'govet', 'errcheck']
+" let g:syntastic_mode_map = { 'mode': 'active', 'passive_filetypes': ['go'] }
+" let g:go_list_type = "quickfix"
 
 " Unite
 " Use fuzzy search and sort results by rank
