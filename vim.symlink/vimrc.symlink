@@ -80,6 +80,8 @@ Plug 'Townk/vim-autoclose'
 " golang support
 Plug 'fatih/vim-go'
 
+Plug 'elzr/vim-json'
+
 " All of your Plugins must be added before the following line
 call plug#end()
 
@@ -219,6 +221,10 @@ autocmd BufNewFile,BufReadPost *.md set filetype=markdown
 " Open new split panes to right and bottom
 set splitbelow
 set splitright
+
+" Don't conceal JSON syntax
+set conceallevel=0
+let g:vim_json_syntax_conceal = 0
 
 let g:miniBufExplBRSplit = 0   " Put new window above
                                " current or on the

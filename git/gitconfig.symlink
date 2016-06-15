@@ -13,3 +13,5 @@
 	proxy = 
 [rerere]
 	enabled = true
+[diff]
+    compactionHeuristic = true
