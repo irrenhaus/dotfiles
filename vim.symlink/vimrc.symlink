@@ -335,6 +335,9 @@ nmap <S-Down>  <C-W><Down>
 nmap <S-Left>  <C-W><Left>
 nmap <S-Right> <C-W><Right>
 
+nmap <M-Left> :bprevious<CR>
+nmap <M-Right> :bnext<CR>
+
 nnoremap <F4> :UndotreeToggle<cr>
 " Nicer buffer switchting on F6
 nnoremap <F6> :buffers<CR>:buffer<Space>
@@ -367,13 +370,15 @@ endif
 
 " vim-go
 au FileType go nmap <leader>gr <Plug>(go-run)
+au FileType go nmap <leader>gd <Plug>(go-def)
+au FileType go nmap <leader>gds <Plug>(go-def-split)
+au FileType go nmap <leader>gdv <Plug>(go-def-vertical)
 au FileType go nmap <leader>gb <Plug>(go-build)
 au FileType go nmap <leader>gt <Plug>(go-test)
 au FileType go nmap <leader>gv <Plug>(go-vet)
 au FileType go nmap <leader>gc <Plug>(go-coverage)
 au FileType go nmap <leader>gcc <Plug>(go-coverage-clear)
 au FileType go nmap <leader>gct <Plug>(go-coverage-toggle)
-au FileType go nmap <Leader>gd <Plug>(go-doc)
 au FileType go nmap <Leader>gi <Plug>(go-implements)
 au FileType go nmap <Leader>gce <Plug>(go-callees)
 au FileType go nmap <Leader>gcr <Plug>(go-callers)

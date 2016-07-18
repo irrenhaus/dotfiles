@@ -41,3 +41,10 @@ alias md5='md5sum'
 # alias lt='exa -lgTR'
 
 alias vim='nvim'
+
+# Mosh into a server and automatically resume / start a tmux session
+alias tmosh='() {mosh $* -- sh -c "tmux a || tmux"}'
+
+# Wrapper using helper script to add $HOME/.ssh/id_rsa to ssh-agent on the first
+# SSH connection.
+alias ssh="ssh-ask-pass"

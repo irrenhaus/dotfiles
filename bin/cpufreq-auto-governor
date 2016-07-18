@@ -1,0 +1,9 @@
+#!/bin/sh
+
+CPUFREQ_SET_GOVERNOR="/home/irrenhaus/.dotfiles/bin/cpufreq-set-governor"
+
+if on_ac_power; then
+    $CPUFREQ_SET_GOVERNOR performance
+else
+    $CPUFREQ_SET_GOVERNOR powersave
+fi

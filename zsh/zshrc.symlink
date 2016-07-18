@@ -62,3 +62,6 @@ source $HOME/.zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 # Small workaround for virtualenvs not being found upon opening a new window
 cd .
 
+
+export NVM_DIR="/home/irrenhaus/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm

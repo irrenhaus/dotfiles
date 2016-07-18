@@ -5,3 +5,5 @@ export PATH="$PATH:$GOPATH/bin:$HOME/bin"
 
 export MYVIMRC=~/.vimrc
 export VIMRC=$MYVIMRC
+
+export SSH_ASKPASS="/usr/bin/ksshaskpass"

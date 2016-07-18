@@ -15,3 +15,12 @@
 	enabled = true
 [diff]
     compactionHeuristic = true
+[gitflow "branch"]
+        master = master
+        develop = staging
+[gitflow "prefix"]
+        feature = feature/
+        release = release/
+        hotfix = hotfix/
+        support = support/
+        versiontag =
