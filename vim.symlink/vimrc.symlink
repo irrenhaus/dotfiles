@@ -13,7 +13,8 @@ Plug 'gmarik/Vundle.vim'
 
 " Color themes
 " Plug 'tomasr/molokai'
-Plug 'nanotech/jellybeans.vim'
+" Plug 'nanotech/jellybeans.vim'
+Plug 'altercation/vim-colors-solarized'
 
 " YouCompleteMe autocompletion engine
 " Plug 'Valloric/YouCompleteMe'
@@ -82,6 +83,9 @@ Plug 'fatih/vim-go'
 
 Plug 'elzr/vim-json'
 
+Plug 'othree/html5.vim'
+Plug 'posva/vim-vue'
+
 " All of your Plugins must be added before the following line
 call plug#end()
 
@@ -89,7 +93,7 @@ filetype plugin indent on    " required
 
 set hidden
 
-set background=dark
+set background=light
 
 let mapleader=','
 
@@ -103,6 +107,27 @@ set guioptions+=c
 set guioptions-=T
 " Disable menu
 " set guioptions-=m
+
+" Highlight current line
+au WinLeave * set nocursorline nocursorcolumn
+au WinEnter * set cursorline cursorcolumn
+set cursorline cursorcolumn
+
+" More powerfull backspace
+set backspace=indent,eol,start
+
+" persistent_undo
+set undofile                                                                                                                                                                                              
+set undodir=~/.vim/undodir
+set undolevels=1000
+set undoreload=10000
+
+" show matching bracket (briefly jump)
+set showmatch
+set matchtime=2 "0.2 seconds
+set matchpairs+=<:>                                               " specially for html      
+
+" set list listchars=tab:<+                                         " display TAB as <+++
 
 " RainbowParantheses Config Start
 let g:rbpt_colorpairs = [
@@ -127,7 +152,8 @@ let g:rbpt_loadcmd_toggle = 0
 
 syntax on
 filetype plugin indent on
-colorscheme jellybeans
+" colorscheme jellybeans
+colorscheme solarized
 
 " Damn you Arduino!
 au BufNewFile,BufRead *.ino set filetype=cpp
@@ -256,7 +282,8 @@ set laststatus=2 " Always display the statusline in all windows
 let g:airline_powerline_fonts = 1
 let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#whitespace#enabled = 1
-let g:airline_theme='wombat'
+" let g:airline_theme='wombat'
+let g:airline_theme='solarized'
 
 " tagbar
 let g:tagbar_left = 1

@@ -1,10 +1,10 @@
 [user]
-	email = nils.hesse@compeople.de
+	email = nphesse@gmail.com
 	name = Nils Hesse
 [push]
 	default = simple
 [merge]
-	tool = kdiff3
+	tool = meld
 
 [alias]
         lg = log --graph --all
