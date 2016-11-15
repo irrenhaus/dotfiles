@@ -65,3 +65,6 @@ cd .
 
 export NVM_DIR="/home/irrenhaus/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
+
+source /usr/share/chruby/chruby.sh
+source /usr/share/chruby/auto.sh

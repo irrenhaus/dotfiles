@@ -1,8 +1,0 @@
-#!/bin/bash
-
-ssh-add -l | grep "$HOME/.ssh/id_rsa" 2>&1 >/dev/null
-if [ $? -ne "0" ]; then
-    ssh-add </dev/null
-fi
-
-exec /usr/bin/ssh "$@"

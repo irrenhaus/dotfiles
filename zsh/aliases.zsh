@@ -45,6 +45,4 @@ alias vim='nvim'
 # Mosh into a server and automatically resume / start a tmux session
 alias tmosh='() {mosh $* -- sh -c "tmux a || tmux"}'
 
-# Wrapper using helper script to add $HOME/.ssh/id_rsa to ssh-agent on the first
-# SSH connection.
-alias ssh="ssh-ask-pass"
+alias nvidia-settings='optirun -b none nvidia-settings -c :8'
