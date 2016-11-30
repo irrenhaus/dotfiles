@@ -7,3 +7,12 @@
 [submodule "zsh-syntax-highlighting.symlink"]
 	path = zsh-syntax-highlighting.symlink
 	url = git://github.com/zsh-users/zsh-syntax-highlighting.git
+[submodule "git-extra-commands"]
+	path = git/git-extra-commands
+	url = https://github.com/unixorn/git-extra-commands.git
+[submodule "git/git-secrets"]
+	path = git/git-secrets
+	url = https://github.com/awslabs/git-secrets.git
+[submodule "git/git-standup"]
+	path = git/git-standup
+	url = https://github.com/kamranahmedse/git-standup.git
