@@ -33,7 +33,7 @@ if [ -f /etc/arch-release ]; then
     fi
     $SUDO "pacman -S --noconfirm base-devel sudo curl diff-so-fancy pv"
     install_yaourt
-    yaourt -S fasd
+    yaourt -S fasd watchman python2-pywatchman
     sudo pip install git-sweep
 fi
 

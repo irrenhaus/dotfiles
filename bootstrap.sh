@@ -136,7 +136,9 @@ if [ "x$NOINSTALL" != "xYes" ]; then
     fi
 
     echo '  Running installers...'
-    find "$DOTFILES_ROOT" -maxdepth 2 -name "install.sh" | while read installer; do sh -c "${installer}"; done
+    for I in `find "$DOTFILES_ROOT" -maxdepth 2 -name "install.sh"`; do
+        sh -c "$I"
+    done
 fi
 
 echo ''
