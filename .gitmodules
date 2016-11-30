@@ -16,3 +16,6 @@
 [submodule "git/git-standup"]
 	path = git/git-standup
 	url = https://github.com/kamranahmedse/git-standup.git
+[submodule "zsh/liquidprompt"]
+	path = liquidprompt
+	url = https://github.com/nojhan/liquidprompt.git

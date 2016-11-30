@@ -156,4 +156,4 @@ autoload -U current_virtual_env
 
 # prompt
 PROMPT='[%{$fg[$NCOLOR]%}%B%n%b%{$reset_color%}$HOSTINFO:%{$fg[red]%}%30<...<%~%<<%{$reset_color%}]%(!.#.$) '
-RPROMPT='$(git_super_status)$(current_virtual_env)'
+#RPROMPT='$(git_super_status)$(current_virtual_env)'

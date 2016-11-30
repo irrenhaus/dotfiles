@@ -62,7 +62,6 @@ Plug 'PreserveNoEOL'
 " Maps Groovy syntax to gradle files
 Plug 'tfnico/vim-gradle'
 
-" Generates .sh files for a airline-like prompt
 Plug 'edkolev/promptline.vim'
 
 " Only GIT: Show changed/added/deleted lines in the signs-column
@@ -313,9 +312,12 @@ set laststatus=2 " Always display the statusline in all windows
 let g:airline_powerline_fonts = 1
 let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#whitespace#enabled = 1
-" let g:airline_theme='wombat'
-" let g:airline_theme='solarized'
+"let g:airline#extensions#promptline#snapshot_file = '~/.dotfiles/zsh/90-airline-theme.zsh'
+"let g:airline_theme='wombat'
+"let g:airline_theme='solarized'
 let g:airline_theme='onedark'
+
+" let g:promptline_theme='airline'
 
 " tagbar
 let g:tagbar_left = 1

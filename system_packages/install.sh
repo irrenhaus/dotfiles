@@ -31,7 +31,7 @@ if [ -f /etc/arch-release ]; then
     if [ -f /usr/bin/sudo ]; then
         SUDO="sudo bash -c"
     fi
-    $SUDO "pacman -S --noconfirm base-devel sudo curl diff-so-fancy pv"
+    $SUDO "pacman -S --noconfirm base-devel sudo curl diff-so-fancy pv acpi lm_sensors"
     install_yaourt
     yaourt -S fasd watchman python2-pywatchman
     sudo pip install git-sweep
