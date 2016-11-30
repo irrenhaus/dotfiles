@@ -88,6 +88,10 @@ Plug 'posva/vim-vue'
 
 Plug 'tpope/vim-fugitive'
 
+Plug 'airodactyl/neovim-ranger'
+
+Plug 'kyuhi/vim-emoji-complete'
+
 " All of your Plugins must be added before the following line
 call plug#end()
 

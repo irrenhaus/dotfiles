@@ -46,3 +46,7 @@ alias vim='nvim'
 alias tmosh='() {mosh $* -- sh -c "tmux a || tmux"}'
 
 alias nvidia-settings='optirun -b none nvidia-settings -c :8'
+
+alias staging-logs="multitail -l 'ssh deploy@api1.staging.zenmate.io \"tail -f /home/deploy/zenguard-api-v2/current/log/staging.log\"' -l 'ssh deploy@api2.staging.zenmate.io \"tail -f /home/deploy/zenguard-api-v2/current/log/staging.log\"'"
+
+alias btr-todo='find -type d -name "btr" -exec grep -rn -C2 --color=always "TODO:" {} \;'
