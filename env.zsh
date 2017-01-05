@@ -15,3 +15,5 @@ export SOLO_API_KEY=ZUSSu5pPyfbd762C
 export PATH="$PATH:$HOME/.gem/ruby/2.3.0/bin"
 
 export PATH="$PATH:$HOME/.dotfiles/git-extra-commands/bin"
+
+#export SSH_AUTH_SOCK="$XDG_RUNTIME_DIR/ssh-agent.socket"

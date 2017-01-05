@@ -1,0 +1,34 @@
+#!/bin/bash
+
+# Don't allow on 3G connection
+DISALLOWED_INTERFACES=("enp0s20f0u5c2")
+ALLOW_ON_BATTERY="FALSE"
+
+# See http://unix.stackexchange.com/a/307790
+ACTIVE_INTERFACE="$(route | grep '^default' | grep -o '[^ ]*$')"
+
+containsElement () {
+  local e
+  for e in "${@:2}"; do [[ "$e" == "$1" ]] && return 0; done
+  return 1
+}
+
+# Check if backups are allowed on the current interface
+containsElement "$ACTIVE_INTERFACE" "${DISALLOWED_INTERFACES[@]}"
+if [ $? -eq "0" ]; then
+    sudo -u irrenhaus env DISPLAY=:0 DBUS_SESSION_BUS_ADDRESS=unix:path=/run/user/1000/bus XAUTHORITY=/home/irrenhaus/.Xauthority notify-send "Backup" "Running on disallowed interface $ACTIVE_INTERFACE; not allowing backup"
+    exit 1
+fi
+
+if [ "$ALLOW_ON_BATTERY" != "xTRUE" ]; then
+    # Don't allow on backup power
+    acpi -b | grep Discharging > /dev/null
+    if [ $? -eq "0" ]; then
+        sudo -u irrenhaus env DISPLAY=:0 DBUS_SESSION_BUS_ADDRESS=unix:path=/run/user/1000/bus XAUTHORITY=/home/irrenhaus/.Xauthority notify-send "Backup" "Running on battery; not allowing backup"
+        exit 2
+    fi
+fi
+
+sudo -u irrenhaus env DISPLAY=:0 DBUS_SESSION_BUS_ADDRESS=unix:path=/run/user/1000/bus XAUTHORITY=/home/irrenhaus/.Xauthority notify-send "Backup" "Backup preconditions OK; will run now"
+
+exit 0

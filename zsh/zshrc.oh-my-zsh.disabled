@@ -1,0 +1,66 @@
+#####################
+## OH-MY-ZSH Config
+#####################
+
+# Path to your oh-my-zsh configuration.
+ZSH=$HOME/.oh-my-zsh
+ZSH_CUSTOM=$HOME/.oh-my-zsh-custom
+DOTFILES=$HOME/.dotfiles
+
+# use .localrc for SUPER SECRET CRAP that you don't
+# want in your public, versioned repo.
+if [[ -a $HOME/.localrc ]]
+then
+    source $HOME/.localrc
+fi
+
+# Load dotfiles ZSH configs
+typeset -U config_files
+config_files=("${(@f)$(find $DOTFILES -maxdepth 2 -name "*.zsh")}")
+
+# load the path files
+for file in ${(M)config_files:#*/path.zsh}; do
+    if [ -z "$(echo $file | grep -o ".symlink")" ]; then
+        source $file
+    fi
+done
+
+# load everything but the path, alias and completion files
+for file in ${${config_files:#*/path.zsh}:#*/completion.zsh:#*/aliases.zsh}; do
+    if [ -z "$(echo $file | grep -o ".symlink")" ]; then
+        source $file
+    fi
+done
+
+#####################
+## Activate oh-my-zsh
+#####################
+source $ZSH/oh-my-zsh.sh
+
+# At this point compinit was run by oh-my-zsh
+
+# load every completion after autocomplete loads
+for file in ${(M)config_files:#*/completion.zsh}; do
+    if [ -z "$(echo $file | grep -o ".symlink")" ]; then
+        source $file
+    fi
+done
+
+# load all aliases
+for file in ${(M)config_files:#*/aliases.zsh}; do
+    if [ -z "$(echo $file | grep -o ".symlink")" ]; then
+        source $file
+    fi
+done
+
+type rm | grep "alias" >/dev/null 2>/dev/null && unalias rm
+
+unset config_files
+
+source $HOME/.zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+
+export NVM_DIR="/home/irrenhaus/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
+
+source /usr/share/chruby/chruby.sh
+source /usr/share/chruby/auto.sh
