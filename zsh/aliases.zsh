@@ -56,3 +56,18 @@ function btr-grep() {
 
 alias top='glances'
 alias htop='glances'
+
+alias rails_console_staging='ssh api1.staging.zenmate.io "bash -i -c rails_console"'
+
+knife_stage(){
+ CHEF_ENV=staging bundle exec knife $@
+}
+
+knife_prod(){
+ CHEF_ENV=production bundle exec knife $@
+}
+
+alias rails_console_prod="ssh api1.zenmate.io -t 'bash --login -i -c rails_console'"
+alias rails_console_staging="ssh api2.staging.zenmate.io -t 'bash --login -i -c rails_console'"
+
+alias local_db='docker start postgres-api'

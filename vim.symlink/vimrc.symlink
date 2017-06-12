@@ -15,7 +15,8 @@ Plug 'gmarik/Vundle.vim'
 " Plug 'tomasr/molokai'
 " Plug 'nanotech/jellybeans.vim'
 " Plug 'altercation/vim-colors-solarized'
-Plug 'joshdick/onedark.vim'
+" Plug 'joshdick/onedark.vim'
+Plug 'liuchengxu/space-vim-dark'
 
 " YouCompleteMe autocompletion engine
 " Plug 'Valloric/YouCompleteMe'
@@ -23,10 +24,10 @@ Plug 'joshdick/onedark.vim'
 " Color coding for parantheses
 Plug 'kien/rainbow_parentheses.vim'
 
-" Syntastic syntax highlighting
-Plug 'scrooloose/syntastic'
+" Syntastic syntax highlighting (conflicts with ALE)
+" Plug 'scrooloose/syntastic'
 
-Plug 'majutsushi/tagbar'
+" Plug 'majutsushi/tagbar'
 
 " Better status line
 Plug 'vim-airline/vim-airline'
@@ -62,18 +63,20 @@ Plug 'PreserveNoEOL'
 " Maps Groovy syntax to gradle files
 Plug 'tfnico/vim-gradle'
 
-Plug 'edkolev/promptline.vim'
+" Plug 'edkolev/promptline.vim'
 
 " Only GIT: Show changed/added/deleted lines in the signs-column
 Plug 'airblade/vim-gitgutter'
 
 " Preview of %s changes
-Plug 'osyo-manga/vim-over'
+" Plug 'osyo-manga/vim-over'
 
 Plug 'mbbill/undotree'
 
 " Auto-close parentheses
 Plug 'Townk/vim-autoclose'
+
+Plug 'mileszs/ack.vim'
 
 " Sublime Text style multiple cursors
 " Plug 'vim-multiple-cursors'
@@ -87,6 +90,7 @@ Plug 'sheerun/vim-polyglot'
 
 " Automatically adding 'end' for Ruby
 Plug 'tpope/vim-endwise'
+Plug 'ngmy/vim-rubocop'
 
 " Match HTML tags like parentheses
 Plug 'gregsexton/MatchTag'
@@ -95,7 +99,15 @@ Plug 'tpope/vim-fugitive'
 
 Plug 'airodactyl/neovim-ranger'
 
-Plug 'kyuhi/vim-emoji-complete'
+Plug 'w0rp/ale'
+
+Plug 'scrooloose/nerdcommenter'
+
+Plug 'tpope/vim-surround'
+
+Plug 'coverage.nvim'
+
+" Plug 'kyuhi/vim-emoji-complete'
 
 " All of your Plugins must be added before the following line
 call plug#end()
@@ -128,7 +140,7 @@ set cursorline cursorcolumn
 set backspace=indent,eol,start
 
 " persistent_undo
-set undofile                                                                                                                                                                                              
+set undofile
 set undodir=~/.vim/undodir
 set undolevels=1000
 set undoreload=10000
@@ -136,7 +148,7 @@ set undoreload=10000
 " show matching bracket (briefly jump)
 set showmatch
 set matchtime=2 "0.2 seconds
-set matchpairs+=<:>                                               " specially for html      
+set matchpairs+=<:>                                               " specially for html
 
 " Enable true color
 "Use 24-bit (true-color) mode in Vim/Neovim when outside tmux.
@@ -183,7 +195,9 @@ filetype plugin indent on
 " colorscheme molokai
 " colorscheme jellybeans
 " colorscheme solarized
-colorscheme onedark
+" colorscheme onedark
+colorscheme space-vim-dark
+hi Comment cterm=italic
 
 " Damn you Arduino!
 au BufNewFile,BufRead *.ino set filetype=cpp
@@ -274,6 +288,9 @@ set number
 " Automatically detect *.md files as Markdown files
 autocmd BufNewFile,BufReadPost *.md set filetype=markdown
 
+" Automatically remove trailing whitespaces on save
+autocmd BufWritePre * :call <SID>StripTrailingWhitespaces()
+
 " Open new split panes to right and bottom
 set splitbelow
 set splitright
@@ -287,11 +304,11 @@ let g:miniBufExplBRSplit = 0   " Put new window above
                                " left for vertical split
 
 if !has('nvim')
-    let g:neocomplete#enable_at_startup = 1 "default 0
+    let g:neocomplete#enable_at_startup = 0 "default 0
     let g:neocomplete#enable_smart_case = 1
     let g:neocomplete#enable_cursor_hold_i = 1
 else
-    let g:deoplete#enable_at_startup = 1
+    let g:deoplete#enable_at_startup = 0
     let g:deoplete#enable_smart_case = 1
     let g:deoplete#auto_complete_delay = 200
 endif
@@ -307,15 +324,31 @@ let g:syntastic_auto_loc_list = 2
 let g:syntastic_markdown_checkers = ['mdl']
 let g:syntastic_javascript_checkers = ['eslint']
 
+" Gitgutter
+let g:gitgutter_sign_column_always = 1
+
 " Airline
 set laststatus=2 " Always display the statusline in all windows
 let g:airline_powerline_fonts = 1
 let g:airline#extensions#tabline#enabled = 1
+let g:airline#extensions#tabline#buffer_idx_mode = 1
+let g:airline#extensions#tabline#buffer_nr_show = 1
+let g:airline#extensions#tabline#buffer_nr_format = '%s:'
+let g:airline#extensions#tabline#fnamemod = ':t'
+let g:airline#extensions#tabline#fnamecollapse = 1
+let g:airline#extensions#tabline#fnametruncate = 0
+let g:airline#extensions#tabline#formatter = 'unique_tail_improved'
 let g:airline#extensions#whitespace#enabled = 1
 "let g:airline#extensions#promptline#snapshot_file = '~/.dotfiles/zsh/90-airline-theme.zsh'
 "let g:airline_theme='wombat'
 "let g:airline_theme='solarized'
-let g:airline_theme='onedark'
+"let g:airline_theme='onedark'
+let g:airline_theme='violet'
+let g:Powerline_symbols='fancy'
+" Distinct background color is enough to discriminate the warning and
+" error information.
+let g:airline#extensions#ale#error_symbol = '•'
+let g:airline#extensions#ale#warning_symbol = '•'
 
 " let g:promptline_theme='airline'
 
@@ -338,6 +371,32 @@ let g:go_highlight_build_constraints = 1
 let g:go_highlight_operators = 1
 let g:go_highlight_structs = 1
 let g:go_highlight_interfaces = 1
+
+" Ack
+if executable('ag')
+  let g:ackprg = 'ag --vimgrep'
+endif
+
+" Add spaces after comment delimiters by default
+let g:NERDSpaceDelims = 1
+
+" Use compact syntax for prettified multi-line comments
+let g:NERDCompactSexyComs = 1
+
+" Align line-wise comment delimiters flush left instead of following code indentation
+let g:NERDDefaultAlign = 'left'
+
+" Set a language to use its alternate delimiters by default
+let g:NERDAltDelims_java = 1
+
+" Add your own custom formats or override the defaults
+let g:NERDCustomDelimiters = { 'c': { 'left': '/**','right': '*/' } }
+
+" Allow commenting and inverting empty lines (useful when commenting a region)
+let g:NERDCommentEmptyLines = 1
+
+" Enable trimming of trailing whitespace when uncommenting
+let g:NERDTrimTrailingWhitespace = 1
 
 " Sometimes when using both vim-go and syntastic Vim will start lagging while saving and opening files. The following fixes this:
 " let g:syntastic_go_checkers = ['golint', 'govet', 'errcheck']
@@ -369,11 +428,18 @@ vnoremap <Space> zf
 nnoremap <C-p> :Unite -start-insert buffer file_rec/async file_mru -auto-preview<CR>
 nnoremap <Leader>l :Unite -start-insert line -auto-preview<CR>
 nnoremap <Leader>m :Unite -start-insert mapping -auto-preview<CR>
-nnoremap <space>/ :Unite grep:.<CR>
+"nnoremap <space>/ :Unite grep:.<CR>
 nnoremap <space>y :Unite history/yank<CR>
-nnoremap <space>/ :Unite grep:.<CR>
+" nnoremap <space>/ :Unite grep:.<CR>
 vnoremap <space>( :call VisualSelection('ug')<CR>
 " OMG UNITE!
+
+" Ack, again
+nnoremap <space>/ :Ack
+
+nmap <Leader>// <Plug>NERDCommenterToggle
+omap <Leader>// <Plug>NERDCommenterToggle
+vmap <Leader>// <Plug>NERDCommenterToggle
 
 " Map Up and Down keys to move one row instead of one line (wrapped lines
 " stuff)
@@ -501,3 +567,10 @@ function! ToggleTextWrap()
         set fo+=t
     endif
 endfunction
+
+function! <SID>StripTrailingWhitespaces()
+    let l = line(".")
+    let c = col(".")
+    %s/\s\+$//e
+    call cursor(l, c)
+endfun

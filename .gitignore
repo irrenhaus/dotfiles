@@ -2,3 +2,5 @@ vim.symlink/bundle/*
 vim.symlink/.netrwhist
 vim.symlink/plugged
 vim.symlink/undodir/*
+*.log
+*~
