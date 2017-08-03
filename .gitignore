@@ -4,3 +4,4 @@ vim.symlink/plugged
 vim.symlink/undodir/*
 *.log
 *~
+.DS_Store

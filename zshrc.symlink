@@ -11,3 +11,35 @@ if [[ -s "${ZDOTDIR:-$HOME}/.zprezto/init.zsh" ]]; then
 fi
 
 # Customize to your needs...
+
+DOTFILES=$HOME/.dotfiles
+
+# use .localrc for SUPER SECRET CRAP that you don't
+# want in your public, versioned repo.
+if [[ -a $HOME/.localrc ]]
+then
+  source $HOME/.localrc
+fi
+
+# Load dotfiles ZSH configs
+typeset -U config_files
+config_files=("${(@f)$(find $DOTFILES -maxdepth 2 -name "*.zsh")}")
+
+# load the path files
+for file in ${(M)config_files:#*/path.zsh}; do
+  if [ -z "$(echo $file | grep -o ".symlink")" ]; then
+    source $file
+  fi
+done
+
+# load everything but the path, alias and completion files
+for file in ${${config_files:#*/path.zsh}:#*/completion.zsh:#*/aliases.zsh}; do
+  if [ -z "$(echo $file | grep -o ".symlink")" ]; then
+    source $file
+  fi
+done
+
+export NVM_DIR="$HOME/.nvm"
+. "/usr/local/opt/nvm/nvm.sh"
+
+unset config_files

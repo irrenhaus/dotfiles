@@ -104,20 +104,25 @@ link_file () {
 install_dotfiles () {
   info 'installing dotfiles'
 
+  local platform="$1"
   local overwrite_all=false backup_all=false skip_all=false
 
-  for src in $(find "$DOTFILES_ROOT" -maxdepth 2 -name '*.symlink' -not -path '*.merge*')
-  do
-    dst="$HOME/.$(basename "${src%.*}")"
-    link_file "$src" "$dst"
-  done
-
-  for src in $(find "$DOTFILES_ROOT" -maxdepth 2 -name '*.symlink' -path '*.merge*')
-  do
-    dstpath=$(basename $(dirname $src))
-    dst="$HOME/.${dstpath%.*}/.$(basename "${src%.*}")"
-    link_file "$src" "$dst"
-  done
+  (
+    if [ -z "$1" ]; then
+        cd "platform/$platform"
+    fi && \
+    for src in $(find "$DOTFILES_ROOT" -maxdepth 1 -name '*.symlink'); do
+      filename="$(echo $src | sed 's/.symlink//g')"
+      dst="$HOME/.$(basename "$filename")"
+      link_file "$src" "$dst"
+    done && \
+    for src in $(find "$DOTFILES_ROOT" -maxdepth 2 -name '*.symlink' -path '*.merge*' -not -path 'platform'); do
+      dstpath=$(basename $(dirname $src))
+      filename="$(echo $src | sed 's/.symlink//g')"
+      dst="$HOME/.${dstpath%.*}/.$(basename "$filename")"
+      link_file "$src" "$dst"
+    done
+  )
 }
 
 update_submodules () {
@@ -128,24 +133,23 @@ set -e
 
 update_submodules
 install_dotfiles
+install_dotfiles "$(uname -s)"
 
 if [ "x$NOINSTALL" != "xYes" ]; then
-    # If we're on a Mac, let's install and setup homebrew.
-    if [ "$(uname -s)" == "Darwin" ]
-    then
-      info "installing dependencies"
-      if source bin/dot > /tmp/dotfiles-dot 2>&1
-      then
-        success "dependencies installed"
-      else
-        fail "error installing dependencies"
-      fi
-    fi
+  if [ -f "platform/$(uname -s)/dependencies.sh" ]; then
+    info "installing dependencies"
 
-    echo '  Running installers...'
-    for I in `find "$DOTFILES_ROOT" -maxdepth 2 -name "install.sh"`; do
-        sh -c "$I"
-    done
+    if source "platform/$(uname -s)/dependencies.sh" > /tmp/dotfiles-dot 2>&1; then
+      success "dependencies installed"
+    else
+      fail "error installing dependencies"
+    fi
+  fi
+
+  echo '  Running installers...'
+  for I in `find "$DOTFILES_ROOT" -maxdepth 2 -name "install.sh"`; do
+    sh -c "$I"
+  done
 fi
 
 echo ''
