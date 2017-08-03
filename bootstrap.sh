@@ -10,11 +10,11 @@ set -e
 echo ''
 
 info () {
-  printf "  [ \033[00;34m..\033[0m ] $1"
+  printf "  [ \033[00;34m..\033[0m ] $1\n"
 }
 
 user () {
-  printf "\r  [ \033[0;33m?\033[0m ] $1 "
+  printf "\r  [ \033[0;33m?\033[0m ] $1\n"
 }
 
 success () {
@@ -104,19 +104,21 @@ link_file () {
 install_dotfiles () {
   info 'installing dotfiles'
 
-  local platform="$1"
+  export DOTPLATFORM="$1"
+  export WORKINGDIR="$DOTFILES_ROOT"
   local overwrite_all=false backup_all=false skip_all=false
 
   (
-    if [ -z "$1" ]; then
-        cd "platform/$platform"
+    if [ -n "$DOTPLATFORM" ]; then
+        WORKINGDIR="$WORKINGDIR/platform/$DOTPLATFORM"
+        info "using platform $DOTPLATFORM"
     fi && \
-    for src in $(find "$DOTFILES_ROOT" -maxdepth 1 -name '*.symlink'); do
+    for src in $(find "$WORKINGDIR" -maxdepth 1 -name '*.symlink'); do
       filename="$(echo $src | sed 's/.symlink//g')"
       dst="$HOME/.$(basename "$filename")"
       link_file "$src" "$dst"
     done && \
-    for src in $(find "$DOTFILES_ROOT" -maxdepth 2 -name '*.symlink' -path '*.merge*' -not -path 'platform'); do
+    for src in $(find "$WORKINGDIR" -maxdepth 4 -name '*.symlink' -path '*.merge*' -not -path 'platform'); do
       dstpath=$(basename $(dirname $src))
       filename="$(echo $src | sed 's/.symlink//g')"
       dst="$HOME/.${dstpath%.*}/.$(basename "$filename")"
