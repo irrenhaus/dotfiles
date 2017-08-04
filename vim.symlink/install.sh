@@ -2,14 +2,15 @@
 
 (cd $HOME/.vim && git submodule init && git submodule update)
 
+CONFIG_HOME=${XDG_CONFIG_HOME:=$HOME/.config}
 mkdir -p ${XDG_CONFIG_HOME:=$HOME/.config}
 
-if [ ! -e $XDG_CONFIG_HOME/nvim ]; then
+if [ ! -e $CONFIG_HOME/nvim ]; then
     ln -fs ~/.vim $XDG_CONFIG_HOME/nvim
 fi
 
-if [ ! -f $XDG_CONFIG_HOME/nvim/init.vim ]; then
-    ln -fs ~/.vimrc $XDG_CONFIG_HOME/nvim/init.vim
+if [ ! -f $CONFIG_HOME/nvim/init.vim ]; then
+    ln -fs ~/.vimrc $CONFIG_HOME/nvim/init.vim
 fi
 
 if [ -f /etc/debian_version ]; then

@@ -5,6 +5,13 @@
 #   Sorin Ionescu <sorin.ionescu@gmail.com>
 #
 
+# Add location of custom theme.
+
+fpath=(
+  ${HOME}/.dotfiles/prezto
+  ${fpath}
+)
+
 #
 # General
 #
@@ -32,6 +39,12 @@ zstyle ':prezto:load' pmodule \
   'spectrum' \
   'utility' \
   'completion' \
+  'git' \
+  'osx' \
+  'syntax-highlighting' \
+  'zsh-notify' \
+  'homebrew' \
+  'helper' \
   'prompt'
 
 #
@@ -56,7 +69,7 @@ zstyle ':prezto:module:editor' key-bindings 'emacs'
 #
 
 # Ignore submodules when they are 'dirty', 'untracked', 'all', or 'none'.
-# zstyle ':prezto:module:git:status:ignore' submodules 'all'
+zstyle ':prezto:module:git:status:ignore' submodules 'all'
 
 #
 # GNU Utility
@@ -92,7 +105,7 @@ zstyle ':prezto:module:editor' key-bindings 'emacs'
 # Set the prompt theme to load.
 # Setting it to 'random' loads a random theme.
 # Auto set to 'off' on dumb terminals.
-zstyle ':prezto:module:prompt' theme 'bart'
+zstyle ':prezto:module:prompt' theme 'paradoxpurple'
 
 #
 # Ruby

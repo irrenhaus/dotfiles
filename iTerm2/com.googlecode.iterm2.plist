@@ -12,6 +12,14 @@
 	<integer>1</integer>
 	<key>Default Bookmark Guid</key>
 	<string>FF0CEA40-C36A-44FD-B3AA-CC83F32C4EBA</string>
+	<key>DimBackgroundWindows</key>
+	<false/>
+	<key>DisableFullscreenTransparency</key>
+	<false/>
+	<key>HideMenuBarInFullscreen</key>
+	<false/>
+	<key>HideTab</key>
+	<true/>
 	<key>LoadPrefsFromCustomFolder</key>
 	<true/>
 	<key>NSNavLastRootDirectory</key>
@@ -52,9 +60,9 @@
 	<key>NSWindow Frame SessionsPreferences</key>
 	<string>269 207 599 388 0 0 2560 1417 </string>
 	<key>NSWindow Frame SharedPreferences</key>
-	<string>1503 771 796 473 0 0 2560 1440 </string>
+	<string>1503 916 796 473 0 0 2560 1418 </string>
 	<key>NSWindow Frame iTerm Window 0</key>
-	<string>5 234 1593 1166 0 0 2560 1417 </string>
+	<string>1 0 1278 1413 0 0 2560 1418 </string>
 	<key>NSWindow Frame iTerm Window 1</key>
 	<string>2357 838 570 452 0 0 2560 1417 </string>
 	<key>New Bookmarks</key>
@@ -641,7 +649,7 @@
 			<key>Rows</key>
 			<integer>25</integer>
 			<key>Screen</key>
-			<integer>-1</integer>
+			<integer>-2</integer>
 			<key>Scrollback Lines</key>
 			<integer>1000</integer>
 			<key>Selected Text Color</key>
@@ -691,7 +699,7 @@
 			<key>Visual Bell</key>
 			<true/>
 			<key>Window Type</key>
-			<integer>5</integer>
+			<integer>0</integer>
 			<key>Working Directory</key>
 			<string>/Users/irrenhaus</string>
 		</dict>
@@ -700,10 +708,14 @@
 	<true/>
 	<key>NoSyncInstallationId</key>
 	<string>319110A2-44C1-4C19-818E-A2D104FF161A</string>
+	<key>NoSyncNeverAskAboutSettingAlternateMouseScroll</key>
+	<true/>
 	<key>NoSyncNeverRemindPrefsChangesLostForFile</key>
 	<true/>
 	<key>NoSyncNeverRemindPrefsChangesLostForFile_selection</key>
 	<integer>0</integer>
+	<key>NoSyncPermissionToShowTip</key>
+	<false/>
 	<key>NoSyncTimeOfFirstLaunchOfVersionWithTip</key>
 	<real>523267820.15244401</real>
 	<key>PointerActions</key>
@@ -754,17 +766,23 @@
 	<key>SUHasLaunchedBefore</key>
 	<true/>
 	<key>SULastCheckTime</key>
-	<date>2017-08-01T08:10:20Z</date>
+	<date>2017-08-02T15:21:34Z</date>
 	<key>SUSendProfileInfo</key>
 	<false/>
 	<key>SavePasteHistory</key>
 	<false/>
+	<key>SmartPlacement</key>
+	<true/>
 	<key>TabStyle</key>
 	<integer>1</integer>
 	<key>ToolbeltTools</key>
 	<array>
 		<string>Profiles</string>
 	</array>
+	<key>UseBorder</key>
+	<true/>
+	<key>UseLionStyleFullscreen</key>
+	<false/>
 	<key>WordCharacters</key>
 	<string>/-+\~_.</string>
 	<key>iTerm Version</key>
