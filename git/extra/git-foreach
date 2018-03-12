@@ -12,7 +12,7 @@ for p in $@; do
     CMD="${CMD}$p "
 done
 
-for DIR in `find -type d -iname "*.git"`; do
+for DIR in `find . -type d -iname "*.git"`; do
     DIR="$(dirname $DIR)"
     if [ -e "${DIR}/.git" ]; then
         echo "Running ${CMD}in ${DIR}..."

@@ -42,9 +42,9 @@ zstyle ':prezto:load' pmodule \
   'git' \
   'osx' \
   'syntax-highlighting' \
-  'zsh-notify' \
   'homebrew' \
   'helper' \
+  'zsh-notify' \
   'prompt'
 
 #

@@ -58,7 +58,7 @@ endif
 Plug 'Yggdroot/indentLine'
 
 " Deletes a trailing EOL from files on save (if it is there)
-Plug 'PreserveNoEOL'
+Plug 'vim-scripts/PreserveNoEOL'
 
 " Maps Groovy syntax to gradle files
 Plug 'tfnico/vim-gradle'
@@ -91,7 +91,8 @@ Plug 'sheerun/vim-polyglot'
 
 " Automatically adding 'end' for Ruby
 " Plug 'tpope/vim-endwise'
-" Plug 'ngmy/vim-rubocop'
+Plug 'ngmy/vim-rubocop'
+Plug 'vim-ruby/vim-ruby'
 
 " Match HTML tags like parentheses
 Plug 'gregsexton/MatchTag'
@@ -132,9 +133,12 @@ set guioptions-=T
 " set guioptions-=m
 
 " Highlight current line
-au WinLeave * set nocursorline nocursorcolumn
-au WinEnter * set cursorline cursorcolumn
-set cursorline cursorcolumn
+let s:uname = system("echo -n \"$(uname)\"")
+if !v:shell_error && s:uname == "Linux"
+    au WinLeave * set nocursorline nocursorcolumn
+    au WinEnter * set cursorline cursorcolumn
+    set cursorline cursorcolumn
+endif
 
 " More powerfull backspace
 set backspace=indent,eol,start
@@ -325,7 +329,7 @@ endif
 "let g:syntastic_javascript_checkers = ['eslint']
 
 " Gitgutter
-let g:gitgutter_sign_column_always = 1
+set signcolumn=yes
 
 " Airline
 set laststatus=2 " Always display the statusline in all windows
@@ -419,9 +423,9 @@ nnoremap <silent> <Space> @=(foldlevel('.')?'za':"\<Space>")<CR>
 vnoremap <Space> zf
 
 " Tab changes
-:nmap \t2 :set expandtab tabstop=2 shiftwidth=2 softtabstop=2<CR>
-:nmap \t4 :set expandtab tabstop=4 shiftwidth=4 softtabstop=4<CR>
-:nmap \t8 :set expandtab tabstop=8 shiftwidth=8 softtabstop=8<CR>
+:nmap <Leader>t2 :set expandtab tabstop=2 shiftwidth=2 softtabstop=2<CR>
+:nmap <Leader>t4 :set expandtab tabstop=4 shiftwidth=4 softtabstop=4<CR>
+:nmap <Leader>t8 :set expandtab tabstop=8 shiftwidth=8 softtabstop=8<CR>
 
 " Unite
 " -no-split?

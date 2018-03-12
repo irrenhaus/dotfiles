@@ -71,3 +71,22 @@ alias rails_console_prod="ssh api1.zenmate.io -t 'bash --login -i -c rails_conso
 alias rails_console_staging="ssh api2.staging.zenmate.io -t 'bash --login -i -c rails_console'"
 
 alias local_db='docker start postgres-api'
+
+
+
+
+########################## DOCKER
+
+# Kill all running containers.
+alias dockerkillall='docker kill $(docker ps -q)'
+
+# Delete all stopped containers.
+alias dockercleanc='printf "\n>>> Deleting stopped containers\n\n" && docker rm $(docker ps -a -q)'
+
+# Delete all untagged images.
+alias dockercleani='printf "\n>>> Deleting untagged images\n\n" && docker rmi $(docker images -q -f dangling=true)'
+
+# Delete all stopped containers and untagged images.
+alias dockerclean='dockercleanc || true && dockercleani'
+
+alias dockerremovealli='docker rmi $(docker images -q)'
