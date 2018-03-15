@@ -137,6 +137,10 @@ update_submodules
 install_dotfiles
 install_dotfiles "$(uname -s)"
 
+source $DOTFILES_ROOT/dotfunctions.zsh
+
+update_dotfile_config_files
+
 if [ "x$NOINSTALL" != "xYes" ]; then
   if [ -f "platform/$(uname -s)/dependencies.sh" ]; then
     info "installing dependencies"

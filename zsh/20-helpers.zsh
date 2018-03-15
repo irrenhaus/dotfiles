@@ -12,7 +12,8 @@ function check_compression {
 }
 
 function api_sequential_ssh() {
-    for i in {1..10}; do                                                                           
+    for i in {1..10}; do
 		ssh api$i.zenmate.io
 	done
 }
+

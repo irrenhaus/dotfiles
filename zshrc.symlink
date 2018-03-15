@@ -21,9 +21,11 @@ then
   source $HOME/.localrc
 fi
 
+source $DOTFILES/dotfunctions.zsh
+
 # Load dotfiles ZSH configs
 typeset -U config_files
-config_files=("${(@f)$(find $DOTFILES -maxdepth 2 -name "*.zsh")}")
+config_files=$(dotfile_config_files)
 
 # load the path files
 for file in ${(M)config_files:#*/path.zsh}; do
@@ -32,8 +34,8 @@ for file in ${(M)config_files:#*/path.zsh}; do
   fi
 done
 
-# load everything but the path, alias and completion files
-for file in ${${config_files:#*/path.zsh}:#*/completion.zsh:#*/aliases.zsh}; do
+# load everything but the path, env, alias and completion files
+for file in ${${config_files:#*/path.zsh}:#*/completion.zsh:#*/aliases.zsh:#*/env.zsh}; do
   if [ -z "$(echo $file | grep -o ".symlink")" ]; then
     source $file
   fi

@@ -70,9 +70,9 @@
 	<key>NSWindow Frame SessionsPreferences</key>
 	<string>-2291 157 618 519 -2560 0 2560 1418 </string>
 	<key>NSWindow Frame SharedPreferences</key>
-	<string>-1057 884 918 512 -2560 0 2560 1440 </string>
+	<string>-1057 885 796 473 -2560 0 2560 1440 </string>
 	<key>NSWindow Frame iTerm Window 0</key>
-	<string>2560 7 1678 1043 2560 0 1680 1050 </string>
+	<string>0 30 2560 1388 0 0 2560 1418 </string>
 	<key>NSWindow Frame iTerm Window 1</key>
 	<string>2357 838 570 452 0 0 2560 1417 </string>
 	<key>New Bookmarks</key>
@@ -732,6 +732,8 @@
 	<false/>
 	<key>NoSyncTimeOfFirstLaunchOfVersionWithTip</key>
 	<real>523267820.15244401</real>
+	<key>PasteTabToStringTabStopSize</key>
+	<integer>4</integer>
 	<key>PointerActions</key>
 	<dict>
 		<key>Button,1,1,,</key>
@@ -780,7 +782,7 @@
 	<key>SUHasLaunchedBefore</key>
 	<true/>
 	<key>SULastCheckTime</key>
-	<date>2018-02-06T09:40:58Z</date>
+	<date>2018-03-14T12:19:31Z</date>
 	<key>SUSendProfileInfo</key>
 	<false/>
 	<key>SavePasteHistory</key>
