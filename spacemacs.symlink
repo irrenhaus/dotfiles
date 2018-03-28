@@ -37,37 +37,45 @@ values."
      ;; <M-m f e R> (Emacs style) to install them.
      ;; ----------------------------------------------------------------
      helm
-     auto-completion
-     ;; better-defaults
+     osx
+
+     ;; Languages
      emacs-lisp
-     git
-     emoji
      (markdown :variables markdown-live-preview-engine 'vmd)
+     html
+     javascript
+     typescript
+     ruby
+     scala
+
+     ;; Tools
+     auto-completion
+     syntax-checking
+     version-control
+     git
      (org :packages (not org-projectile))
+     restclient
+
+     ;; Misc
+     ;; emoji ;; Breaks org-mode when DONEing repeated items
+     xkcd
+     games
+
+     ;; Disabled stuff
+     ;; better-defaults
      ;; (shell :variables
      ;;        shell-default-height 30
      ;;        shell-default-position 'bottom)
      ;; spell-checking
-     syntax-checking
-     version-control
-     osx
-     html
-     javascript
-     typescript
-     (ruby :variables ruby-enable-enh-ruby-mode t)
-     scala
-     restclient
      ;;(mu4e :variables mu4e-installation-path "/usr/local/share/emacs/site-lisp/mu/mu4e")
-     xkcd
-     games
      )
    ;; List of additional packages that will be installed without being
    ;; wrapped in a layer. If you need some configuration for these
    ;; packages, then consider creating a layer. You can also put the
    ;; configuration in `dotspacemacs/user-config'.
-   dotspacemacs-additional-packages '(exec-path-from-shell)
+   dotspacemacs-additional-packages '()
    ;; A list of packages that cannot be updated.
-   dotspacemacs-frozen-packages '()
+   dotspacemacs-frozen-packages '(ensime)
    ;; A list of packages that will not be installed and loaded.
    dotspacemacs-excluded-packages '()
    ;; Defines the behaviour of Spacemacs when installing packages.
@@ -114,7 +122,7 @@ values."
    ;; (default 'vim)
    dotspacemacs-editing-style 'vim
    ;; If non nil output loading progress in `*Messages*' buffer. (default nil)
-   dotspacemacs-verbose-loading nil
+   dotspacemacs-verbose-loading t
    ;; Specify the startup banner. Default value is `official', it displays
    ;; the official spacemacs logo. An integer value is the index of text
    ;; banner, `random' chooses a random text banner in `core/banners'
@@ -325,7 +333,11 @@ before packages are loaded. If you are unsure, you should try in setting them in
         js-indent-level 2
         javascript-indent-level 2)
 
-  (setq exec-path-from-shell-arguments '("-l"))
+  (push '("melpa-stable" . "stable.melpa.org/packages/") configuration-layer--elpa-archives)
+  (push '("ensime" . "melpa-stable") package-pinned-packages)
+
+  (setq-default exec-path-from-shell-arguments '("-l"))
+  (setq-default exec-path-from-shell-variables '("PATH" "MANPATH" "JAVA" "JAVA_HOME"))
   )
 
 (defun dotspacemacs/user-config ()
@@ -335,10 +347,7 @@ layers configuration.
 This is the place where most of your configurations should be done. Unless it is
 explicitly specified that a variable should be set before a package is loaded,
 you should place your code here."
-  (when (memq window-system '(mac ns x))
-    (exec-path-from-shell-initialize))
-  (exec-path-from-shell-copy-env "JAVA")
-  (exec-path-from-shell-copy-env "JAVA_HOME")
+  (setq debug-on-error t)
 
   (setq
    powerline-default-separator 'curve
@@ -355,24 +364,33 @@ you should place your code here."
                                 ("d" "Deadline" entry
                                  (file+headline org-default-notes-file "Tasks")
                                  "* TODO %i%? DEADLINE: %U")
+                                ("s" "Scheduled" entry
+                                 (file+headline org-default-notes-file "Tasks")
+                                 "* TODO %i%? SCHEDULED: %U")
+                                ("s" "Scheduled" entry
+                                 (file+headline org-default-notes-file "Tasks")
+                                 "* %i%?\n  %a")
                                 ("T" "Tickler" entry
-                                 (file+headline org-default-notes-file "Tickler")
-                                 "* %i%? \n  %U")))
+                                 (file+headline org-default-notes-file "Tasks")
+                                 "* %i%? \n  %U")
+                                ("w" "Web Entry" entry
+                                 (file+headline org-default-notes-file "Tasks")
+                                 "* [[%:link][%:description]]\n  %u %i")
+                               )
+    )
   (add-hook 'org-capture-mode-hook 'evil-insert-state)
 
-  ;; OrgMode fancy states - https://thraxys.wordpress.com/2016/01/14/pimp-up-your-org-agenda/
-  (setq org-todo-keywords '((sequence "☛ TODO(t)" "|" "<img draggable='false' class='emoji' alt='✔' src='https://s0.wp.com/wp-content/mu-plugins/wpcom-smileys/twemoji/2/svg/2714.svg'> DONE(d)")
-                            (sequence "⚑ WAITING(w)" "|")
-                            (sequence "|" "✘ CANCELED(c)")))
+  (setq org-todo-keywords '("TODO" "WAITING" "|" "DONE" "CANCELED"))
 
   (setq org-bullets-bullet-list '("►" "■" "◼" "▪"))
-
-  (setq debug-on-error t)
 
   ;; Scala goto definition TAGS issue
   ;; https://github.com/syl20bnr/spacemacs/issues/9756#issuecomment-363436814
   (setq spacemacs-default-jump-handlers
         (remove 'evil-goto-definition spacemacs-default-jump-handlers))
+
+  (server-start)
+  (require 'org-protocol)
 
   ;; (setq mu4e-maildir "~/.mail")
 
@@ -411,7 +429,7 @@ you should place your code here."
  '(evil-want-Y-yank-to-eol nil)
  '(package-selected-packages
    (quote
-    (typit mmt sudoku pacmacs 2048-game xkcd mu4e-maildirs-extension mu4e-alert ht restclient-helm ob-restclient ob-http company-restclient restclient know-your-http-well vmd-mode emoji-cheat-sheet-plus company-emoji noflet git-gutter-fringe+ git-gutter-fringe fringe-helper git-gutter+ git-gutter ensime sbt-mode scala-mode diff-hl enh-ruby-mode unfill mwim flyspell-correct-helm flyspell-correct flycheck-pos-tip pos-tip auto-dictionary web-mode web-beautify tide typescript-mode flycheck tagedit slim-mode scss-mode sass-mode pug-mode livid-mode skewer-mode simple-httpd less-css-mode json-mode json-snatcher json-reformat js2-refactor multiple-cursors js2-mode js-doc helm-css-scss haml-mode emmet-mode company-web web-completion-data company-tern dash-functional tern coffee-mode reveal-in-osx-finder pbcopy osx-trash osx-dictionary launchctl smeargle orgit org-projectile org-category-capture org-present org-pomodoro alert log4e gntp org-mime org-download mmm-mode markdown-toc markdown-mode magit-gitflow htmlize helm-gitignore helm-company helm-c-yasnippet gnuplot gitignore-mode gitconfig-mode gitattributes-mode git-timemachine git-messenger git-link gh-md fuzzy evil-magit magit magit-popup git-commit ghub let-alist with-editor company-statistics company auto-yasnippet yasnippet ac-ispell auto-complete rvm ruby-tools ruby-test-mode rubocop rspec-mode robe rbenv rake minitest chruby bundler inf-ruby ws-butler winum which-key volatile-highlights vi-tilde-fringe uuidgen use-package toc-org spaceline powerline restart-emacs request rainbow-delimiters popwin persp-mode pcre2el paradox spinner org-plus-contrib org-bullets open-junk-file neotree move-text macrostep lorem-ipsum linum-relative link-hint indent-guide hydra hungry-delete hl-todo highlight-parentheses highlight-numbers parent-mode highlight-indentation helm-themes helm-swoop helm-projectile helm-mode-manager helm-make projectile pkg-info epl helm-flx helm-descbinds helm-ag google-translate golden-ratio flx-ido flx fill-column-indicator fancy-battery eyebrowse expand-region exec-path-from-shell evil-visualstar evil-visual-mark-mode evil-unimpaired evil-tutor evil-surround evil-search-highlight-persist evil-numbers evil-nerd-commenter evil-mc evil-matchit evil-lisp-state smartparens evil-indent-plus evil-iedit-state iedit evil-exchange evil-escape evil-ediff evil-args evil-anzu anzu evil goto-chg undo-tree eval-sexp-fu highlight elisp-slime-nav dumb-jump f dash s diminish define-word column-enforce-mode clean-aindent-mode bind-map bind-key auto-highlight-symbol auto-compile packed aggressive-indent adaptive-wrap ace-window ace-link ace-jump-helm-line helm avy helm-core popup async))))
+    (typit mmt sudoku pacmacs 2048-game xkcd mu4e-maildirs-extension mu4e-alert ht restclient-helm ob-restclient ob-http company-restclient restclient know-your-http-well vmd-mode emoji-cheat-sheet-plus company-emoji noflet git-gutter-fringe+ git-gutter-fringe fringe-helper git-gutter+ git-gutter sbt-mode scala-mode diff-hl enh-ruby-mode unfill mwim flyspell-correct-helm flyspell-correct flycheck-pos-tip pos-tip auto-dictionary web-mode web-beautify tide typescript-mode flycheck tagedit slim-mode scss-mode sass-mode pug-mode livid-mode skewer-mode simple-httpd less-css-mode json-mode json-snatcher json-reformat js2-refactor multiple-cursors js2-mode js-doc helm-css-scss haml-mode emmet-mode company-web web-completion-data company-tern dash-functional tern coffee-mode reveal-in-osx-finder pbcopy osx-trash osx-dictionary launchctl smeargle orgit org-projectile org-category-capture org-present org-pomodoro alert log4e gntp org-mime org-download mmm-mode markdown-toc markdown-mode magit-gitflow htmlize helm-gitignore helm-company helm-c-yasnippet gnuplot gitignore-mode gitconfig-mode gitattributes-mode git-timemachine git-messenger git-link gh-md fuzzy evil-magit magit magit-popup git-commit ghub let-alist with-editor company-statistics company auto-yasnippet yasnippet ac-ispell auto-complete rvm ruby-tools ruby-test-mode rubocop rspec-mode robe rbenv rake minitest chruby bundler inf-ruby ws-butler winum which-key volatile-highlights vi-tilde-fringe uuidgen use-package toc-org spaceline powerline restart-emacs request rainbow-delimiters popwin persp-mode pcre2el paradox spinner org-plus-contrib org-bullets open-junk-file neotree move-text macrostep lorem-ipsum linum-relative link-hint indent-guide hydra hungry-delete hl-todo highlight-parentheses highlight-numbers parent-mode highlight-indentation helm-themes helm-swoop helm-projectile helm-mode-manager helm-make projectile pkg-info epl helm-flx helm-descbinds helm-ag google-translate golden-ratio flx-ido flx fill-column-indicator fancy-battery eyebrowse expand-region exec-path-from-shell evil-visualstar evil-visual-mark-mode evil-unimpaired evil-tutor evil-surround evil-search-highlight-persist evil-numbers evil-nerd-commenter evil-mc evil-matchit evil-lisp-state smartparens evil-indent-plus evil-iedit-state iedit evil-exchange evil-escape evil-ediff evil-args evil-anzu anzu evil goto-chg undo-tree eval-sexp-fu highlight elisp-slime-nav dumb-jump f dash s diminish define-word column-enforce-mode clean-aindent-mode bind-map bind-key auto-highlight-symbol auto-compile packed aggressive-indent adaptive-wrap ace-window ace-link ace-jump-helm-line helm avy helm-core popup async))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.

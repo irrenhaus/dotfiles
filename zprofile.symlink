@@ -9,16 +9,13 @@ export DOTFILES="$HOME/.dotfiles"
 
 source $DOTFILES/dotfunctions.zsh
 
+set_debug_mode
+
 # Load dotfiles ZSH configs
-typeset -U config_files
-config_files=$(dotfile_config_files)
+dotfile_config_files
 
 # load the env files
-for file in ${(M)config_files:#*/env.zsh}; do
-  if [ -z "$(echo $file | grep -o ".symlink")" ]; then
-    source $file
-  fi
-done
+load_env_config
 
 #
 # Browser

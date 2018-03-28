@@ -1,1 +1,15 @@
-/Users/irrenhaus/.dotfiles/nodejs/nvm.zsh /Users/irrenhaus/.dotfiles/zprezto.symlink/init.zsh /Users/irrenhaus/.dotfiles/kicad/env.zsh /Users/irrenhaus/.dotfiles/android/build_env.zsh /Users/irrenhaus/.dotfiles/zsh/aliases.zsh /Users/irrenhaus/.dotfiles/zsh/60-fasd.zsh /Users/irrenhaus/.dotfiles/zsh/99-misc.zsh /Users/irrenhaus/.dotfiles/zsh/10-color_definitions.zsh /Users/irrenhaus/.dotfiles/zsh/50-encfs-automount.zsh /Users/irrenhaus/.dotfiles/zsh/31-rbenv.zsh /Users/irrenhaus/.dotfiles/zsh/20-helpers.zsh /Users/irrenhaus/.dotfiles/zsh/40-command-not-found.zsh /Users/irrenhaus/.dotfiles/zsh/30-options.zsh /Users/irrenhaus/.dotfiles/env.zsh /Users/irrenhaus/.dotfiles/git/path.zsh /Users/irrenhaus/.dotfiles/git/env.zsh
+/Users/irrenhaus/.dotfiles/nodejs/nvm.zsh
+/Users/irrenhaus/.dotfiles/zprezto.symlink/init.zsh
+/Users/irrenhaus/.dotfiles/kicad/env.zsh
+/Users/irrenhaus/.dotfiles/android/build_env.zsh
+/Users/irrenhaus/.dotfiles/zsh/aliases.zsh
+/Users/irrenhaus/.dotfiles/zsh/60-fasd.zsh
+/Users/irrenhaus/.dotfiles/zsh/99-misc.zsh
+/Users/irrenhaus/.dotfiles/zsh/10-color_definitions.zsh
+/Users/irrenhaus/.dotfiles/zsh/50-encfs-automount.zsh
+/Users/irrenhaus/.dotfiles/zsh/31-rbenv.zsh
+/Users/irrenhaus/.dotfiles/zsh/20-helpers.zsh
+/Users/irrenhaus/.dotfiles/zsh/40-command-not-found.zsh
+/Users/irrenhaus/.dotfiles/zsh/30-options.zsh
+/Users/irrenhaus/.dotfiles/git/path.zsh
+/Users/irrenhaus/.dotfiles/git/env.zsh

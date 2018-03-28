@@ -23,25 +23,16 @@ fi
 
 source $DOTFILES/dotfunctions.zsh
 
+set_debug_mode
+
 # Load dotfiles ZSH configs
-typeset -U config_files
-config_files=$(dotfile_config_files)
+dotfile_config_files
 
 # load the path files
-for file in ${(M)config_files:#*/path.zsh}; do
-  if [ -z "$(echo $file | grep -o ".symlink")" ]; then
-    source $file
-  fi
-done
+load_path_config
 
 # load everything but the path, env, alias and completion files
-for file in ${${config_files:#*/path.zsh}:#*/completion.zsh:#*/aliases.zsh:#*/env.zsh}; do
-  if [ -z "$(echo $file | grep -o ".symlink")" ]; then
-    source $file
-  fi
-done
+load_general_config
 
 export NVM_DIR="$HOME/.nvm"
 . "/usr/local/opt/nvm/nvm.sh"
-
-unset config_files
