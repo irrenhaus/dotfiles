@@ -72,7 +72,7 @@
 	<key>NSWindow Frame SharedPreferences</key>
 	<string>-1057 885 796 473 -2560 0 2560 1440 </string>
 	<key>NSWindow Frame iTerm Window 0</key>
-	<string>0 30 2560 1388 0 0 2560 1418 </string>
+	<string>-2560 0 2560 1440 -2560 0 2560 1440 </string>
 	<key>NSWindow Frame iTerm Window 1</key>
 	<string>2357 838 570 452 0 0 2560 1417 </string>
 	<key>New Bookmarks</key>
@@ -782,7 +782,7 @@
 	<key>SUHasLaunchedBefore</key>
 	<true/>
 	<key>SULastCheckTime</key>
-	<date>2018-03-14T12:19:31Z</date>
+	<date>2018-04-03T09:15:03Z</date>
 	<key>SUSendProfileInfo</key>
 	<false/>
 	<key>SavePasteHistory</key>
@@ -790,6 +790,8 @@
 	<key>ShowFullScreenTabBar</key>
 	<false/>
 	<key>SmartPlacement</key>
+	<true/>
+	<key>SuppressRestartAnnouncement</key>
 	<true/>
 	<key>TabStyle</key>
 	<integer>1</integer>
