@@ -13,6 +13,6 @@
 [submodule "git/git-standup"]
 	path = git/git-standup
 	url = https://github.com/kamranahmedse/git-standup.git
-[submodule "zprezto.symlink"]
-	path = zprezto.symlink
-	url = git@github.com:irrenhaus/prezto.git
+[submodule "LASI"]
+	path = LASI
+	url = https://github.com/CyanJDroid/LASI.git

@@ -137,6 +137,9 @@ update_submodules
 install_dotfiles
 install_dotfiles "$(uname -s)"
 
+git clone --recursive https://github.com/sorin-ionescu/prezto.git "${ZDOTDIR:-$HOME}/.zprezto"
+git clone https://github.com/syl20bnr/spacemacs ~/.emacs.d
+
 source $DOTFILES_ROOT/dotfunctions.zsh
 
 update_dotfile_config_files
