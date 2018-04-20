@@ -16,3 +16,6 @@
 [submodule "LASI"]
 	path = LASI
 	url = https://github.com/irrenhaus/LASI.git
+[submodule "powerline-fonts"]
+	path = powerline-fonts
+	url = https://github.com/powerline/fonts.git

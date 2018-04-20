@@ -121,7 +121,7 @@ install_dotfiles () {
     for src in $(find "$WORKINGDIR" -maxdepth 4 -name '*.symlink' -path '*.merge*' -not -path 'platform'); do
       dstpath=$(basename $(dirname $src))
       filename="$(echo $src | sed 's/.symlink//g')"
-      dst="$HOME/.${dstpath%.*}/.$(basename "$filename")"
+      dst="$HOME/.${dstpath%.*}/$(basename "$filename")"
       link_file "$src" "$dst"
     done
   )
@@ -137,8 +137,13 @@ update_submodules
 install_dotfiles
 install_dotfiles "$(uname -s)"
 
-git clone --recursive https://github.com/sorin-ionescu/prezto.git "${ZDOTDIR:-$HOME}/.zprezto"
-git clone https://github.com/syl20bnr/spacemacs ~/.emacs.d
+if [ ! -d "${ZDOTDIR:-$HOME}/.zprezto" ]; then
+  git clone --recursive https://github.com/sorin-ionescu/prezto.git "${ZDOTDIR:-$HOME}/.zprezto"
+fi
+
+if [ ! -d "$HOME/.emacs.d" ]; then
+  git clone https://github.com/syl20bnr/spacemacs $HOME/.emacs.d
+fi
 
 source $DOTFILES_ROOT/dotfunctions.zsh
 

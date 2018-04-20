@@ -90,3 +90,9 @@ alias dockercleani='printf "\n>>> Deleting untagged images\n\n" && docker rmi $(
 alias dockerclean='dockercleanc || true && dockercleani'
 
 alias dockerremovealli='docker rmi $(docker images -q)'
+
+
+
+######################### emacs
+
+alias em="emacsclient -a '' -c -n"

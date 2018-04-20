@@ -63,7 +63,7 @@ function load_general_config {
     generals=(${(f)DOTFILE_CONFIG_FILES})
     generals=(${generals#*/path.zsh})
     generals=(${generals#*/completion.zsh})
-    generals=(${generals#*/aliases.zsh})
+    # generals=(${generals#*/aliases.zsh})
     generals=(${generals#*/env.zsh})
 
     for file in $generals; do

@@ -1,11 +1,14 @@
-ENCDIR="$HOME/Nextcloud/.encfs"
-MOUNTPOINT="$HOME/encfs"
-
-export ENCFS6_CONFIG=$HOME/.encfs6.xml
-
 function auto_mount_encfs() {
-    if [[ "$PWD" == "$MOUNTPOINT" ]]; then
-        mount | grep $MOUNTPOINT >/dev/null 2>/dev/null
+    if [[ -z "$ENCDIR" ]] || [[ -z "$ENCMOUNTPOINT" ]] || [[ -z "$ENCFS6_CONFIG" ]]; then
+        return 1
+    fi
+
+    if [[ "$PWD" == "$ENCMOUNTPOINT" ]]; then
+        if [[ -n "$PREENC" ]]; then
+            eval "$PREENC"
+        fi
+
+        mount | grep $ENCMOUNTPOINT >/dev/null 2>/dev/null
         if [ $? -ne 0 ]; then
             echo -n "Password: "
 
@@ -14,7 +17,7 @@ function auto_mount_encfs() {
             stty echo
 
             echo ""         # force a carriage return to be output
-            echo $password | encfs -S -i 30 "$ENCDIR" "$MOUNTPOINT"
+            echo $password | encfs -S -i 30 "$ENCDIR" "$ENCMOUNTPOINT"
         fi
     fi
 }
