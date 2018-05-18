@@ -2,3 +2,4 @@
 
 . ~/.dotfiles/kicad/env.zsh
 
+export QT_AUTO_SCREEN_SCALE_FACTORS=0
