@@ -86,8 +86,11 @@ alias dockercleanc='printf "\n>>> Deleting stopped containers\n\n" && docker rm 
 # Delete all untagged images.
 alias dockercleani='printf "\n>>> Deleting untagged images\n\n" && docker rmi $(docker images -q -f dangling=true)'
 
+# Delete all tangling volumes.
+alias dockercleanv='printf "\n>>> Deleting dangling volumes\n\n" && docker volume rm $(docker volume ls -qf dangling=true)'
+
 # Delete all stopped containers and untagged images.
-alias dockerclean='dockercleanc || true && dockercleani'
+alias dockerclean='dockercleanc || true && dockercleani || true && dockercleanv'
 
 alias dockerremovealli='docker rmi $(docker images -q)'
 
