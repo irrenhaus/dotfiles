@@ -31,9 +31,12 @@ if [ -f /etc/arch-release ]; then
     if [ -f /usr/bin/sudo ]; then
         SUDO="sudo bash -c"
     fi
-    $SUDO "pacman -S --noconfirm base-devel sudo curl diff-so-fancy pv acpi lm_sensors"
+    $SUDO "pacman -S --noconfirm --needed base-devel sudo curl diff-so-fancy pv acpi lm_sensors python-pip"
     install_yaourt
-    yaourt -S fasd watchman python2-pywatchman
+    yaourt -S --needed fasd watchman python2-pywatchman nvm
     sudo pip install git-sweep
+    source /usr/share/nvm/init-nvm.sh
+    nvm install 10
+    nvm use 10
 fi
 
