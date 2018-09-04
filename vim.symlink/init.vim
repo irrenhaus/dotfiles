@@ -1,1 +1,1 @@
-/home/irrenhaus/.vimrc
+/home/default/.vimrc

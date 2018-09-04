@@ -99,3 +99,5 @@ alias dockerremovealli='docker rmi $(docker images -q)'
 ######################### emacs
 
 alias em="emacsclient -a '' -c -n"
+
+alias find='echo "Nope, use fd instead!"'
