@@ -96,3 +96,5 @@ alias dockerremovealli='docker rmi $(docker images -q)'
 ######################### emacs
 
 alias em="emacsclient -a '' -c -n"
+
+alias open='xdg-open'

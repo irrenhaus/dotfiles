@@ -1,0 +1,3 @@
+#!/bin/bash
+
+exec dd oflag=direct status=progress bs=4M "$@"

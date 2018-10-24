@@ -87,8 +87,8 @@ TMPPREFIX="${TMPDIR%/}/zsh"
 
 export LPASS_AGENT_DISABLE=1
 
-export XDG_CONFIG_HOME="$HOME/.config"
-export XDG_CONFIG_DIRS="${XDG_CONFIG_DIRS}:$HOME/.config/powerline"
+#export XDG_CONFIG_HOME="$HOME/.config"
+#export XDG_CONFIG_DIRS="${XDG_CONFIG_DIRS}:$HOME/.config/powerline"
 export GOPATH=$HOME/.gocode
 export PATH="$PATH:/usr/local/bin:$GOPATH/bin:$HOME/bin:$HOME/.bin"
 
@@ -112,4 +112,8 @@ export ENCFS6_CONFIG=""
 
 if [ -f "$HOME/.secretrc" ]; then
     source "$HOME/.secretrc"
+fi
+
+if [ -f "/etc/profile.d/jre.sh" ]; then
+    source /etc/profile.d/jre.sh
 fi

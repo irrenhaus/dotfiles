@@ -17,8 +17,8 @@ if [ -n "$BASH_VERSION" ]; then
 fi
 
 # set PATH so it includes user's private bin if it exists
-if [ -d "$HOME/bin" ] ; then
-    PATH="$HOME/bin:$PATH"
+if [ -d "$HOME/.bin" ] ; then
+    PATH="$HOME/.bin:$PATH"
 fi
 
 . ~/.dotfiles/kicad/env.zsh
@@ -28,4 +28,4 @@ export PATH="$PATH:$HOME/.dotfiles/bin"
 
 [[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm" # Load RVM into a shell session *as a function*
 
-export QT_AUTO_SCREEN_SCALE_FACTOR=0
+#export QT_AUTO_SCREEN_SCALE_FACTOR=0

@@ -1,0 +1,36 @@
+#!/bin/bash
+
+# definition of MAC addresses
+desktop_nils="D8:50:E6:3F:37:05"
+
+echo "Which PC to wake?"
+echo "d) desktop-nils"
+echo "q) quit"
+read input1
+
+echo "Via?"
+echo "d) Direct"
+echo "z) ZeroTier One"
+echo "q) quit"
+read input2
+
+case $input2 in
+  d)
+    WOL_COMMAND="wakeonlan"
+    ;;
+  z)
+    WOL_COMMAND="ssh irrenhaus@datavault.zt1.hesse.guru wakeonlan"
+    ;;
+  Q|q)
+    exit 0
+    ;;
+esac
+
+case $input1 in
+  d)
+    $WOL_COMMAND $desktop_nils
+    ;;
+  Q|q)
+    break
+    ;;
+esac
