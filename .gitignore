@@ -5,3 +5,5 @@ vim.symlink/undodir/*
 *.log
 *~
 .DS_Store
+.config_files
+config.merge/albert.symlink/core.db

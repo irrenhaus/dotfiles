@@ -1,0 +1,20 @@
+#!/bin/sh
+
+ITEMID="$1"
+
+if [ -z "$ITEMID" ]; then
+    echo "Usage: bw-askpass <itemid>"
+    exit 1
+fi
+
+if [ -z "$(which bw 2>/dev/null)" ]; then
+    echo "BitWarden CLI not found."
+    exit 1
+fi
+
+BW_SESSION="$(bw unlock --raw)"
+PASSWORD="$(bw get password $ITEMID)"
+RESULT="$?"
+bw lock >/dev/null
+echo $PASSWORD
+exit $RESULT
