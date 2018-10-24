@@ -7,3 +7,4 @@ vim.symlink/undodir/*
 .DS_Store
 .config_files
 config.merge/albert.symlink/core.db
+config.merge/albert.symlink/org.albert*
