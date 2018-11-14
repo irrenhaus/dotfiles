@@ -40,9 +40,7 @@ zstyle ':prezto:load' pmodule \
   'utility' \
   'completion' \
   'git' \
-  'osx' \
   'syntax-highlighting' \
-  'homebrew' \
   'helper' \
   'prompt'
 
@@ -95,7 +93,7 @@ zstyle ':prezto:module:git:status:ignore' submodules 'all'
 #
 
 # Set the Pacman frontend.
-# zstyle ':prezto:module:pacman' frontend 'yaourt'
+zstyle ':prezto:module:pacman' frontend 'yay'
 
 #
 # Prompt
@@ -104,7 +102,8 @@ zstyle ':prezto:module:git:status:ignore' submodules 'all'
 # Set the prompt theme to load.
 # Setting it to 'random' loads a random theme.
 # Auto set to 'off' on dumb terminals.
-zstyle ':prezto:module:prompt' theme 'paradoxpurple'
+# zstyle ':prezto:module:prompt' theme 'paradoxpurple'
+zstyle ':prezto:module:prompt' theme 'powerlevel9k'
 
 #
 # Ruby

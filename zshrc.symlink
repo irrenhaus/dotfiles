@@ -5,14 +5,18 @@
 #   Sorin Ionescu <sorin.ionescu@gmail.com>
 #
 
+DOTFILES=$HOME/.dotfiles
+
+if [[ -s "${DOTFILES}/powerlevel9k.zsh" ]]; then
+    source ${DOTFILES}/powerlevel9k.zsh
+fi
+
 # Source Prezto.
 if [[ -s "${ZDOTDIR:-$HOME}/.zprezto/init.zsh" ]]; then
   source "${ZDOTDIR:-$HOME}/.zprezto/init.zsh"
 fi
 
 # Customize to your needs...
-
-DOTFILES=$HOME/.dotfiles
 
 # use .localrc for SUPER SECRET CRAP that you don't
 # want in your public, versioned repo.

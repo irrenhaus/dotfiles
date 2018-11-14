@@ -23,7 +23,7 @@ alias l='ls -CF'
 # Provide sort-by-size for du
 alias du-sort='du -sh * | sort -h'
 
-alias reinit='reset; source ~/.zshrc'
+alias reinit='exec zsh -l'
 
 # We only want to use gvim if we're not on a remote server!
 if [[ "x$SSH_CONNECTION" == "x" ]] && [[ "x$SSH_CLIENT" == "x" ]]; then
@@ -68,3 +68,5 @@ alias dockerremovealli='docker rmi $(docker images -q)'
 alias em="emacsclient -a '' -c -n"
 
 alias open='xdg-open'
+
+alias raspberry-scan="sudo nmap -sP 192.168.178.0/24 | awk '/^Nmap/{ip=\$NF}/B8:27:EB/{print ip}'"

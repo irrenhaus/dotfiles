@@ -13,6 +13,3 @@
 [submodule "git/git-standup"]
 	path = git/git-standup
 	url = https://github.com/kamranahmedse/git-standup.git
-[submodule "powerline-fonts"]
-	path = powerline-fonts
-	url = https://github.com/powerline/fonts.git
