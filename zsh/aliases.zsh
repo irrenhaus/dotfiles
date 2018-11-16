@@ -40,8 +40,6 @@ alias htop='glances'
 alias find='echo "Nope, use fd or fzf instead!"'
 alias ping='prettyping'
 
-alias cat='bat'
-
 ########################## DOCKER
 
 # Kill all running containers.
