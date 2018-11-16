@@ -32,6 +32,7 @@ zstyle ':prezto:*:*' color 'yes'
 # The order matters.
 zstyle ':prezto:load' pmodule \
   'environment' \
+  'helper' \
   'terminal' \
   'editor' \
   'history' \
@@ -41,8 +42,11 @@ zstyle ':prezto:load' pmodule \
   'completion' \
   'git' \
   'syntax-highlighting' \
-  'helper' \
-  'prompt'
+  'prompt' \
+  'autosuggestions' \
+  'history-substring-search' \
+  'pacman' \
+  'command-not-found'
 
 #
 # Autosuggestions
@@ -56,10 +60,11 @@ zstyle ':prezto:load' pmodule \
 #
 
 # Set the key mapping style to 'emacs' or 'vi'.
-zstyle ':prezto:module:editor' key-bindings 'emacs'
+zstyle ':prezto:module:editor' key-bindings 'vi'
 
 # Auto convert .... to ../..
-# zstyle ':prezto:module:editor' dot-expansion 'yes'
+zstyle ':prezto:module:editor' dot-expansion 'yes'
+zstyle ':prezto:module:editor' ps-context 'yes'
 
 #
 # Git
@@ -127,7 +132,7 @@ zstyle ':prezto:module:prompt' theme 'powerlevel9k'
 #
 
 # Set the SSH identities to load into the agent.
-zstyle ':prezto:module:ssh:load' identities 'id_rsa'
+zstyle ':prezto:module:ssh:load' identities 'id_rsa' 'patagona-test_id_rsa'
 
 #
 # Syntax Highlighting
