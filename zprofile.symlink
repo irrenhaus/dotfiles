@@ -101,6 +101,8 @@ export PATH="$PATH:$HOME/.dotfiles/git-extra-commands/bin"
 
 export PATH="$HOME/.bin:$PATH"
 
+export PATH="$HOME/.appimage:$PATH"
+
 #export SSH_AUTH_SOCK="$XDG_RUNTIME_DIR/ssh-agent.socket"
 
 export LPASS_AGENT_TIMEOUT=60
