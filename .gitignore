@@ -8,3 +8,4 @@ vim.symlink/undodir/*
 .config_files
 config.merge/albert.symlink/core.db
 config.merge/albert.symlink/org.albert*
+*.uuid
