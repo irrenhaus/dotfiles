@@ -37,7 +37,6 @@ values."
      ;; <M-m f e R> (Emacs style) to install them.
      ;; ----------------------------------------------------------------
      helm
-     osx
 
      ;; Languages
      emacs-lisp
@@ -46,7 +45,7 @@ values."
      javascript
      typescript
      ruby
-     (scala :variables scala-auto-start-ensime t)
+     ;; (scala :variables scala-auto-start-ensime t)
      puppet
 
      ;; Tools
@@ -59,8 +58,8 @@ values."
 
      ;; Misc
      ;; emoji ;; Breaks org-mode when DONEing repeated items
-     xkcd
-     games
+     ;; xkcd
+     ;; games
 
      ;; Disabled stuff
      ;; better-defaults
@@ -152,7 +151,7 @@ values."
    dotspacemacs-colorize-cursor-according-to-state t
    ;; Default font, or prioritized list of fonts. `powerline-scale' allows to
    ;; quickly tweak the mode-line size to make separators look not too crappy.
-   dotspacemacs-default-font '("Source Code Pro for Powerline"
+   dotspacemacs-default-font '("Hack Nerd Font Regular"
                                :size 12
                                :weight normal
                                :width normal

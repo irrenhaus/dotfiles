@@ -19,7 +19,7 @@ case $input2 in
     WOL_COMMAND="wakeonlan"
     ;;
   z)
-    WOL_COMMAND="ssh irrenhaus@datavault.zt1.hesse.guru wakeonlan"
+    WOL_COMMAND="ssh nils@datavault.zt1.hesse.guru wakeonlan"
     ;;
   Q|q)
     exit 0

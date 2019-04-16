@@ -32,12 +32,9 @@ fi
 
 alias md5='md5sum'
 
-alias vim='nvim'
-
 alias top='glances'
 alias htop='glances'
 
-alias find='echo "Nope, use fd or fzf instead!"'
 alias ping='prettyping'
 
 ########################## DOCKER
@@ -59,7 +56,13 @@ alias dockerclean='dockercleanc || true && dockercleani || true && dockercleanv'
 
 alias dockerremovealli='docker rmi $(docker images -q)'
 
+######################### Editors
 
+alias e='em'
+
+######################### VIM
+#
+alias vim='nvim'
 
 ######################### emacs
 
