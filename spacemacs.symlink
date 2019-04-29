@@ -357,6 +357,8 @@ you should place your code here."
    markdown-command "grip --wide --export -"
    )
 
+  (setq spacemacs-jump-handlers (append spacemacs-default-jump-handlers))
+
   (setq org-directory "/home/irrenhaus/NextCloud/orgmode")
   (setq org-default-notes-file (concat org-directory "/tasks.org"))
   (setq org-agenda-files (list org-directory))

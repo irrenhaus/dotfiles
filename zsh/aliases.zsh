@@ -66,7 +66,7 @@ alias vim='nvim'
 
 ######################### emacs
 
-alias em="emacsclient -a '' -c -n"
+alias em="emacsclient -a '' -c -n -s /tmp/emacs1000/server"
 
 alias open='xdg-open'
 
