@@ -37,6 +37,8 @@ alias htop='glances'
 
 alias ping='prettyping'
 
+alias sbt='env TERM=xterm-color sbt'
+
 ########################## DOCKER
 
 # Kill all running containers.
