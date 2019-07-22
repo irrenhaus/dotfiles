@@ -1,0 +1,51 @@
+Object.assign(global, require('lodash/fp'));
+
+global.strategyBuilders = function(json) {
+    if(! json instanceof Object) {
+        return [];
+    }
+
+    var knownBuilders = [
+        "TargetPositionBuilder",
+        "VendorsOnPosition",
+        "OwnPosition",
+        "CompetitorsOnPosition",
+        "AdjustToReferencePrice",
+        "PullUp",
+        "Serial",
+        "TagBasedTargetPosition",
+        "TagBasedPriceGap",
+        "TargetPosition",
+        "DeliveryCost",
+        "OwnOfferBasedTargetPosition",
+        "SoleVendor",
+        "TimeFrame",
+        "TagBasedAdjustToNextPricier",
+        "TagBasedFilter",
+        "TagBasedIncludeDeliveryCost",
+        "KeepPrice",
+        "DiscountBoundaryFilter",
+        "PriceFilter",
+        "ContextModifier",
+        "Formula",
+        "OwnOfferFilter",
+        "OfferFilter",
+        "ContextModifiers",
+        "FormulaComparison",
+        "PriceStep"
+    ];
+
+    return uniq(flattenDeep(map(function(key) {
+        if(knownBuilders.includes(key)) {
+            var result = strategyBuilders(json[key]);
+            result.push(key);
+            return result;
+        } else if(key == "builder") {
+            return strategyBuilders(json[key]);
+        } else if(key == "builders") {
+            return map(strategyBuilders, json[key]);
+        } else {
+            return [];
+        }
+    }, Object.keys(json))));
+};
