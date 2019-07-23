@@ -46,7 +46,8 @@ zstyle ':prezto:load' pmodule \
   'autosuggestions' \
   'history-substring-search' \
   'pacman' \
-  'command-not-found'
+  'command-not-found' \
+  'ssh'
 
 #
 # Autosuggestions
@@ -134,7 +135,7 @@ zstyle ':prezto:module:prompt' theme off
 #
 
 # Set the SSH identities to load into the agent.
-zstyle ':prezto:module:ssh:load' identities 'id_rsa' 'patagona-test_id_rsa'
+# zstyle ':prezto:module:ssh:load' identities 'id_rsa' 'patagona-test_id_rsa'
 
 #
 # Syntax Highlighting
