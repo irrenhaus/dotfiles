@@ -38,4 +38,4 @@ load_path_config
 # load everything but the path, env, alias and completion files
 load_general_config
 
-source ~/powerlevel10k/powerlevel10k.zsh-theme
+source ~/.dotfiles/powerlevel10k/powerlevel10k.zsh-theme

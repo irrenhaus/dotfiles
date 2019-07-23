@@ -13,3 +13,6 @@
 [submodule "git/git-standup"]
 	path = git/git-standup
 	url = https://github.com/kamranahmedse/git-standup.git
+[submodule "powerlevel10k"]
+	path = powerlevel10k
+	url = https://github.com/romkatv/powerlevel10k.git
