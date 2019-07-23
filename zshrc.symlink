@@ -27,7 +27,7 @@ fi
 
 source $DOTFILES/dotfunctions.zsh
 
-set_debug_mode
+# set_debug_mode
 
 # Load dotfiles ZSH configs
 dotfile_config_files
@@ -38,7 +38,4 @@ load_path_config
 # load everything but the path, env, alias and completion files
 load_general_config
 
-export NVM_DIR="$HOME/.nvm"
-if [ -f "/usr/local/opt/nvm/nvm.sh" ]; then
-  . "/usr/local/opt/nvm/nvm.sh"
-fi
+source ~/powerlevel10k/powerlevel10k.zsh-theme
