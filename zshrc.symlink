@@ -39,3 +39,5 @@ load_path_config
 load_general_config
 
 source ~/.dotfiles/powerlevel10k/powerlevel10k.zsh-theme
+
+source /home/irrenhaus/.config/broot/launcher/bash/br

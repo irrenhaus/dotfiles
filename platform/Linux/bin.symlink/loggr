@@ -1,0 +1,8 @@
+#!/bin/sh
+
+export LOGGR="/usr/bin/loggr"
+export PRESENCE_SCRIPT="/home/irrenhaus/patagona/patagona_presence.sh"
+
+. /home/irrenhaus/.localrc
+
+exec $LOGGR --presence-script "$PRESENCE_SCRIPT" --host kimai.hesse.guru --user "$KIMAI_USER" --apikey "$KIMAI_APIKEY" --identifier patagona_presence --activity-id 1 --project-id 1 $@

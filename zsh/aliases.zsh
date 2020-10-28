@@ -32,12 +32,12 @@ fi
 
 alias md5='md5sum'
 
-alias top='glances'
-alias htop='glances'
+#alias top='glances'
+#alias htop='glances'
 
-alias ping='prettyping'
+#alias ping='prettyping'
 
-alias sbt='env TERM=xterm-color sbt'
+alias sbt='env TERM=xterm-color SBT_OPTS="-Xmx2G -XX:+UseConcMarkSweepGC -XX:+CMSClassUnloadingEnabled -Xss2M  -Duser.timezone=GMT" sbt'
 
 ########################## DOCKER
 

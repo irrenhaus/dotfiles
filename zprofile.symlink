@@ -117,10 +117,13 @@ export PATH="\
 :$GOPATH/bin\
 :$HOME/bin\
 :$HOME/.bin\
-:$HOME/.dotfiles/git-extra-commands/bin\
+:$HOME/.dotfiles/git/extra\
+:$HOME/.dotfiles/git/git-extra-commands/bin\
+:$HOME/.dotfiles/git/git-mv-changes\
+:$HOME/.dotfiles/git/git-secrets\
+:$HOME/.dotfiles/git/git-standup\
 :$HOME/.appimage\
 :$HOME/.cargo/bin\
-:$HOME/.dotfiles/git/extra\
 :$HOME/.dotfiles/bin\
 :$HOME/_3Dprintering/Slic3r/bin\
 :$HOME/gcc-arm-none-eabi/bin\

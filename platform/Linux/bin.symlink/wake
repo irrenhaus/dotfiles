@@ -1,7 +1,9 @@
 #!/bin/bash
 
 # definition of MAC addresses
-desktop_nils="D8:50:E6:3F:37:05"
+desktop_nils="70:85:C2:F9:2D:6E"
+
+zerotier_gateway_address="10.3.237.144"
 
 echo "Which PC to wake?"
 echo "d) desktop-nils"
@@ -19,7 +21,7 @@ case $input2 in
     WOL_COMMAND="wakeonlan"
     ;;
   z)
-    WOL_COMMAND="ssh nils@datavault.zt1.hesse.guru wakeonlan"
+    WOL_COMMAND="ssh nils@$zerotier_gateway_address wakeonlan"
     ;;
   Q|q)
     exit 0
