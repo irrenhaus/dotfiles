@@ -28,12 +28,12 @@ fi
 if [ -f /etc/arch-release ]; then
     # Wohoo, ArchLinux!
     echo "Installing ArchLinux dependencies for vim"
-    sudo pacman -Sy --noconfirm autopep8 astyle tidy cmake ctags the_silver_searcher libffi xdg-utils python-cffi python-pygit2 python-psutil
+    sudo pacman -Sy --noconfirm autopep8 astyle tidy cmake ctags the_silver_searcher libffi xdg-utils python-cffi python-pygit2 python-psutil npm
 fi
 
-case $(readlink -f .)/ in
-    $(readlink -f /home)/*) npm -g install js-beautify ;;
-    *) sudo npm -g install js-beautify ;;
-esac
+# case $(readlink -f .)/ in
+#     $(readlink -f /home)/*) npm -g install js-beautify ;;
+#     *) sudo npm -g install js-beautify ;;
+# esac
 
 cat $HOME/.vim/README.install.md

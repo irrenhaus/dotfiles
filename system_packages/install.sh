@@ -23,7 +23,7 @@ if [ -f /etc/arch-release ]; then
     fi
     $SUDO "pacman -S --noconfirm --needed base-devel sudo curl pv acpi lm_sensors python-pip"
     install_yay
-    $SUDO "yay -S --noconfirm --needed diff-so-fancy fasd nvm git-sweep ncdu noti silver-searcher entr bat prettyping fd fzf"
+    yay -S --noconfirm --needed diff-so-fancy fasd nvm ncdu noti the_silver_searcher entr bat prettyping fd fzf
     source /usr/share/nvm/init-nvm.sh
     nvm install 10
     nvm use 10
