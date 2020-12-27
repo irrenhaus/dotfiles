@@ -10,8 +10,8 @@ function auto_mount_encfs() {
 
         mount | grep $ENCMOUNTPOINT >/dev/null 2>/dev/null
         if [ $? -ne 0 ]; then
-            command -v bw &> /dev/null
-            BW_STATUS="$(bw status | jq -r '.status')"
+#            command -v bw &> /dev/null
+            BW_STATUS="unauthenticated" #"$(bw status | jq -r '.status')"
             if [[ "$?" -ne 0 ]] || [[ "$BW_STATUS" == "unauthenticated" ]]; then
                 echo -n "Password: "
 
