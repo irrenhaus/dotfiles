@@ -141,9 +141,9 @@ if [ ! -d "${ZDOTDIR:-$HOME}/.zprezto" ]; then
   git clone --recursive https://github.com/sorin-ionescu/prezto.git "${ZDOTDIR:-$HOME}/.zprezto"
 fi
 
-if [ ! -d "$HOME/.emacs.d" ]; then
-  git clone https://github.com/syl20bnr/spacemacs $HOME/.emacs.d
-fi
+# if [ ! -d "$HOME/.emacs.d" ]; then
+#   git clone https://github.com/syl20bnr/spacemacs $HOME/.emacs.d
+# fi
 
 source $DOTFILES_ROOT/dotfunctions.zsh
 
