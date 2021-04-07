@@ -200,7 +200,7 @@ set softtabstop=4
 set expandtab
 
 if !has('nvim')
-    set term=xterm-256color
+    set term=screen-256color
     " Set utf8 as standard encoding
     set encoding=utf8
 endif

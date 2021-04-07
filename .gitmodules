@@ -19,3 +19,6 @@
 [submodule "git/git-mv-changes"]
 	path = git/git-mv-changes
 	url = https://github.com/MikhailGolubtsov/git-mv-changes.git
+[submodule "tmux.symlink/plugins/tpm"]
+	path = tmux.symlink/plugins/tpm
+	url = https://github.com/tmux-plugins/tpm
