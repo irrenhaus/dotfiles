@@ -11,5 +11,5 @@ setopt inc_append_history
 setopt share_history
 
 # Activate colors
-export TERM=screen-256color
+export TERM=xterm-256color
 

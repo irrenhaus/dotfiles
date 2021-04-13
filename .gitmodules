@@ -22,3 +22,12 @@
 [submodule "tmux.symlink/plugins/tpm"]
 	path = tmux.symlink/plugins/tpm
 	url = https://github.com/tmux-plugins/tpm
+[submodule "rofi/rofi"]
+	path = rofi/rofi
+	url = https://github.com/adi1090x/rofi.git
+[submodule "polybar/polybar-themes"]
+	path = polybar/polybar-themes
+	url = https://github.com/adi1090x/polybar-themes.git
+[submodule "external/machaerus-dotfiles"]
+	path = external/machaerus-dotfiles
+	url = https://gitlab.com/machaerus/dotfiles.git
