@@ -1,0 +1,46 @@
+#!/usr/bin/env sh
+#
+# A rofi powered menu to execute power related action.
+# Uses: amixer mpc poweroff reboot rofi rofi-prompt
+
+power_off=' power off'
+reboot=' reboot'
+lock=' lock screen'
+suspend='鈴 suspend to RAM'
+log_out=' logout'
+
+chosen=$(printf '%s;%s;%s;%s;%s\n' "$power_off" "$reboot" "$lock" "$suspend" \
+                                   "$log_out" \
+    | rofi -theme /home/irrenhaus/.config/rofi/themes/appsmenu.rasi\
+           -dmenu \
+           -sep ';' \
+           -selected-row 2)
+
+function lock() {
+    dbus-send --type=method_call --dest=org.gnome.ScreenSaver /org/gnome/ScreenSaver org.gnome.ScreenSaver.Lock
+}
+
+case "$chosen" in
+    "$power_off")
+        ~/.config/i3/rofi-prompt --query 'Shutdown?' && systemctl poweroff
+        ;;
+
+    "$reboot")
+        ~/.config/i3/rofi-prompt --query 'Reboot?' && systemctl reboot
+        ;;
+
+    "$lock")
+        lock
+        ;;
+
+    "$suspend")
+        lock && systemctl suspend
+        ;;
+
+    "$log_out")
+        ~/.config/i3/rofi-prompt --query 'Logout?' && i3-msg exit
+        ;;
+
+    *) exit 1 ;;
+esac
+

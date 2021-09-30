@@ -81,8 +81,8 @@
     # Otherwise the "#" and following would be interpreted as a comment.
     ; background = "#282828"
     ; foreground = "#928374"
-    background = "#a89984"
-    foreground = "#3c3836"
+    background = "#597072"
+    foreground = "#535353"
     timeout = 8
     # Icon for notifications with low urgency, uncomment to enable
     #icon = /path/to/icon
@@ -90,15 +90,15 @@
 [urgency_normal]
     ; background = "#333333"
     ; foreground = "#ebdbb2"
-    background = "#bdae93"
-    foreground = "#3c3836"
+    background = "#b7ce42"
+    foreground = "#535353"
     timeout = 10
 
 [urgency_critical]
     ; background = "#703838"
     ; foreground = "#ebdbb2"
-    background = "#fb4934"
-    foreground = "#32302f"
+    background = "#e84f4f"
+    foreground = "#535353"
     ; frame_color = "#CCA83B"
     timeout = 0
 

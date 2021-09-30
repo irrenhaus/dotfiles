@@ -9,41 +9,43 @@
 source ~/.config/polybar/scripts/colors.sh
 
 net_print() {
+    WIFI_IF="$(iwconfig 2>&1 | grep ESSID | cut -d' ' -f1)"
 
-	# CONNECTED_WIFI=$(iwconfig wlan0 | grep ESSID | wc -l)
-	ESSID=$(iwconfig wlp61s0 | grep ESSID | cut -d: -f2 | xargs)
-	[ "$ESSID" = "off/any" ] && CONNECTED_WIFI=0 || CONNECTED_WIFI=1
-	CONNECTED_VPN=$(ifconfig -a | grep tun0 | wc -l)
-	# CONNECTED_HAMACHI=$(hamachi | grep status | cut -d ':' -f 2 | xargs)
-	CONNECTED_ZEROTIER=$(zerotier-cli info | cut -d ' ' -f 5 | xargs)
+    CONNECTED_WIFI=0
+    for IF in `echo -e "$WIFI_IF"`; do
+        ESSID=$(iwconfig $IF | grep ESSID | cut -d: -f2 | xargs)
+        [ "$ESSID" = "off/any" ] || CONNECTED_WIFI=1
+    done
+
+	CONNECTED_VPN=$(ip link | grep tun0 | wc -l)
+    CONNECTED_HAMACHI=$(comman -v hamachi 2>/dev/null && (hamachi | grep status | cut -d ':' -f 2 | xargs))
+	#CONNECTED_ZEROTIER=$(zerotier-cli info | cut -d ' ' -f 5 | xargs)
+
+    indicator="$dark0_soft["
 
 	if [ "$CONNECTED_WIFI" -eq 1 ]; then
-		wifi_indicator="${faded_green}${RESET}"
+		indicator="$indicator ${faded_green}${RESET}"
 	else
-		wifi_indicator="${dark0_soft}${RESET}"
+		indicator="$indicator ${dark0_soft}${RESET}"
 	fi
 
-	if [ "$CONNECTED_VPN" -eq 1 ]; then
-		vpn_indicator="${faded_green}${RESET}"
-	else
-		vpn_indicator="${dark0_soft}${RESET}"
-	fi
+ 	if [ "$CONNECTED_VPN" -eq 1 ]; then
+ 		indicator="$indicator ${faded_green}${RESET}"
+ 	fi
 
-	# if [ "$CONNECTED_HAMACHI" = "logged in" ]; then
-	# 	hamachi_indicator="${faded_green}${RESET}"
-	# else
-	# 	hamachi_indicator="${dark0_soft}${RESET}"
-	# fi
+ 	if [ "$CONNECTED_HAMACHI" = "logged in" ]; then
+ 		indicator="$indicator ${faded_green}${RESET}"
+ 	fi
 
-	if [ "$CONNECTED_ZEROTIER" = "ONLINE" ]; then
-		zerotier_indicator="${faded_green}${RESET}"
-	else
-		zerotier_indicator="${dark0_soft}${RESET}"
-	fi
+ 	if [ "$CONNECTED_ZEROTIER" = "ONLINE" ]; then
+ 		indicator="$indicator ${faded_green}${RESET}"
+ 	fi
+
+    indicator="$indicator $dark0_soft]"
 
 	# echo "$dark2[$wifi_indicator$dark2]$dark2[$vpn_indicator$dark2]"
-	echo "$dark0_soft[ $wifi_indicator $vpn_indicator $zerotier_indicator $dark0_soft]"
-	# echo " $wifi_indicator $vpn_indicator "
+	# echo "$dark0_soft[ $wifi_indicator $vpn_indicator $zerotier_indicator $dark0_soft]"
+	echo "$indicator"
 }
 
 net_print

@@ -73,3 +73,5 @@ alias em="emacsclient -a '' -c -n -s /tmp/emacs1000/server"
 alias open='xdg-open'
 
 alias raspberry-scan="sudo nmap -sP 192.168.178.0/24 | awk '/^Nmap/{ip=\$NF}/B8:27:EB/{print ip}'"
+
+alias sway="~/.bin/start_sway"

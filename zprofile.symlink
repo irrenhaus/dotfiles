@@ -25,6 +25,8 @@ if [[ "$OSTYPE" == darwin* ]]; then
   export BROWSER='open'
 fi
 
+export MOZ_ENABLE_WAYLAND=1
+
 #
 # Editors
 #
@@ -135,3 +137,5 @@ export PATH="\
 :$HOME/.gem/ruby/2.3.0/bin\
 :$HOME/.gem/ruby/2.6.0/bin\
 "
+
+export WLR_DRM_DEVICES=/dev/dri/card1:/dev/dri/card0

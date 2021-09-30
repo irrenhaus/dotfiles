@@ -122,7 +122,8 @@ set background=dark
 let mapleader=','
 
 " GVim settings
-set guifont=Envy\ Code\ R\ for\ Powerline\ 10
+" set guifont=Envy\ Code\ R\ for\ Powerline\ 10
+set guifont=Iosevka\ Nerd\ Font\ 10
 " Autoselect: Automatically yank visual selection into "* register
 set guioptions+=a
 " Use console dialogs instead of popup dialogs
