@@ -6,7 +6,9 @@ DEFAULTS="$(ponymix --short)"
 SINKS="$(ponymix --short -t sink list)"
 SOURCES="$(ponymix --short -t source list | grep -v Monitor)"
 
-ROFI="rofi -theme $HOME/.config/rofi/themes/appsmenu.rasi"
+#ROFI="rofi -theme $HOME/.config/rofi/themes/appsmenu.rasi"
+ROFI_THEME="${ROFI_THEME:-/usr/share/rofi/themes/Arc-Dark.rasi}"
+ROFI="rofi -theme $ROFI_THEME"
 
 function get_type() {
     local PONYMIX_LINE="$1"

@@ -20,22 +20,33 @@ set $term terminator
 # font Iosevka Nerd Font:regular 8
 font Cantarell:regular 10
 
-# #---Colors to be used with WPGTK--# #
-set $coloractfoc "#4491ed"
-set $coloract "#4084d6"
-set $colorin "#4b5160"
-set $color15  "#c4cbd4"
+# Arc-Dark style
+# set $color_act_foc "#4491ed"
+# set $color_foc "#4084d6"
+# set $color_inactive "#4b5160"
+# set $color_fg  "#c4cbd4"
+# set $split  "#f9ff44"
+# set $coloru  "#b7ce42"
+# set $color0  "#2d3031"
+# set $color8  "#535353"
+
+# HN Style
+set $color_act_foc "#ff6600"
+set $color_foc "#db5800"
+set $color_inactive "#4b5160"
+set $color_fg_foc  "#222222"
+set $color_fg  "#c4cbd4"
 set $split  "#f9ff44"
 set $coloru  "#b7ce42"
 set $color0  "#2d3031"
 set $color8  "#535353"
 
 # class                 border    backgr    text    indicator child_border
-client.focused          $coloractfoc $coloractfoc $color15 $split  $coloractfoc
-client.focused_inactive "#333333"	  $coloract $color15 $split  "#333333"
-client.unfocused        "#333333"   $colorin  $color15 $split  "#333333"
-client.urgent           $coloru   $coloru   $color15 $coloru $coloru
-client.placeholder      $color0   $color8   $color15 $color0 $color8
+client.focused          $color_act_foc $color_act_foc $color_fg_foc $split  $color_act_foc
+client.focused_inactive "#333333"	  $color_foc $color_fg_foc $split  "#333333"
+client.unfocused        "#333333"   $color_inactive  $color_fg $split  "#333333"
+client.urgent           $coloru   $coloru   $color_fg $coloru $coloru
+client.placeholder      $color0   $color8   $color_fg $color0 $color8
 client.background       $color0
 
 # Workspaces
@@ -55,12 +66,13 @@ set $ws10 "10:web"
 # on the original workspace that the command was run on.
 # set $menu dmenu_path | dmenu | xargs swaymsg exec --
 # set $menu rofi -modi drun -show drun -theme /home/irrenhaus/.config/rofi/themes/appsmenu.rasi
-set $menu rofi -modi drun -show drun -theme /usr/share/rofi/themes/Arc-Dark.rasi
+set $menu rofi -modi drun -show drun -theme $ROFI_THEME
 
 ### Output configuration
 #
 # Default wallpaper (more resolutions are available in /usr/share/backgrounds/sway/)
-output * bg /usr/share/backgrounds/sway/Sway_Wallpaper_Blue_1920x1080.png fill
+# output * bg /usr/share/backgrounds/sway/Sway_Wallpaper_Blue_1920x1080.png fill
+output * bg /home/irrenhaus/Nextcloud/Wallpapers/Space/1364721228618.jpg fill
 #
 # Example configuration:
 #
@@ -337,6 +349,8 @@ exec wl-paste -t text --watch clipman store
 exec nm-applet --indicator
 
 exec gammastep
+
+exec_always ~/.config/sway/import-gsettings
 
 include /home/irrenhaus/.config/sway/config.d
 include /etc/sway/config.d/*

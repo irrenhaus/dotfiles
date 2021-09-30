@@ -53,9 +53,15 @@
     font-family: Cantarell, Noto Sans, sans-serif;
     font-size: 13px;
 }*/
-#waybar {
+/* Arc-Dark style #waybar {
     background: #2d3031;
     color: #c4cbd4;
+    font-family: Cantarell, Noto Sans, sans-serif;
+    font-size: 13px;
+}*/
+#waybar {
+    background: #2d3031;
+    color: #ff6600;
     font-family: Cantarell, Noto Sans, sans-serif;
     font-size: 13px;
 }
@@ -189,13 +195,18 @@
     padding-bottom: 2px;
     padding-left: 10px;
     padding-right: 10px;
-    color: #aaaaaa;
+    color: #bdbdbd;
 }
 
-#workspaces button.focused {
+/*Arc-Dark #workspaces button.focused {
     border-color: #4c7899;
     color: white;
     background-color: #4084d6;
+}*/
+#workspaces button.focused {
+    border-color: #4c7899;
+    color: #222222;
+    background-color: #ff6600;
 }
 
 #workspaces button.urgent {
