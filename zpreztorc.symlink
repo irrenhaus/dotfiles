@@ -112,7 +112,8 @@ zstyle ':prezto:module:pacman' frontend 'yay'
 # zstyle ':prezto:module:prompt' theme 'paradoxpurple'
 # zstyle ':prezto:module:prompt' theme 'powerlevel9k'
 # zstyle ':prezto:module:prompt' theme 'powerlevel10k'
-zstyle ':prezto:module:prompt' theme off
+# zstyle ':prezto:module:prompt' theme off
+zstyle ':prezto:module:prompt' theme 'skwp'
 
 #
 # Ruby

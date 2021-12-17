@@ -7,9 +7,9 @@
 
 DOTFILES=$HOME/.dotfiles
 
-if [[ -s "${DOTFILES}/powerlevel9k.zsh" ]]; then
-    source ${DOTFILES}/powerlevel9k.zsh
-fi
+#if [[ -s "${DOTFILES}/powerlevel9k.zsh" ]]; then
+#    source ${DOTFILES}/powerlevel9k.zsh
+#fi
 
 # Source Prezto.
 if [[ -s "${ZDOTDIR:-$HOME}/.zprezto/init.zsh" ]]; then
@@ -38,6 +38,6 @@ load_path_config
 # load everything but the path, env, alias and completion files
 load_general_config
 
-source ~/.dotfiles/powerlevel10k/powerlevel10k.zsh-theme
+# source ~/.dotfiles/powerlevel10k/powerlevel10k.zsh-theme
 
 # source /home/irrenhaus/.config/broot/launcher/bash/br
