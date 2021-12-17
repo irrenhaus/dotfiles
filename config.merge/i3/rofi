@@ -1,0 +1,5 @@
+#!/bin/bash
+
+ROFI_THEME="${ROFI_THEME:-/usr/share/rofi/themes/Arc-Dark.rasi}"
+
+rofi -theme "$ROFI_THEME" -modi drun -show drun "$@"

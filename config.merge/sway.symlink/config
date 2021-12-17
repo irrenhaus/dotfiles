@@ -49,17 +49,8 @@ client.urgent           $coloru   $coloru   $color_fg $coloru $coloru
 client.placeholder      $color0   $color8   $color_fg $color0 $color8
 client.background       $color0
 
-# Workspaces
-set $ws1 "1:term"
-set $ws2 "2:term"
-set $ws3 "3"
-set $ws4 "4"
-set $ws5 "5:edit"
-set $ws6 "6"
-set $ws7 "7"
-set $ws8 "8:misc"
-set $ws9 "9:comm"
-set $ws10 "10:web"
+# Set wayland overlay bar socket
+set $WOBSOCK $XDG_RUNTIME_DIR/wob.sock
 
 # Your preferred application launcher
 # Note: pass the final command to swaymsg so that the resulting window can be opened
@@ -87,9 +78,9 @@ output * bg /home/irrenhaus/Nextcloud/Wallpapers/Space/1364721228618.jpg fill
 #
 # output DP-1 scale 1.5
 # output DP-1 mode 3840x2160@60Hz pos 0 288
-output DP-1 mode 2560x1440@60Hz pos 0 288
+output 'Samsung Electric Company U28E590 HTPM300683' mode 2560x1440@60Hz pos 0 288
 
-output eDP-1 mode 1920x1080 pos 320 1728
+output eDP-1 mode 1920x1080@144Hz pos 320 1728
 
 output HDMI-1 mode 1920x1080 pos 2240 1728
 
@@ -247,19 +238,36 @@ input "2362:4918:UNIW0001:00_093A:1336_Touchpad" {
     # If there are multiple scratchpad windows, this command cycles through them.
     bindsym $mod+minus scratchpad show
 
+    # Bind clipman clipboard history
+    bindsym $mod+Shift+h exec clipman pick -t rofi --tool-args="-theme $ROFI_THEME"
+
 #
 # Media keys
 #
-    bindsym XF86AudioRaiseVolume exec pactl set-sink-volume @DEFAULT_SINK@ +5%
-    bindsym XF86AudioLowerVolume exec pactl set-sink-volume @DEFAULT_SINK@ -5%
-    bindsym XF86AudioMute exec pactl set-sink-mute @DEFAULT_SINK@ toggle
-    bindsym XF86AudioMicMute exec pactl set-source-mute @DEFAULT_SOURCE@ toggle
-    bindsym XF86MonBrightnessDown exec brightnessctl set 10%-
-    bindsym XF86MonBrightnessUp exec brightnessctl set +10%
+#     bindsym XF86AudioRaiseVolume exec pactl set-sink-volume @DEFAULT_SINK@ +5%
+#     bindsym XF86AudioLowerVolume exec pactl set-sink-volume @DEFAULT_SINK@ -5%
+#     bindsym XF86AudioMute exec pactl set-sink-mute @DEFAULT_SINK@ toggle
+#     bindsym XF86AudioMicMute exec pactl set-source-mute @DEFAULT_SOURCE@ toggle
+#     bindsym XF86MonBrightnessDown exec brightnessctl set 10%-
+#     bindsym XF86MonBrightnessUp exec brightnessctl set +10%
     bindsym XF86AudioPlay exec playerctl play-pause
     bindsym XF86AudioNext exec playerctl next
     bindsym XF86AudioPrev exec playerctl previous
     bindsym XF86Search exec bemenu-run
+
+    bindsym XF86AudioRaiseVolume exec pamixer -ui 2 && pamixer --get-volume > $WOBSOCK
+    bindsym XF86AudioLowerVolume exec pamixer -ud 2 && pamixer --get-volume > $WOBSOCK
+    bindsym XF86AudioMute exec pamixer --toggle-mute && ( pamixer --get-mute && echo 0 > $WOBSOCK ) || pamixer --get-volume > $WOBSOCK
+
+    bindsym XF86MonBrightnessDown exec brightnessctl set 5%- | sed -En 's/.*\(([0-9]+)%\).*/\1/p' > $WOBSOCK
+    bindsym XF86MonBrightnessUp exec brightnessctl set +5% | sed -En 's/.*\(([0-9]+)%\).*/\1/p' > $WOBSOCK
+
+    bindsym XF86KbdBrightnessDown exec brightnessctl --device='ite_8291::kbd_backlight' set 20%- | sed -En 's/.*\(([0-9]+)%\).*/\1/p' > $WOBSOCK
+    bindsym XF86KbdBrightnessUp exec brightnessctl --device='ite_8291::kbd_backlight' set +20% | sed -En 's/.*\(([0-9]+)%\).*/\1/p' > $WOBSOCK
+
+# Misc
+    bindsym $mod+c exec rofi-calc
+
 
 #
 # Resizing containers:
@@ -329,6 +337,25 @@ for_window [class="Yad" title="yad-calendar"] floating enable
 for_window [class="Pavucontrol"] floating enable
 for_window [class="Pavucontrol"] resize shrink left 100, resize shrink right 100, resize shrink down 50, resize shrink up 50
 
+# Firefox sharing indicator
+for_window [title=".*Sharing Indicator.*"] floating enable
+
+# Show XWayland marker in title
+for_window [shell="xwayland"] title_format "%title [XWayland]"
+
+
+# Firefox desktop notification windows
+no_focus [app_id="firefox" title="^$"]
+for_window [app_id="firefox" title="^$"] border none, floating enable, move position 79 ppt 4 ppt
+
+
+# Idle inhibition
+# Zoom
+for_window [title="Zoom Meeting"] inhibit_idle open
+# Any fullscreen window
+for_window [class="^.*"] inhibit_idle fullscreen
+for_window [app_id="^.*"] inhibit_idle fullscreen
+
 # gaps
 for_window [class="^.*"] border pixel 2
 gaps inner 5
@@ -351,6 +378,11 @@ exec nm-applet --indicator
 exec gammastep
 
 exec_always ~/.config/sway/import-gsettings
+
+# Create socket for wayland overlay bar
+exec env WOBSOCK=$WOBSOCK ~/.config/sway/wob
+
+# exec ~/.config/sway/sworkstyle
 
 include /home/irrenhaus/.config/sway/config.d
 include /etc/sway/config.d/*

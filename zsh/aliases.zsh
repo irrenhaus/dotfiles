@@ -75,3 +75,6 @@ alias open='xdg-open'
 alias raspberry-scan="sudo nmap -sP 192.168.178.0/24 | awk '/^Nmap/{ip=\$NF}/B8:27:EB/{print ip}'"
 
 alias sway="~/.bin/start_sway"
+alias plasma="~/.bin/start_plasma"
+
+alias files="fzf --preview 'bat --style=numbers --color=always --line-range :500 {}' --color 'fg:#bbccdd,fg+:#ddeeff,bg:#334455,preview-bg:#223344,border:#778899'"

@@ -8,7 +8,9 @@ DEFAULTS="$(ponymix --short)"
 SINKS="$(ponymix --short -t sink list)"
 SOURCES="$(ponymix --short -t source list | grep -v Monitor)"
 
-ROFI="rofi -theme $HOME/.config/rofi/themes/appsmenu.rasi"
+#ROFI="rofi -theme $HOME/.config/rofi/themes/appsmenu.rasi"
+ROFI_THEME="${ROFI_THEME:-/usr/share/rofi/themes/Arc-Dark.rasi}"
+ROFI="rofi -theme $ROFI_THEME"
 
 function get_type() {
     local PONYMIX_LINE="$1"
@@ -60,9 +62,11 @@ while IFS= read -r line; do
 done <<< "$DEFAULTS"
 
 if [ "$OP" == "sink" ]; then
-    echo "$dark0_soft $faded_green SINK$RESET $dark0_soft"
+    TEXT="$(echo -n "$DEFAULT_SINK" | cut -c1-10)..."
+    echo "$dark0_soft $faded_green $TEXT$RESET $dark0_soft"
 elif [ "$OP" == "source" ]; then
-    echo "$dark0_soft $faded_aqua SOURCE$RESET $dark0_soft"
+    TEXT="$(echo -n "$DEFAULT_SOURCE" | cut -c1-10)..."
+    echo "$dark0_soft $faded_aqua $TEXT$RESET $dark0_soft"
 elif [ "$OP" == "select-sinks" ]; then
     SELECTED=$(select_entry "$SINKS" "sink")
     ID=$(get_id_for_name "$SINKS" "$SELECTED")

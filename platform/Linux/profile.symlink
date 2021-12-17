@@ -27,5 +27,8 @@ export PATH="$PATH:$HOME/.dotfiles/bin"
 
 #export QT_AUTO_SCREEN_SCALE_FACTOR=0
 
-
 export PATH="$HOME/.cargo/bin:$PATH"
+
+export ROFI_THEME=$HOME/.config/rofi/themes/Arc-Dark-HackerNews.rasi
+
+export XCURSOR_THEME=Breeze

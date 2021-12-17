@@ -7,6 +7,7 @@ while true; do
     if [[ "$CURRENT_LIST" != "$MONITOR_LIST" ]]; then
         echo "Monitor config changed!"
         sleep 5
+        CURRENT_LIST="$(polybar --list-monitors)"
         $HOME/.config/polybar/launch.sh
         MONITOR_LIST="$CURRENT_LIST"
     fi

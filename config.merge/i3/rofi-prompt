@@ -3,6 +3,8 @@
 # Rofi powered menu to prompt a message and get a yes/no answer.
 # Uses: rofi
 
+ROFI_THEME="${ROFI_THEME:-/usr/share/rofi/themes/Arc-Dark.rasi}"
+
 yes='Confirm'
 no='Cancel'
 query='Are you sure?'
@@ -27,8 +29,9 @@ while [ $# -ne 0 ]; do
     shift
 done
 
+# old: prompt.rasi
 chosen=$(printf '%s;%s\n' "$yes" "$no" \
-    | rofi -theme 'themes/prompt.rasi' \
+    | rofi -theme $ROFI_THEME \
            -p "$query" \
            -dmenu \
            -sep ';' \

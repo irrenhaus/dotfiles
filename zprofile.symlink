@@ -138,6 +138,4 @@ export PATH="\
 :$HOME/.gem/ruby/2.6.0/bin\
 "
 
-export WLR_DRM_DEVICES=/dev/dri/card1:/dev/dri/card0
-
 export ROFI_THEME=$HOME/.config/rofi/themes/Arc-Dark-HackerNews.rasi

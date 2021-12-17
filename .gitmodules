@@ -31,3 +31,6 @@
 [submodule "external/machaerus-dotfiles"]
 	path = external/machaerus-dotfiles
 	url = https://gitlab.com/machaerus/dotfiles.git
+[submodule "emacs.d.symlink"]
+	path = emacs.d.symlink
+	url = https://github.com/syl20bnr/spacemacs

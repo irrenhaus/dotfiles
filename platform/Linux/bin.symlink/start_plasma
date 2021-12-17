@@ -1,0 +1,7 @@
+#!/bin/bash
+
+export XDG_SESSION_TYPE=wayland
+export KWIN_DRM_FORCE_EGL_STREAMS=1
+export VIDEO_CARDS=nvidia
+
+exec dbus-run-session startplasma-wayland

@@ -1,0 +1,5 @@
+#!/bin/bash
+
+ROFI_THEME="${ROFI_THEME:-/usr/share/rofi/themes/Arc-Dark.rasi}"
+
+exec rofi -show calc -modi calc -no-show-match -no-sort -theme $ROFI_THEME
