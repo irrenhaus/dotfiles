@@ -20,14 +20,24 @@ net_speed() {
 	echo -n "$dark0_soft $faded_aqua $ICON  $UP_NETSPEED KB/s$RESET$faded_green  $DOWN_NETSPEED KB/s$RESET $dark0_soft"
 }
 
-ESSID=$(iwconfig wlp61s0 | grep ESSID | cut -d: -f2 | xargs)
-[ "$ESSID" = "off/any" ] && CONNECTED_WIFI=0 || CONNECTED_WIFI=1
+HOSTNAME="$(hostnamectl hostname)"
 
-if [ $CONNECTED_WIFI -eq 1 ]; then
-    net_speed wlp61s0 ""
-    echo -n "   "
+if [ "$HOSTNAME" == "desktop-nils" ]; then
+    net_speed enp5s0 ""
+
+    echo ""
+else
+    if [ "$HOSTNAME" == "galactica"  ]; then
+        ESSID=$(iwconfig wlp61s0 2>/dev/null | grep ESSID | cut -d: -f2 | xargs)
+        [ "$ESSID" = "off/any" ] && CONNECTED_WIFI=0 || CONNECTED_WIFI=1
+
+        if [ $CONNECTED_WIFI -eq 1 ]; then
+            net_speed wlp61s0 ""
+            echo -n "   "
+        fi
+
+        net_speed enp60s0 ""
+
+        echo ""
+    fi
 fi
-
-net_speed enp60s0 ""
-
-echo ""
