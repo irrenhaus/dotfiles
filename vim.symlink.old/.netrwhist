@@ -1,0 +1,6 @@
+let g:netrw_dirhistmax  =10
+let g:netrw_dirhistcnt =4
+let g:netrw_dirhist_4='/home/irrenhaus/xelera/xsuite-thirdpartylibs/xrt-headers'
+let g:netrw_dirhist_3='/home/irrenhaus/.dotfiles/tmux.symlink'
+let g:netrw_dirhist_2='/home/irrenhaus'
+let g:netrw_dirhist_1='/home/irrenhaus/.ssh'

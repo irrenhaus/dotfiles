@@ -25,11 +25,6 @@ alias du-sort='du -sh * | sort -h'
 
 alias reinit='exec zsh -l'
 
-# We only want to use gvim if we're not on a remote server!
-if [[ "x$SSH_CONNECTION" == "x" ]] && [[ "x$SSH_CLIENT" == "x" ]]; then
-    alias vim='gvim -v'
-fi
-
 alias md5='md5sum'
 
 #alias top='glances'
@@ -62,10 +57,6 @@ alias dockerremovealli='docker rmi $(docker images -q)'
 
 alias e='em'
 
-######################### VIM
-#
-alias vim='nvim'
-
 ######################### emacs
 
 alias em="emacsclient -a '' -c -n -s /tmp/emacs1000/server"
@@ -78,3 +69,9 @@ alias sway="~/.bin/start_sway"
 alias plasma="~/.bin/start_plasma"
 
 alias files="fzf --preview 'bat --style=numbers --color=always --line-range :500 {}' --color 'fg:#bbccdd,fg+:#ddeeff,bg:#334455,preview-bg:#223344,border:#778899'"
+
+######################### Rust
+
+alias clippy='cargo clippy --tests --benches'
+
+unalias scp

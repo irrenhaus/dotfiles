@@ -327,3 +327,5 @@ smart_borders on
 exec_always "feh --bg-scale --randomize /home/irrenhaus/Nextcloud/Wallpapers/Polyscapes"
 # exec_always "feh --bg-scale /home/irrenhaus/Seafile/Wallpapers/StarWars/1472672064716.jpg"
 # gsettings set org.gnome.gnome-flashback root-background true
+
+exec_always "autorandr -c"
